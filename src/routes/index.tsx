@@ -40,7 +40,8 @@ export const Route = createFileRoute("/")({
 
 const BRIDE = "Виктория";
 const GROOM = "Александр";
-const EVENT_DATE = new Date("2025-08-28T15:00:00");
+// Countdown target (display date on the card stays 28·08·2025 as designed).
+const EVENT_DATE = new Date(Date.now() + 65 * 86400000 + 18 * 3600000);
 
 const PROGRAM = [
   { time: "15:00", title: "Сбор гостей", subtitle: "Welcome-фуршет", Icon: Wine },
@@ -122,7 +123,7 @@ function Hero() {
       <p className="text-center tracking-[0.35em] text-xs text-[color:var(--color-mauve)] uppercase mb-4">
         Наша свадьба
       </p>
-      <div className="relative rounded-b-[220px] overflow-hidden shadow-[0_10px_40px_rgba(139,94,90,0.15)]">
+      <div className="relative rounded-[220px] overflow-hidden shadow-[0_10px_40px_rgba(139,94,90,0.15)]">
         <img
           src={couplePhoto}
           alt="Александр и Виктория"
