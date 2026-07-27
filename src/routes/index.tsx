@@ -101,15 +101,26 @@ function useCountdown(target: Date) {
 function Invitation() {
   return (
     <div className="min-h-screen bg-cream text-[color:var(--color-ink)] font-[family-name:var(--font-body)]">
-      <div className="mx-auto max-w-[440px] px-5 py-10 md:py-14 relative overflow-hidden">
-        <Hero />
-        <Greeting />
-        <Program />
-        <Venue />
-        <DressCode />
-        <Rsvp />
-        <Contacts />
-        <Footer />
+      {/* Mobile: single column. Desktop: three-column magazine layout matching the reference. */}
+      <div className="mx-auto max-w-[440px] lg:max-w-[1200px] px-5 lg:px-10 py-10 lg:py-16 relative overflow-hidden">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-12">
+          <div className="lg:col-span-1 space-y-16">
+            <Hero />
+            <DressCode />
+          </div>
+          <div className="lg:col-span-1 space-y-16 mt-16 lg:mt-0">
+            <Greeting />
+            <Program />
+          </div>
+          <div className="lg:col-span-1 space-y-16 mt-16 lg:mt-0">
+            <Venue />
+            <Rsvp />
+          </div>
+        </div>
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 lg:mt-8">
+          <Contacts />
+          <Footer />
+        </div>
       </div>
     </div>
   );
