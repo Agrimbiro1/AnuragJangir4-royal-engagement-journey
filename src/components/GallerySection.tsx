@@ -20,7 +20,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "g1",
     src: couplePhoto,
-    caption: "Alexander & Victoria — Royal Couple Portrait",
+    caption: "Arjun & Ananya — Royal Couple Portrait",
     category: "couple",
     likes: 245,
   },
@@ -213,7 +213,7 @@ export function GallerySection() {
             <GlassPhotoCard
               isHero
               src={couplePhoto}
-              caption="Alexander & Victoria"
+              caption="Arjun & Ananya"
               onClick={() => setActiveLightboxIndex(0)}
             />
           </motion.div>

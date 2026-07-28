@@ -56,7 +56,7 @@ function PaperMandapArbor() {
           The Wedding of
         </p>
         <h3 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold tracking-[0.2em] text-[color:var(--color-mauve-deep)] uppercase gold-text my-1">
-          Alexander & Victoria
+          Arjun & Ananya
         </h3>
         <p className="text-[10px] tracking-[0.3em] font-semibold text-[color:var(--color-muted-ink)] uppercase">
           August 28, 2025 · Villa Love
@@ -307,7 +307,7 @@ export function OpeningAnimation({ isOpen, onOpen }: OpeningAnimationProps) {
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#FFD700] via-[#D4AF37] to-[#AA771C] border-2 border-[#FFF8DC] shadow-[0_10px_25px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center text-amber-950 wax-seal-pulse relative group-hover:scale-105 transition-transform">
               <Crown className="w-4 h-4 text-amber-900 mb-0.5" />
               <span className="font-[family-name:var(--font-heading)] font-extrabold text-sm sm:text-base tracking-widest text-amber-950">
-                A & V
+                A & A
               </span>
               <Sparkles className="w-3 h-3 text-amber-200 absolute top-1 right-1 animate-spin" style={{ animationDuration: "8s" }} />
             </div>

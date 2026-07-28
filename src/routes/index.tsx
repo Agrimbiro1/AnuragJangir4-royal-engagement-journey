@@ -18,13 +18,13 @@ import { FooterSection } from "../components/FooterSection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Alexander & Victoria — Royal Wedding Invitation" },
+      { title: "Arjun & Ananya — Royal Engagement Invitation" },
       {
         name: "description",
         content:
-          "Join Alexander & Victoria for their royal wedding celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue map.",
+          "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details.",
       },
-      { property: "og:title", content: "Alexander & Victoria — Royal Wedding Invitation" },
+      { property: "og:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
       {
         property: "og:description",
         content: "A royal invitation to celebrate our eternal love — 28.08.2025",
@@ -50,7 +50,7 @@ function Invitation() {
             <div className="flex items-center gap-2">
               <Crown className="w-5 h-5 text-amber-300 animate-pulse" />
               <span className="font-[family-name:var(--font-heading)] font-bold text-lg tracking-widest text-amber-100">
-                ALEXANDER & VICTORIA
+                ARJUN & ANANYA
               </span>
             </div>
 

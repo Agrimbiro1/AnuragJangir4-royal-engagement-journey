@@ -39,7 +39,7 @@ export function CountdownSection() {
   const [notified, setNotified] = useState(false);
 
   const googleCalendarUrl =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Alexander+%26+Victoria+Royal+Wedding&dates=20250828T100000Z/20250828T180000Z&details=Join+Alexander+and+Victoria+for+their+sacred+wedding+ceremony!&location=Villa+Love,+Lapino";
+    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Arjun+%26+Ananya+Royal+Engagement&dates=20250828T100000Z/20250828T180000Z&details=Join+Arjun+and+Ananya+for+their+sacred+engagement+ceremony!&location=Villa+Love,+Lapino";
 
   const handleReminder = () => {
     setNotified(true);

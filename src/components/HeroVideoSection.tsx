@@ -62,7 +62,7 @@ export function HeroVideoSection() {
             transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="font-[family-name:var(--font-script)] text-6xl sm:text-7xl md:text-9xl text-white font-normal drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] my-2 leading-tight"
           >
-            Alexander & Victoria
+            Arjun & Ananya
           </motion.h1>
 
           {/* Decorative Divider */}

@@ -98,7 +98,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     id: "fb2",
     author: "Grandmother Beatrice",
     relation: "Bride's Family",
-    message: "All my love and sacred heirloom blessings to Alexander & Victoria on this magical day.",
+    message: "All my love and sacred heirloom blessings to Arjun & Ananya on this magical day.",
     photo: couplePhoto,
     likes: 89,
     posClass: "top-[1%] right-[2%] lg:right-[4%]",

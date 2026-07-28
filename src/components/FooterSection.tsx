@@ -72,7 +72,7 @@ export function FooterSection() {
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#4C342F] via-[#3A2320] to-[#201311] text-amber-100 flex flex-col items-center justify-center shadow-[0_12px_30px_rgba(76,52,47,0.25)] border-3 border-[#D4AF37]">
             <Crown className="w-5 h-5 text-[#FFD700] mb-0.5" />
             <span className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold tracking-widest text-[#FFF1B0]">
-              A & V
+              A & A
             </span>
           </div>
         </div>
@@ -89,7 +89,7 @@ export function FooterSection() {
         <GoldFlourish />
 
         <h3 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold tracking-[0.25em] uppercase text-[#4C342F]">
-          Alexander & Victoria
+          Arjun & Ananya
         </h3>
 
         {/* 3. THANK YOU VOW TEXT */}
@@ -102,7 +102,7 @@ export function FooterSection() {
 
         {/* 5. COPYRIGHT NOTE */}
         <p className="text-[9.5px] text-[#8B5E5A] uppercase tracking-[0.25em] font-semibold mt-4 border-t border-stone-200/60 pt-3 w-full max-w-xs">
-          © 2025 ALEXANDER & VICTORIA — ROYAL WEDDING INVITATION
+          © 2025 ARJUN & ANANYA — ROYAL ENGAGEMENT INVITATION
         </p>
 
       </motion.div>
