@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Arjun & Ananya — Royal Engagement Invitation" },
+      { name: "description", content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
+      { property: "og:description", content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
+      { name: "twitter:description", content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ef8be99c-786c-4924-87c1-49e89a9f0223/id-preview-f1df7898--76ead1e5-a2ca-470a-bad6-cd17ba580235.lovable.app-1785232902109.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ef8be99c-786c-4924-87c1-49e89a9f0223/id-preview-f1df7898--76ead1e5-a2ca-470a-bad6-cd17ba580235.lovable.app-1785232902109.png" },
     ],
     links: [
       {
