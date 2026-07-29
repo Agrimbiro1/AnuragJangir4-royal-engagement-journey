@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Sparkles, Heart, Bell } from "lucide-react";
+import { Calendar, Bell, Crown, Heart, CheckCircle2 } from "lucide-react";
 
-const TARGET_DATE = new Date("2025-08-28T16:00:00");
+const TARGET_DATE = new Date("2026-08-28T16:00:00");
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState<number>(() => Date.now());
@@ -18,18 +18,21 @@ function useCountdown(target: Date) {
   return { d, h, m, s };
 }
 
-function Sprig({ className = "" }: { className?: string }) {
+// Gold Filigree Divider SVG
+function GoldLineFlourish() {
   return (
-    <svg viewBox="0 0 80 30" className={className} fill="none" stroke="currentColor" strokeWidth="1">
-      <path d="M10 15 Q40 5 70 15" />
-      <path d="M22 13 q3 -6 8 -6" />
-      <path d="M32 10 q3 -6 8 -6" />
-      <path d="M42 9 q3 -6 8 -6" />
-      <path d="M52 10 q3 -6 8 -6" />
-      <path d="M22 17 q3 6 8 6" />
-      <path d="M32 20 q3 6 8 6" />
-      <path d="M42 21 q3 6 8 6" />
-      <path d="M52 20 q3 6 8 6" />
+    <svg
+      viewBox="0 0 160 24"
+      className="w-36 sm:w-44 h-6 mx-auto text-[#C5A059] opacity-85 my-3"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+    >
+      <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
+      <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
+      <path d="M 50 12 Q 40 8, 30 12" />
+      <path d="M 110 12 Q 120 8, 130 12" />
+      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
     </svg>
   );
 }
@@ -39,7 +42,7 @@ export function CountdownSection() {
   const [notified, setNotified] = useState(false);
 
   const googleCalendarUrl =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Arjun+%26+Ananya+Royal+Engagement&dates=20250828T100000Z/20250828T180000Z&details=Join+Arjun+and+Ananya+for+their+sacred+engagement+ceremony!&location=Villa+Love,+Lapino";
+    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Arjun+%26+Ananya+Royal+Engagement&dates=20260828T100000Z/20260828T180000Z&details=Join+Arjun+and+Ananya+for+their+sacred+engagement+ceremony!&location=Villa+Love,+Jaipur";
 
   const handleReminder = () => {
     setNotified(true);
@@ -47,69 +50,78 @@ export function CountdownSection() {
   };
 
   return (
-    <section className="mt-24 sm:mt-32 relative select-none">
+    <section className="mt-16 sm:mt-24 py-6 relative select-none w-full">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-gradient-to-br from-[color:var(--color-mauve-deep)] via-[#563330] to-[color:var(--color-ink)] text-amber-50 rounded-3xl p-8 md:p-12 border-2 border-[color:var(--color-gold)] shadow-2xl relative overflow-hidden text-center"
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative max-w-4xl mx-auto rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-14 bg-gradient-to-br from-[#FFFDF9]/95 via-[#FDF8F0]/90 to-[#F9EFE0]/95 backdrop-blur-2xl border border-[#C5A059]/40 shadow-[0_25px_60px_rgba(76,52,47,0.12)] text-center overflow-hidden"
       >
-        {/* Background Sparkles */}
-        <div className="absolute top-4 left-4 text-amber-300/30 animate-pulse">
-          <Sparkles className="w-8 h-8" />
+        {/* Soft Ambient Radial Background Glow */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+
+        {/* Outer Fine Accent Border Line */}
+        <div className="absolute inset-2 sm:inset-3 rounded-[26px] sm:rounded-[34px] border border-[#C5A059]/25 pointer-events-none" />
+
+        {/* 1. SECTION HEADER */}
+        <div className="relative z-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/70 border border-[#C5A059]/40 mb-1 shadow-xs">
+            <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+            <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
+              Save The Date
+            </span>
+            <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+          </div>
+
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide text-[#3A2E2A] leading-tight">
+            COUNTDOWN TO THE <span className="italic gold-text">CELEBRATION</span>
+          </h2>
+
+          <GoldLineFlourish />
+
+          <p className="text-xs sm:text-sm font-semibold tracking-widest text-[#8B5E5A] uppercase pt-1">
+            AUGUST 28, 2026 · FATEH PALACE ESTATE, UDAIPUR
+          </p>
         </div>
-        <div className="absolute bottom-4 right-4 text-amber-300/30 animate-pulse">
-          <Sparkles className="w-10 h-10" />
-        </div>
 
-        <p className="tracking-[0.4em] text-xs uppercase text-[color:var(--color-gold-light)] font-bold mb-2">
-          The Grand Royal Countdown
-        </p>
-
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-bold tracking-[0.2em] uppercase text-white">
-          Countdown To The Wedding Date
-        </h2>
-
-        <div className="mt-4 flex justify-center text-[color:var(--color-gold-light)]">
-          <Sprig className="w-24 h-8" />
-        </div>
-
-        <p className="mt-3 font-[family-name:var(--font-script)] text-3xl text-[color:var(--color-gold-light)]">
-          August 28, 2025 — Villa Love
-        </p>
-
-        {/* Ticking Countdown Boxes */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+        {/* 2. MINIMAL MONOLITHIC DIGIT CARDS */}
+        <div className="relative z-10 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
           {[
-            { value: d, label: "Days" },
-            { value: h, label: "Hours" },
-            { value: m, label: "Minutes" },
-            { value: s, label: "Seconds" },
+            { value: d, label: "DAYS" },
+            { value: h, label: "HOURS" },
+            { value: m, label: "MINUTES" },
+            { value: s, label: "SECONDS" },
           ].map((item) => (
             <motion.div
               key={item.label}
-              whileHover={{ y: -6, scale: 1.05 }}
+              whileHover={{ y: -5, scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="countdown-box rounded-2xl p-5 flex flex-col items-center justify-center relative overflow-hidden cursor-pointer"
+              className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-7 bg-white/70 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(76,52,47,0.08)] flex flex-col items-center justify-center group cursor-pointer"
             >
-              <span className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-[color:var(--color-gold-light)] drop-shadow-md">
+              {/* Card Inner Subtle Glow */}
+              <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-amber-100/30 via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+              <span className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#3A2E2A] tracking-tight drop-shadow-xs">
                 {String(item.value).padStart(2, "0")}
               </span>
-              <span className="text-[10px] tracking-[0.3em] uppercase text-amber-200/80 font-bold mt-2">
+
+              <div className="w-8 h-0.5 bg-[#C5A059]/50 my-2 sm:my-3 rounded-full group-hover:w-12 transition-all duration-300" />
+
+              <span className="text-[10px] sm:text-xs tracking-[0.3em] font-extrabold text-[#AA771C]">
                 {item.label}
               </span>
             </motion.div>
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        {/* 3. PREMIUM ACTION BUTTONS */}
+        <div className="relative z-10 mt-10 flex flex-wrap justify-center items-center gap-4">
           <a
             href={googleCalendarUrl}
             target="_blank"
             rel="noreferrer"
-            className="px-6 py-3.5 rounded-full bg-gradient-to-r from-[color:var(--color-gold)] to-[color:var(--color-gold-deep)] text-stone-900 font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-all shadow-lg flex items-center gap-2"
+            className="px-6 sm:px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#AA771C] to-[#8B5E5A] text-white font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-all shadow-[0_10px_25px_rgba(170,119,28,0.3)] hover:shadow-[0_15px_30px_rgba(170,119,28,0.4)] flex items-center gap-2 cursor-pointer active:scale-98"
           >
             <Calendar className="w-4 h-4" />
             <span>Add to Google Calendar</span>
@@ -117,12 +129,34 @@ export function CountdownSection() {
 
           <button
             onClick={handleReminder}
-            className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-amber-50 font-bold text-xs uppercase tracking-widest transition-all border border-amber-200/30 flex items-center gap-2"
+            className="px-6 sm:px-8 py-3.5 rounded-full bg-white/80 hover:bg-white text-[#3A2E2A] font-extrabold text-xs uppercase tracking-widest transition-all border border-[#C5A059]/50 shadow-sm flex items-center gap-2 cursor-pointer active:scale-98"
           >
-            <Bell className="w-4 h-4 text-[color:var(--color-gold-light)]" />
-            <span>{notified ? "Reminder Set! ♡" : "Set Event Reminder"}</span>
+            {notified ? (
+              <>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span className="text-emerald-700">Reminder Set!</span>
+              </>
+            ) : (
+              <>
+                <Bell className="w-4 h-4 text-[#AA771C]" />
+                <span>Set Event Reminder</span>
+              </>
+            )}
           </button>
         </div>
+
+        {/* Notification Toast */}
+        {notified && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="relative z-10 mt-3 text-xs font-bold text-[#AA771C] flex items-center justify-center gap-1"
+          >
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse" />
+            <span>Reminder preference saved for August 28, 2026!</span>
+          </motion.p>
+        )}
       </motion.div>
     </section>
   );

@@ -9,7 +9,9 @@ export function AudioPlayer() {
   // Simple Web Audio Synthesizer producing soft royal harp chimes
   const startChimeSequence = () => {
     try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
 
       if (!audioCtxRef.current) {
@@ -79,10 +81,17 @@ export function AudioPlayer() {
   };
 
   useEffect(() => {
+    const handleCustomToggle = () => {
+      toggleAudio();
+    };
+
+    window.addEventListener("toggle-royal-audio", handleCustomToggle);
+
     return () => {
+      window.removeEventListener("toggle-royal-audio", handleCustomToggle);
       stopChimeSequence();
     };
-  }, []);
+  }, [isPlaying]);
 
   return (
     <button

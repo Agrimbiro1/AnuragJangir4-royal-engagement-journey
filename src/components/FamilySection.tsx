@@ -1,82 +1,108 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Users, Crown, X, Sparkles, ChevronRight } from "lucide-react";
+import { Crown, Sparkles, Users, X, ChevronRight, Quote, Heart, Star } from "lucide-react";
 import groomFamilyPhoto from "../assets/groom_family.png";
 import brideFamilyPhoto from "../assets/bride_family.png";
+import couplePhoto from "../assets/couple.jpg";
+import haldiPhoto from "../assets/haldi.png";
+import sangeetPhoto from "../assets/sangeet.png";
+import bouquetPhoto from "../assets/bouquet.png";
 
 interface FamilyMember {
+  id: string;
   name: string;
   relation: string;
+  avatar: string;
   description: string;
   quote: string;
 }
 
 const GROOM_FAMILY_MEMBERS: FamilyMember[] = [
   {
-    name: "Lord Richard & Lady Margaret",
-    relation: "Parents of the Groom",
-    description: "Guiding Alexander with wisdom, strength, and unwavering warmth throughout his life journey.",
-    quote: "Love is not about looking at each other, but looking together in the same direction.",
+    id: "g1",
+    name: "Maharaja Vikram Singh",
+    relation: "Father of the Groom",
+    avatar: groomFamilyPhoto,
+    description: "Guiding Arjun with wisdom, strength, and noble values throughout his life.",
+    quote: "Love is looking together in the same direction of honor & grace.",
   },
   {
-    name: "Sir Edward & Lady Eleanor",
-    relation: "Grandparents",
-    description: "Pillars of heritage and tradition, passing down golden values of love and honor.",
+    id: "g2",
+    name: "Maharani Gayatri Devi",
+    relation: "Mother of the Groom",
+    avatar: brideFamilyPhoto,
+    description: "The heart of the household, bestowing warmth, elegance, and maternal blessings.",
     quote: "May your bond grow stronger with each passing sunrise.",
   },
   {
-    name: "Sebastian & Clara",
-    relation: "Brother & Sister-in-Law",
-    description: "Alexander's lifelong confidants and partners in adventure.",
-    quote: "Welcome to the family, Victoria! Our home is complete with you.",
+    id: "g3",
+    name: "Kunwar Devraj Singh",
+    relation: "Brother & Best Man",
+    avatar: couplePhoto,
+    description:
+      "Arjun's lifelong confidant, partner in adventure, and guardian of royal celebration.",
+    quote: "Welcome to the family, Ananya! Our home is complete with you.",
   },
   {
-    name: "Princess Sophia",
+    id: "g4",
+    name: "Rajkumari Aditi",
     relation: "Sister of the Groom",
-    description: "Spreading joy, laughter, and floral grace across the wedding festivities.",
-    quote: "So thrilled for my brother and my new sister!",
+    avatar: bouquetPhoto,
+    description: "Spreading joy, laughter, and royal floral grace across all wedding festivities.",
+    quote: "So thrilled for my brother Arjun and my new sister Ananya!",
   },
 ];
 
 const BRIDE_FAMILY_MEMBERS: FamilyMember[] = [
   {
-    name: "Dr. Arthur & Elizabeth Montgomery",
-    relation: "Parents of the Bride",
-    description: "Nurturing Victoria's dreams with endless kindness, grace, and devotion.",
-    quote: "Seeing Victoria's smile brighten beside Alexander fills our hearts with pride.",
+    id: "b1",
+    name: "Dr. Harshvardhan Sharma",
+    relation: "Father of the Bride",
+    avatar: brideFamilyPhoto,
+    description: "Nurturing Ananya's dreams with wisdom, academic pride, and unconditional love.",
+    quote: "Seeing Ananya's smile bright beside Arjun fills our hearts with pride.",
   },
   {
-    name: "Grandmother Beatrice",
-    relation: "Grandmother",
-    description: "Bestowing heritage wisdom, blessed heirloom jewels, and unconditional blessings.",
+    id: "b2",
+    name: "Sunita Sharma",
+    relation: "Mother of the Bride",
+    avatar: groomFamilyPhoto,
+    description: "Pillar of royal elegance and hospitality, filling every moment with warmth.",
     quote: "True love is a flower that blooms forever in the garden of the heart.",
   },
   {
-    name: "Isabella & William",
-    relation: "Sister & Brother-in-Law",
-    description: "Victoria's beloved sister, maid of honor, and cherished anchor.",
-    quote: "You two are made for each other. Let the royal celebrations begin!",
+    id: "b3",
+    name: "Isha Sharma",
+    relation: "Sister & Maid of Honor",
+    avatar: haldiPhoto,
+    description: "Ananya's soul sister, confidante, and master designer of royal wedding magic.",
+    quote: "You two are made for each other. Let the celebrations begin!",
   },
   {
-    name: "Henry Montgomery",
+    id: "b4",
+    name: "Karan Sharma",
     relation: "Brother of the Bride",
-    description: "The groom's sidekick and guardian of wedding dance floor energy.",
-    quote: "Cheers to the best couple in the world!",
+    avatar: sangeetPhoto,
+    description: "The bride's protective brother and champion of high-energy celebration.",
+    quote: "Cheers to Arjun & Ananya — the finest royal couple!",
   },
 ];
 
-function Sprig({ className = "" }: { className?: string }) {
+// Gold Line Ornament SVG
+function GoldOrnament() {
   return (
-    <svg viewBox="0 0 80 30" className={className} fill="none" stroke="currentColor" strokeWidth="1">
-      <path d="M10 15 Q40 5 70 15" />
-      <path d="M22 13 q3 -6 8 -6" />
-      <path d="M32 10 q3 -6 8 -6" />
-      <path d="M42 9 q3 -6 8 -6" />
-      <path d="M52 10 q3 -6 8 -6" />
-      <path d="M22 17 q3 6 8 6" />
-      <path d="M32 20 q3 6 8 6" />
-      <path d="M42 21 q3 6 8 6" />
-      <path d="M52 20 q3 6 8 6" />
+    <svg
+      viewBox="0 0 160 24"
+      className="w-36 sm:w-44 h-5 mx-auto text-[#C5A059] opacity-85 my-2"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+    >
+      <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
+      <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
+      <path d="M 50 12 Q 40 8, 30 12" />
+      <path d="M 110 12 Q 120 8, 130 12" />
+      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
     </svg>
   );
 }
@@ -84,141 +110,151 @@ function Sprig({ className = "" }: { className?: string }) {
 export function FamilySection() {
   const [activeModal, setActiveModal] = useState<"groom" | "bride" | null>(null);
 
+  const activeMembers = activeModal === "groom" ? GROOM_FAMILY_MEMBERS : BRIDE_FAMILY_MEMBERS;
+  const activeTitle = activeModal === "groom" ? "Arjun's Royal Lineage" : "Ananya's Royal Lineage";
+  const activeBanner = activeModal === "groom" ? groomFamilyPhoto : brideFamilyPhoto;
+
   return (
-    <section className="mt-24 sm:mt-32 py-12 sm:py-20 relative select-none w-full">
-      {/* SECTION HEADER (SLIDE FROM TOP) */}
+    <section className="mt-20 sm:mt-28 py-10 relative select-none w-full max-w-6xl mx-auto px-4">
+      {/* 1. SECTION HEADER */}
       <motion.div
-        initial={{ opacity: 0, y: -30 }}
+        initial={{ opacity: 0, y: -25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="text-center max-w-3xl mx-auto px-4 mb-16 sm:mb-20"
+        className="text-center max-w-3xl mx-auto mb-14"
       >
-        <p className="tracking-[0.35em] text-xs uppercase text-[color:var(--color-gold-deep)] font-bold mb-3">
+        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
           HERITAGE & LINEAGE
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
         </p>
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl tracking-wide uppercase text-[color:var(--color-mauve-deep)] font-bold">
+
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
           ROYAL FAMILIES OF BRIDE & GROOM
         </h2>
-        <div className="mt-4 flex justify-center text-[color:var(--color-mauve)]">
-          <Sprig className="w-24 h-8" />
-        </div>
+
+        <GoldOrnament />
       </motion.div>
 
-      {/* CARDS GRID (GROOM SLIDES LEFT, BRIDE SLIDES RIGHT) */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
-        
-        {/* GROOM FAMILY CARD (SLIDE FROM LEFT) */}
+      {/* 2. BRIGHT & UNIQUE DUAL FAMILY CARDS (GROOM CARD & BRIDE CARD) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* GROOM SECTION CARD */}
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
+          initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="soft-card rounded-[36px] p-8 sm:p-10 md:p-12 flex flex-col items-center justify-between text-center relative overflow-hidden border-2 border-[color:var(--color-gold)]/40 shadow-[0_25px_60px_rgba(76,52,47,0.14)] hover:border-[color:var(--color-gold)] transition-all duration-300 min-h-[520px] sm:min-h-[580px] md:min-h-[620px]"
+          transition={{ duration: 0.5 }}
+          whileHover={{ y: -6 }}
+          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_22px_55px_rgba(76,52,47,0.18)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.12),transparent_70%)] pointer-events-none" />
+          {/* Radial Warm Glow */}
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 w-80 h-80 bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl" />
 
-          <div className="flex flex-col items-center z-10 w-full">
-            <span className="px-4 py-1.5 rounded-full bg-[color:var(--color-gold-light)]/80 border border-[color:var(--color-gold)]/50 text-[color:var(--color-gold-deep)] text-xs uppercase font-bold tracking-widest mb-6 flex items-center gap-1.5 shadow-xs">
-              <Crown className="w-4 h-4 text-[#AA771C]" /> The Groom's Dynasty
-            </span>
-
-            <motion.div
-              whileHover={{ scale: 1.06, rotate: -2 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-white via-[#F5EBE1] to-[color:var(--color-gold-light)] border-2 border-[color:var(--color-gold)] shadow-xl mb-6 cursor-pointer"
-              onClick={() => setActiveModal("groom")}
-            >
-              <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
-                <img
-                  src={groomFamilyPhoto}
-                  alt="Groom Alexander & Family"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[color:var(--color-mauve-deep)]">
-              Alexander's Family
-            </h3>
-            <p className="text-xs sm:text-sm text-[color:var(--color-muted-ink)] mt-3 max-w-sm leading-relaxed font-normal">
-              Son of Lord Richard & Lady Margaret. Carrying forward a proud royal legacy of honor, integrity, and warmth across generations.
-            </p>
-
-            <div className="mt-6 p-4 rounded-2xl bg-white/40 border border-[color:var(--color-gold)]/30 max-w-sm">
-              <p className="font-[family-name:var(--font-script)] text-xl text-[color:var(--color-mauve-deep)] italic">
-                "Love is not about looking at each other, but looking together in the same direction."
-              </p>
-            </div>
+          {/* Top Badge */}
+          <div className="z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EBDBC9] border border-[#C5A059]/50 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-xs mb-6">
+            <Crown className="w-4 h-4 text-[#AA771C]" />
+            <span>The Groom's Dynasty</span>
           </div>
 
+          {/* Circular Portrait Frame */}
+          <div
+            onClick={() => setActiveModal("groom")}
+            className="z-10 relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-white to-[#AA771C] border-2 border-[#C5A059] shadow-xl mb-5 cursor-pointer group-hover:scale-105 transition-transform duration-500"
+          >
+            <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
+              <img
+                src={groomFamilyPhoto}
+                alt="Arjun's Family"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="absolute bottom-1 right-1 p-2 rounded-full bg-[#4C342F] text-amber-200 border border-[#D4AF37] shadow-md">
+              <Star className="w-3.5 h-3.5 fill-current text-[#FFD700]" />
+            </span>
+          </div>
+
+          {/* Card Title & Bio */}
+          <div className="z-10 space-y-3 w-full">
+            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#4C342F]">
+              Arjun's Family
+            </h3>
+            <p className="text-xs sm:text-sm text-[#5C4D46] leading-relaxed max-w-sm mx-auto font-normal">
+              Son of Maharaja Vikram Singh & Maharani Gayatri Devi. Carrying forward a proud royal
+              legacy of honor, integrity, and warmth across generations.
+            </p>
+          </div>
+
+          {/* Action Button */}
           <button
             onClick={() => setActiveModal("groom")}
-            className="mt-8 z-10 w-full sm:w-auto px-8 py-4 rounded-full bg-[color:var(--color-mauve-deep)] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[color:var(--color-mauve)] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 border border-amber-200/30 cursor-pointer"
+            className="z-10 mt-8 w-full py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 border border-[#D4AF37] cursor-pointer"
           >
-            <Users className="w-4 h-4 text-[color:var(--color-gold-light)]" />
-            <span>Explore Groom Family Tree</span>
-            <ChevronRight className="w-4 h-4" />
+            <Users className="w-4 h-4 text-[#FFD700]" />
+            <span>Meet Arjun's Family Members</span>
+            <ChevronRight className="w-4 h-4 text-[#FFD700]" />
           </button>
         </motion.div>
 
-        {/* BRIDE FAMILY CARD (SLIDE FROM RIGHT) */}
+        {/* BRIDE SECTION CARD */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
+          initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="soft-card rounded-[36px] p-8 sm:p-10 md:p-12 flex flex-col items-center justify-between text-center relative overflow-hidden border-2 border-[color:var(--color-gold)]/40 shadow-[0_25px_60px_rgba(76,52,47,0.14)] hover:border-[color:var(--color-gold)] transition-all duration-300 min-h-[520px] sm:min-h-[580px] md:min-h-[620px]"
+          transition={{ duration: 0.5 }}
+          whileHover={{ y: -6 }}
+          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_22px_55px_rgba(76,52,47,0.18)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.12),transparent_70%)] pointer-events-none" />
+          {/* Radial Warm Glow */}
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 w-80 h-80 bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl" />
 
-          <div className="flex flex-col items-center z-10 w-full">
-            <span className="px-4 py-1.5 rounded-full bg-[color:var(--color-gold-light)]/80 border border-[color:var(--color-gold)]/50 text-[color:var(--color-gold-deep)] text-xs uppercase font-bold tracking-widest mb-6 flex items-center gap-1.5 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#AA771C]" /> The Bride's Dynasty
-            </span>
-
-            <motion.div
-              whileHover={{ scale: 1.06, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-white via-[#F5EBE1] to-[color:var(--color-gold-light)] border-2 border-[color:var(--color-gold)] shadow-xl mb-6 cursor-pointer"
-              onClick={() => setActiveModal("bride")}
-            >
-              <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
-                <img
-                  src={brideFamilyPhoto}
-                  alt="Bride Victoria & Family"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[color:var(--color-mauve-deep)]">
-              Victoria's Family
-            </h3>
-            <p className="text-xs sm:text-sm text-[color:var(--color-muted-ink)] mt-3 max-w-sm leading-relaxed font-normal">
-              Daughter of Dr. Arthur & Elizabeth Montgomery. A family renowned for academic brilliance, royal grace, and joy.
-            </p>
-
-            <div className="mt-6 p-4 rounded-2xl bg-white/40 border border-[color:var(--color-gold)]/30 max-w-sm">
-              <p className="font-[family-name:var(--font-script)] text-xl text-[color:var(--color-mauve-deep)] italic">
-                "Seeing Victoria's smile brighten beside Alexander fills our hearts with pride."
-              </p>
-            </div>
+          {/* Top Badge */}
+          <div className="z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EBDBC9] border border-[#C5A059]/50 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-xs mb-6">
+            <Sparkles className="w-4 h-4 text-[#AA771C]" />
+            <span>The Bride's Dynasty</span>
           </div>
 
+          {/* Circular Portrait Frame */}
+          <div
+            onClick={() => setActiveModal("bride")}
+            className="z-10 relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-white to-[#AA771C] border-2 border-[#C5A059] shadow-xl mb-5 cursor-pointer group-hover:scale-105 transition-transform duration-500"
+          >
+            <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
+              <img
+                src={brideFamilyPhoto}
+                alt="Ananya's Family"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="absolute bottom-1 right-1 p-2 rounded-full bg-[#4C342F] text-amber-200 border border-[#D4AF37] shadow-md">
+              <Heart className="w-3.5 h-3.5 fill-current text-[#E86F68]" />
+            </span>
+          </div>
+
+          {/* Card Title & Bio */}
+          <div className="z-10 space-y-3 w-full">
+            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#4C342F]">
+              Ananya's Family
+            </h3>
+            <p className="text-xs sm:text-sm text-[#5C4D46] leading-relaxed max-w-sm mx-auto font-normal">
+              Daughter of Dr. Harshvardhan Sharma & Sunita Sharma. Renowned for academic excellence,
+              royal poise, and everlasting warmth.
+            </p>
+          </div>
+
+          {/* Action Button */}
           <button
             onClick={() => setActiveModal("bride")}
-            className="mt-8 z-10 w-full sm:w-auto px-8 py-4 rounded-full bg-[color:var(--color-mauve-deep)] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[color:var(--color-mauve)] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 border border-amber-200/30 cursor-pointer"
+            className="z-10 mt-8 w-full py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 border border-[#D4AF37] cursor-pointer"
           >
-            <Users className="w-4 h-4 text-[color:var(--color-gold-light)]" />
-            <span>Explore Bride Family Tree</span>
-            <ChevronRight className="w-4 h-4" />
+            <Users className="w-4 h-4 text-[#FFD700]" />
+            <span>Meet Ananya's Family Members</span>
+            <ChevronRight className="w-4 h-4 text-[#FFD700]" />
           </button>
         </motion.div>
-
       </div>
 
-      {/* FAMILY TREE MODAL */}
+      {/* 3. INTERACTIVE POP-UP MODAL WITH SMALL INDIVIDUAL FAMILY CARDS */}
       <AnimatePresence>
         {activeModal && (
           <motion.div
@@ -226,70 +262,107 @@ export function FamilySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveModal(null)}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center overflow-y-auto"
+            className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md p-4 sm:p-6 flex items-center justify-center overflow-y-auto"
           >
             <motion.div
-              initial={{ scale: 0.9, y: 20 }}
+              initial={{ scale: 0.92, y: 25 }}
               animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
+              exit={{ scale: 0.92, y: 25 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-cream max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl border-2 border-[color:var(--color-gold)] p-6 md:p-8 relative max-h-[85vh] overflow-y-auto"
+              className="bg-[#FDFBF7] max-w-4xl w-full rounded-[36px] overflow-hidden shadow-2xl border-3 border-[#D4AF37] p-6 sm:p-8 md:p-10 relative max-h-[90vh] overflow-y-auto flex flex-col justify-between"
             >
+              {/* Close Button */}
               <button
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[color:var(--color-mauve-deep)] text-white flex items-center justify-center hover:bg-[color:var(--color-mauve)] transition-colors"
+                className="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#4C342F] text-amber-100 flex items-center justify-center hover:bg-[#3A2320] transition-colors border border-[#D4AF37] shadow-md z-20 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="text-center mb-6">
-                <span className="text-xs uppercase tracking-widest text-[color:var(--color-gold-deep)] font-bold">
-                  {activeModal === "groom" ? "Alexander's Heritage" : "Victoria's Heritage"}
-                </span>
-                <h3 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[color:var(--color-mauve-deep)]">
-                  {activeModal === "groom" ? "Groom Family Tree & Blessings" : "Bride Family Tree & Blessings"}
-                </h3>
+              <div>
+                {/* Pop-up Title & Header */}
+                <div className="text-center mb-6">
+                  <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-bold block mb-1">
+                    FAMILY LINEAGE & BLESSINGS
+                  </span>
+                  <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#4C342F]">
+                    {activeTitle}
+                  </h3>
+                </div>
+
+                {/* Pop-up Banner Image */}
+                <div className="relative h-48 sm:h-56 rounded-3xl overflow-hidden mb-8 border-2 border-[#D4AF37]/50 shadow-lg">
+                  <img
+                    src={activeBanner}
+                    alt={activeTitle}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between text-white">
+                    <span className="font-[family-name:var(--font-heading)] text-lg font-bold tracking-wider">
+                      {activeModal === "groom" ? "Arjun's Family Crest" : "Ananya's Family Crest"}
+                    </span>
+                    <span className="text-xs uppercase tracking-widest text-amber-200 font-semibold px-3 py-1 rounded-full bg-black/40 border border-white/30 backdrop-blur-sm">
+                      4 Members
+                    </span>
+                  </div>
+                </div>
+
+                {/* GRID OF SMALL INDIVIDUAL FAMILY CARDS WITH PROFILE PICTURES */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                  {activeMembers.map((member, i) => (
+                    <motion.div
+                      key={member.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.08 }}
+                      className="soft-card rounded-3xl p-5 border-2 border-[#D4AF37]/40 bg-white shadow-md hover:shadow-xl hover:border-[#D4AF37] transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        {/* Member Profile Avatar & Header */}
+                        <div className="flex items-center gap-3.5 mb-3.5">
+                          <div className="relative w-14 h-14 rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-white to-[#AA771C] border border-[#C5A059] shadow-sm shrink-0">
+                            <div className="w-full h-full rounded-full overflow-hidden">
+                              <img
+                                src={member.avatar}
+                                alt={member.name}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="text-left">
+                            <h4 className="font-bold text-[#4C342F] text-base leading-tight">
+                              {member.name}
+                            </h4>
+                            <span className="inline-block mt-1 text-[9.5px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EBDBC9] text-[#4C342F] border border-[#C5A059]/40">
+                              {member.relation}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-xs text-[#5C4D46] leading-relaxed mb-3">
+                          {member.description}
+                        </p>
+                      </div>
+
+                      {/* Personal Quote / Blessing */}
+                      <div className="p-3 rounded-xl bg-[#FBF6EE] border border-[#E8DCCB] text-center">
+                        <p className="font-[family-name:var(--font-script)] text-base sm:text-lg text-[#AA771C] italic leading-snug">
+                          "{member.quote}"
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
 
-              <div className="relative h-60 rounded-2xl overflow-hidden mb-6 border border-[color:var(--color-gold)]/40 shadow-md">
-                <img
-                  src={activeModal === "groom" ? groomFamilyPhoto : brideFamilyPhoto}
-                  alt="Family Portrait"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="space-y-4">
-                {(activeModal === "groom" ? GROOM_FAMILY_MEMBERS : BRIDE_FAMILY_MEMBERS).map((member, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                    className="soft-card rounded-xl p-4 border border-[color:var(--color-gold)]/20"
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <h4 className="font-bold text-[color:var(--color-mauve-deep)] text-base">
-                        {member.name}
-                      </h4>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[color:var(--color-gold-light)] text-[color:var(--color-gold-deep)]">
-                        {member.relation}
-                      </span>
-                    </div>
-                    <p className="text-xs text-[color:var(--color-ink)] mb-2 leading-relaxed">
-                      {member.description}
-                    </p>
-                    <p className="font-[family-name:var(--font-script)] text-lg text-[color:var(--color-mauve)] italic">
-                      "{member.quote}"
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-
+              {/* Bottom Close Button */}
               <button
                 onClick={() => setActiveModal(null)}
-                className="mt-6 w-full py-3 rounded-xl bg-[color:var(--color-mauve-deep)] text-amber-50 text-xs font-semibold uppercase tracking-widest hover:bg-[color:var(--color-mauve)] transition-colors shadow-md cursor-pointer"
+                className="mt-8 w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-colors border border-[#D4AF37] shadow-md cursor-pointer"
               >
                 Close Family Window
               </button>

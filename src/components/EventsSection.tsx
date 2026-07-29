@@ -1,12 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Gem,
-  Wine,
-  Music,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
+import { Gem, Wine, Music, MapPin, Sparkles, Crown, Calendar, Clock } from "lucide-react";
 import couplePhoto from "../assets/couple.jpg";
 import ringsPhoto from "../assets/rings.jpg";
 import sangeetPhoto from "../assets/sangeet.png";
@@ -30,20 +24,101 @@ function GoldFlourish() {
   );
 }
 
-// Circular Glass Photo Frame Component
-function CircularGlassPhoto({
-  src,
-  alt,
-}: {
-  src: string;
-  alt: string;
-}) {
+// Royal Crest Top Cap for Timeline Spine
+function TimelineRoyalTopCrest() {
   return (
-    <div className="relative w-44 sm:w-56 md:w-64 h-44 sm:h-56 md:h-64 p-3 sm:p-4 rounded-full bg-white/55 backdrop-blur-2xl border-2 border-white shadow-[0_25px_60px_rgba(76,52,47,0.22)] hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-      <div className="absolute inset-2 rounded-full border border-[#C5A059]/40 pointer-events-none" />
-      <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#C5A059]/50 shadow-inner bg-stone-200">
-        <img src={src} alt={alt} className="w-full h-full object-cover" />
+    <motion.div
+      initial={{ scale: 0, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.5, ease: "backOut" }}
+      className="flex flex-col items-center absolute left-1/2 -top-7 sm:-top-9 -translate-x-1/2 z-20"
+    >
+      <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-[#FFFDF9] via-[#F3E5AB] to-[#C5A059] border-2 border-[#C5A059] shadow-sm flex items-center justify-center text-[#7A4B46]">
+        <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-[#7A4B46]" />
       </div>
+      <div className="w-0.5 h-3 bg-gradient-to-b from-[#C5A059] to-transparent" />
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* CRISP DOUBLE-GOLD LEAF PRECISION RIM PHOTO FRAME (STATIC & LUXURY)        */
+/* -------------------------------------------------------------------------- */
+function SleekMinimalPhotoFrame({ src, alt }: { src: string; alt: string }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.04, y: -2 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative w-16 xs:w-22 sm:w-44 md:w-64 h-16 xs:h-22 sm:h-44 md:h-64 p-0.5 sm:p-2 rounded-full bg-white/70 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_12px_28px_rgba(76,52,47,0.15)] flex items-center justify-center group cursor-pointer shrink-0"
+    >
+      {/* Outer Fine Gold Accent Ring */}
+      <div className="absolute inset-0.5 rounded-full border border-[#C5A059]/30 pointer-events-none group-hover:border-[#C5A059]/60 transition-colors duration-500" />
+
+      {/* Clean Edge-to-Edge Photo Container with Inner Gold Bezel */}
+      <div className="w-full h-full rounded-full overflow-hidden border border-[#C5A059]/60 bg-stone-200 relative z-0 shadow-inner">
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-20 group-hover:opacity-0 transition-opacity" />
+      </div>
+    </motion.div>
+  );
+}
+
+// Elegant S-Shaped Curled Gold Timeline Spine SVG (Narrow Gentle Curve Channel)
+function CurledSTimelineSpine() {
+  return (
+    <div className="block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-16 sm:w-28 md:w-36 h-full pointer-events-none z-0">
+      <svg
+        viewBox="0 0 160 800"
+        preserveAspectRatio="none"
+        className="w-full h-full text-[#C5A059]"
+      >
+        <defs>
+          <linearGradient id="goldSpineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.9" />
+            <stop offset="25%" stopColor="#AA771C" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#FFF1B0" stopOpacity="1" />
+            <stop offset="75%" stopColor="#AA771C" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.9" />
+          </linearGradient>
+          <filter id="goldSpineGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        {/* Outer Soft Glow Layer */}
+        <motion.path
+          d="M 80 15 C 105 140, 105 240, 80 395 C 55 550, 55 650, 80 785"
+          fill="none"
+          stroke="#D4AF37"
+          strokeWidth="6"
+          strokeOpacity="0.3"
+          filter="url(#goldSpineGlow)"
+        />
+
+        {/* Main Curled S-Curve Satin Gold Path */}
+        <motion.path
+          d="M 80 15 C 105 140, 105 240, 80 395 C 55 550, 55 650, 80 785"
+          fill="none"
+          stroke="url(#goldSpineGrad)"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
+        />
+
+        {/* Decorative S-Curve Dots at inflection points */}
+        <circle cx="80" cy="15" r="4" fill="#D4AF37" />
+        <circle cx="80" cy="395" r="4" fill="#FFF1B0" stroke="#AA771C" strokeWidth="1.5" />
+        <circle cx="80" cy="785" r="4" fill="#D4AF37" />
+      </svg>
     </div>
   );
 }
@@ -51,222 +126,214 @@ function CircularGlassPhoto({
 export function EventsSection() {
   return (
     <section className="mt-16 sm:mt-24 py-8 relative select-none w-full">
-      {/* 1. HEADER SECTION (SLIDE FROM TOP) */}
+      {/* 1. HEADER SECTION */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="text-center max-w-4xl mx-auto px-4 mb-14 sm:mb-20"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center max-w-4xl mx-auto px-4 mb-12 sm:mb-24"
       >
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-3">
-          SCHEDULE & CELEBRATIONS
-        </p>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/70 border border-[#C5A059]/40 mb-3 shadow-xs">
+          <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+          <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
+            Schedule & Celebrations
+          </span>
+          <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-normal tracking-wide text-[#3A2E2A] leading-tight">
-          ENGAGEMENT Festivities: <span className="italic">The Journey of Love Begins</span>
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-[#3A2E2A] leading-tight">
+          ENGAGEMENT Festivities:{" "}
+          <span className="italic gold-text">The Journey of Love Begins</span>
         </h2>
 
         <GoldFlourish />
       </motion.div>
 
-      {/* 2. ALTERNATING TIMELINE WITH ENHANCED STRAIGHT VERTICAL GOLD SPINE */}
-      <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6">
-        
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      {/* 2. ALTERNATING TIMELINE WITH SUBTLE SATIN GOLD SPINE */}
+      <div className="relative w-full max-w-6xl lg:max-w-7xl mx-auto px-2 sm:px-6">
+        {/* Soft Radial Ambient Backdrop Glow */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
-        {/* CENTER GOLD SPINE */}
-        <motion.div
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-1.5 bg-gradient-to-b from-[#AA771C] via-[#FFD700] to-[#AA771C] rounded-full shadow-[0_0_20px_rgba(212,175,55,0.7)] z-0 origin-top"
-        />
+        {/* ROYAL CREST TOP CAP */}
+        <TimelineRoyalTopCrest />
 
-        <div className="space-y-16 sm:space-y-24 md:space-y-28 relative z-10">
-          
-          {/* ITEM 1: PROPOSAL STORY (TEXT SLIDES FROM LEFT, PHOTO SLIDES FROM RIGHT) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        {/* CURLED S-SHAPED GOLD TIMELINE SPINE */}
+        <CurledSTimelineSpine />
+
+        <div className="space-y-14 sm:space-y-24 md:space-y-28 relative z-10 pt-6 pb-6">
+          {/* ITEM 1: PROPOSAL STORY */}
+          <div className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 lg:gap-24 items-center relative">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 text-left space-y-3.5 pr-0 md:pr-8"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 text-right flex flex-col items-end space-y-1 sm:space-y-3.5 pr-7 xs:pr-9 sm:pr-12 md:pr-16 lg:pr-20"
             >
-              <div className="w-12 h-12 rounded-xl bg-transparent text-[#C5A059] flex items-center justify-center border border-[#C5A059]/40 shadow-xs mb-2">
-                <Gem className="w-6 h-6" />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#FDF9F3] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-xs mb-0.5 sm:mb-1"
+              >
+                <Gem className="w-3.5 h-3.5 sm:w-6 sm:h-6 text-[#AA771C]" />
+              </motion.div>
+
+              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/80 border border-[#C5A059]/40 text-[8px] xs:text-[9px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold">
+                <Calendar className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>AUG 26</span>
+                <span>·</span>
+                <Clock className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>04:00 PM</span>
               </div>
 
-              <p className="text-xs uppercase tracking-widest text-[#C5A059] font-bold flex items-center gap-2">
-                <span>📅 AUGUST 26, 2025</span>
-                <span>·</span>
-                <span>🕓 04:00 PM ONWARDS</span>
-              </p>
-
-              <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#3A2E2A] leading-tight">
+              <h3 className="font-[family-name:var(--font-heading)] text-[11px] xs:text-xs sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
                 THE PROPOSAL STORY & WELCOME
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#5C4D46] font-normal leading-relaxed max-w-md">
-                Family Introductions & Couple's Retelling of Their Proposal Story
+              <p className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#5C4D46] font-medium leading-tight sm:leading-relaxed max-w-md">
+                Family Introductions & Proposal Retelling
               </p>
 
-              <p className="text-xs text-[#C5A059] font-medium flex items-center gap-1.5 pt-1">
-                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0" />
-                <span>The Royal Ballroom, Villa Love</span>
+              <p className="text-[8px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
+                <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
+                <span>Fateh Palace, Udaipur</span>
               </p>
 
-              <div className="pt-1 flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EBDBC9]/80 border border-[#C5A059]/40 text-[10px] font-bold text-[#3A2E2A]">
+              <div className="pt-0.5 flex items-center gap-1 sm:gap-2">
+                <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-[#EBDBC9]/90 border border-[#C5A059]/60 text-[7px] xs:text-[8px] sm:text-[10px] font-extrabold text-[#3A2E2A] shadow-xs">
                   <span>THEME:</span>
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#5C443E] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#E8D5CC] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#F5EBE1] border border-white" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#5C443E] border border-white shadow-xs" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#E8D5CC] border border-white shadow-xs" />
                 </div>
-                <span className="italic text-[#5C4D46] text-xs font-medium">(Champagne Gold)</span>
               </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 flex justify-center md:justify-start pl-0 md:pl-8 relative"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 flex justify-start pl-7 xs:pl-9 sm:pl-12 md:pl-16 lg:pl-20 relative"
             >
-              <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,130,0.9)] z-20" />
-              <CircularGlassPhoto src={couplePhoto} alt="Proposal Story & Welcome" />
+              <SleekMinimalPhotoFrame src={couplePhoto} alt="Proposal Story & Welcome" />
             </motion.div>
           </div>
 
-          {/* ITEM 2: RING EXCHANGE (PHOTO SLIDES FROM LEFT, TEXT SLIDES FROM RIGHT) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          {/* ITEM 2: RING EXCHANGE */}
+          <div className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 lg:gap-24 items-center relative">
             <motion.div
-              initial={{ opacity: 0, x: -50, scale: 0.9 }}
+              initial={{ opacity: 0, x: -30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 flex justify-center md:justify-end pr-0 md:pr-8 order-2 md:order-1 relative"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 flex justify-end pr-7 xs:pr-9 sm:pr-12 md:pr-16 lg:pr-20 relative"
             >
-              <div className="hidden md:block absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,130,0.9)] z-20" />
-              <CircularGlassPhoto src={ringsPhoto} alt="Ring Exchange & Vows" />
+              <SleekMinimalPhotoFrame src={ringsPhoto} alt="Ring Exchange & Vows" />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 text-left space-y-3.5 pl-0 md:pl-8 order-1 md:order-2"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 text-left flex flex-col items-start space-y-1 sm:space-y-3.5 pl-7 xs:pl-9 sm:pl-12 md:pl-16 lg:pl-20"
             >
-              <div className="w-12 h-12 rounded-xl bg-transparent text-[#C5A059] flex items-center justify-center border border-[#C5A059]/40 shadow-xs mb-2">
-                <Sparkles className="w-6 h-6" />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#FDF9F3] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-xs mb-0.5 sm:mb-1"
+              >
+                <Sparkles className="w-3.5 h-3.5 sm:w-6 sm:h-6 text-[#AA771C]" />
+              </motion.div>
+
+              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/80 border border-[#C5A059]/40 text-[8px] xs:text-[9px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold">
+                <Calendar className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>AUG 27</span>
+                <span>·</span>
+                <Clock className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>10:00 AM</span>
               </div>
 
-              <p className="text-xs uppercase tracking-widest text-[#C5A059] font-bold flex items-center gap-2">
-                <span>📅 AUGUST 27, 2025</span>
-                <span>·</span>
-                <span>🕓 10:00 AM ONWARDS</span>
-              </p>
-
-              <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#3A2E2A] leading-tight">
-                RING EXCHANGE & FORMAL BLESSINGS
+              <h3 className="font-[family-name:var(--font-heading)] text-[11px] xs:text-xs sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
+                RING EXCHANGE & BLESSINGS
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#5C4D46] font-normal leading-relaxed max-w-md">
-                Tradition & Family Blessings, Formal Exchange of Engagement Rings
+              <p className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#5C4D46] font-medium leading-tight sm:leading-relaxed max-w-md">
+                Formal Ring Exchange & Family Vows
               </p>
 
-              <p className="text-xs text-[#C5A059] font-medium flex items-center gap-1.5 pt-1">
-                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0" />
-                <span>Courtyard & Gardens, Villa Love</span>
+              <p className="text-[8px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
+                <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
+                <span>Gardens, Fateh Palace</span>
               </p>
 
-              <div className="pt-1 flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EBDBC9]/80 border border-[#C5A059]/40 text-[10px] font-bold text-[#3A2E2A]">
+              <div className="pt-0.5 flex items-center gap-1 sm:gap-2">
+                <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-[#EBDBC9]/90 border border-[#C5A059]/60 text-[7px] xs:text-[8px] sm:text-[10px] font-extrabold text-[#3A2E2A] shadow-xs">
                   <span>THEME:</span>
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#FFD700] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#9AA88E] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#556B2F] border border-white" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#FFD700] border border-white shadow-xs" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#556B2F] border border-white shadow-xs" />
                 </div>
-                <span className="italic text-[#5C4D46] text-xs font-medium">(Sunburst Yellow, Floral Green)</span>
               </div>
             </motion.div>
           </div>
 
-          {/* ITEM 3: CELEBRATION DINNER (TEXT SLIDES FROM LEFT, PHOTO SLIDES FROM RIGHT) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          {/* ITEM 3: CELEBRATION DINNER */}
+          <div className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 lg:gap-24 items-center relative">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 text-left space-y-3.5 pr-0 md:pr-8"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 text-right flex flex-col items-end space-y-1 sm:space-y-3.5 pr-7 xs:pr-9 sm:pr-12 md:pr-16 lg:pr-20"
             >
-              <div className="w-12 h-12 rounded-xl bg-transparent text-[#C5A059] flex items-center justify-center border border-[#C5A059]/40 shadow-xs mb-2 flex gap-0.5">
-                <Wine className="w-5 h-5 text-[#C5A059]" />
-                <Music className="w-4 h-4 text-[#8B5E5A]" />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#FDF9F3] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-xs mb-0.5 sm:mb-1 flex gap-0.5"
+              >
+                <Wine className="w-3 h-3 sm:w-5 sm:h-5 text-[#AA771C]" />
+                <Music className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#8B5E5A]" />
+              </motion.div>
+
+              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/80 border border-[#C5A059]/40 text-[8px] xs:text-[9px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold">
+                <Calendar className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>AUG 27</span>
+                <span>·</span>
+                <Clock className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
+                <span>07:00 PM</span>
               </div>
 
-              <p className="text-xs uppercase tracking-widest text-[#C5A059] font-bold flex items-center gap-2">
-                <span>📅 AUGUST 27, 2025</span>
-                <span>·</span>
-                <span>🕓 07:00 PM ONWARDS</span>
-              </p>
-
-              <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#3A2E2A] leading-tight">
+              <h3 className="font-[family-name:var(--font-heading)] text-[11px] xs:text-xs sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
                 CELEBRATION DINNER & PARTY
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#5C4D46] font-normal leading-relaxed max-w-md">
-                Dinner, Musical Performances, Dance & Bonding with Guests
+              <p className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#5C4D46] font-medium leading-tight sm:leading-relaxed max-w-md">
+                Royal Dinner, Music & Dance
               </p>
 
-              <p className="text-xs text-[#C5A059] font-medium flex items-center gap-1.5 pt-1">
-                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0" />
-                <span>Grand Pavilion, Villa Love</span>
+              <p className="text-[8px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
+                <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
+                <span>Grand Pavilion, Fateh Palace</span>
               </p>
 
-              <div className="pt-1 flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EBDBC9]/80 border border-[#C5A059]/40 text-[10px] font-bold text-[#3A2E2A]">
+              <div className="pt-0.5 flex items-center gap-1 sm:gap-2">
+                <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-[#EBDBC9]/90 border border-[#C5A059]/60 text-[7px] xs:text-[8px] sm:text-[10px] font-extrabold text-[#3A2E2A] shadow-xs">
                   <span>THEME:</span>
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#1E3A8A] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#D4AF37] border border-white" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#3B82F6] border border-white" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#1E3A8A] border border-white shadow-xs" />
+                  <span className="w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D4AF37] border border-white shadow-xs" />
                 </div>
-                <span className="italic text-[#5C4D46] text-xs font-medium">(Polished Gold)</span>
               </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="md:col-span-6 flex justify-center md:justify-start pl-0 md:pl-8 relative"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-span-6 flex justify-start pl-7 xs:pl-9 sm:pl-12 md:pl-16 lg:pl-20 relative"
             >
-              <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,130,0.9)] z-20" />
-              <CircularGlassPhoto src={sangeetPhoto} alt="Celebration Dinner & Party" />
+              <SleekMinimalPhotoFrame src={sangeetPhoto} alt="Celebration Dinner & Party" />
             </motion.div>
           </div>
-
         </div>
-
-        {/* BOTTOM BASE PEDESTAL (SLIDES FROM BOTTOM) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-30px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-16 flex justify-center"
-        >
-          <div className="w-48 h-5 rounded-full bg-gradient-to-r from-[#D4AF37]/30 via-white to-[#D4AF37]/30 border-2 border-[#C5A059] shadow-lg flex items-center justify-center">
-            <div className="w-20 h-1.5 bg-[#AA771C] rounded-full" />
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );

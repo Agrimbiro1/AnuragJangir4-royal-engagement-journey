@@ -28,7 +28,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   // --- LEFT SIDE CLUSTER ---
   {
     id: "fb1",
-    author: "Lord Brandon",
+    author: "Rana Digvijay Singh",
     relation: "The Royal Court",
     message: "May your sacred union bring eternal joy, grace, and noble fortune to both families!",
     photo: couplePhoto,
@@ -41,8 +41,8 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb3",
-    author: "The Royal Court",
-    relation: "Lords & Ladies",
+    author: "Udaipur Royal Relatives",
+    relation: "Royal Guests",
     message: "A royal toast to eternal love, endless laughter, and brilliant celebrations!",
     photo: venuePhoto,
     likes: 42,
@@ -54,8 +54,8 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb5",
-    author: "Sebastian & Clara",
-    relation: "Best Man & Sister",
+    author: "Kunwar Devraj & Rajkumari Ananya",
+    relation: "Brother & Cousin",
     message: "Wishing you a lifetime of grand adventures, late night laughter, and pure happiness!",
     photo: sangeetPhoto,
     likes: 63,
@@ -68,7 +68,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   // INNER LEFT CARD OVERLAPPING TOP-LEFT CORNER OF CENTRAL INPUT CARD
   {
     id: "fb7",
-    author: "Sir Edward & Lady Eleanor",
+    author: "Raja Brijraj Singh & Rani Devika Devi",
     relation: "Grandparents",
     message: "Pillars of heritage and tradition, passing down golden values of love and honor.",
     photo: haldiPhoto,
@@ -81,7 +81,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb9",
-    author: "Lady Beatrice",
+    author: "Dadi Sa Rukmani Devi",
     relation: "Family Elder",
     message: "Sacred light and divine grace guide your steps as you walk as one.",
     photo: brideFamilyPhoto,
@@ -96,7 +96,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   // --- RIGHT SIDE CLUSTER ---
   {
     id: "fb2",
-    author: "Grandmother Beatrice",
+    author: "Dadi Sa Rukmani Devi",
     relation: "Bride's Family",
     message: "All my love and sacred heirloom blessings to Arjun & Ananya on this magical day.",
     photo: couplePhoto,
@@ -109,7 +109,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb4",
-    author: "Lord Richard & Lady Margaret",
+    author: "Maharaja Vikram Singh & Maharani Gayatri Devi",
     relation: "Groom's Parents",
     message: "Watching you both walk together hand in hand fills our hearts with infinite pride.",
     photo: sangeetPhoto,
@@ -122,9 +122,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb6",
-    author: "Princess Sophia",
+    author: "Rajkumari Aditi",
     relation: "Sister of Groom",
-    message: "So thrilled for my brother and my new sister! Welcome to the family Victoria!",
+    message: "So thrilled for my brother Arjun and my new sister Ananya! Welcome to the family!",
     photo: brideFamilyPhoto,
     likes: 58,
     posClass: "bottom-[1%] right-[2%] lg:right-[4%]",
@@ -136,7 +136,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   // INNER RIGHT CARD OVERLAPPING TOP-RIGHT CORNER OF CENTRAL INPUT CARD
   {
     id: "fb8",
-    author: "Isabella & William",
+    author: "Isha & Vikram Sharma",
     relation: "Sister & Brother",
     message: "You two are made for each other! Let the royal celebrations begin!",
     photo: ringsPhoto,
@@ -149,7 +149,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
   },
   {
     id: "fb10",
-    author: "Lord Arthur",
+    author: "Uncle Rajendra Sharma",
     relation: "Uncle of Bride",
     message: "May your hearts beat as one through every chapter of life.",
     photo: groomFamilyPhoto,
@@ -183,7 +183,8 @@ function FeatherOrnament() {
 export function BlessingsSection() {
   const templateGuestName = "Lord Brandon & Honored Family";
   const [blessingText, setBlessingText] = useState("");
-  const [floatingCards, setFloatingCards] = useState<FloatingBlessingCard[]>(OVERLAPPING_ANGLED_CARDS);
+  const [floatingCards, setFloatingCards] =
+    useState<FloatingBlessingCard[]>(OVERLAPPING_ANGLED_CARDS);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [userLiked, setUserLiked] = useState<Record<string, boolean>>({});
   const [showAllModal, setShowAllModal] = useState(false);
@@ -222,7 +223,7 @@ export function BlessingsSection() {
     setUserLiked((prev) => {
       const isLiked = prev[id];
       setFloatingCards((list) =>
-        list.map((c) => (c.id === id ? { ...c, likes: c.likes + (isLiked ? -1 : 1) } : c))
+        list.map((c) => (c.id === id ? { ...c, likes: c.likes + (isLiked ? -1 : 1) } : c)),
       );
       return { ...prev, [id]: !isLiked };
     });
@@ -230,7 +231,6 @@ export function BlessingsSection() {
 
   return (
     <section className="mt-16 sm:mt-24 relative select-none w-full max-w-[1450px] mx-auto px-2 sm:px-4 overflow-x-hidden">
-      
       {/* BACKGROUND WARM RADIAL GLOW AURA */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
@@ -281,7 +281,11 @@ export function BlessingsSection() {
             <div>
               {/* COMPACT PHOTO CONTAINER */}
               <div className="w-full h-22 rounded-xl overflow-hidden mb-1.5 border border-white shadow-inner">
-                <img src={card.photo} alt={card.author} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img
+                  src={card.photo}
+                  alt={card.author}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
               <div className="flex items-center justify-between mb-1">
@@ -326,7 +330,6 @@ export function BlessingsSection() {
           <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
 
           <form onSubmit={handleSubmitBlessing} className="w-full space-y-3.5 relative z-10">
-            
             <div className="text-center">
               <p className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.3em] font-bold text-[#C5A059] mb-1">
                 ROYAL GUESTBOOK & BLESSINGS
@@ -377,62 +380,57 @@ export function BlessingsSection() {
                 <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
               </button>
             </div>
-
           </form>
         </motion.div>
-
       </div>
 
-      {/* 4. MOBILE SCREEN LAYOUT */}
-      <div className="sm:hidden space-y-6 py-4">
-        <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border-2 border-[#D4AF37] shadow-xl text-center">
-          <p className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.3em] font-bold text-[#C5A059] mb-1">
-            ROYAL GUESTBOOK & BLESSINGS
-          </p>
+      {/* 4. MOBILE SCREEN LAYOUT (CLEAN CARD WITH POP-UP MODAL BUTTON) */}
+      <div className="sm:hidden py-4 px-2">
+        <div className="p-6 rounded-[32px] bg-white/75 backdrop-blur-xl border-2 border-[color:var(--color-gold)]/60 shadow-[0_20px_50px_rgba(76,52,47,0.18)] text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
 
-          <p className="font-[family-name:var(--font-script)] text-2xl text-[#AA771C] my-2">
-            Dear '{templateGuestName}',
-          </p>
-
-          <textarea
-            required
-            rows={3}
-            value={blessingText}
-            onChange={(e) => setBlessingText(e.target.value)}
-            placeholder="SHARE YOUR BLESSING..."
-            className="w-full rounded-xl p-3 bg-white border border-[#D4C3B5] text-xs text-[#3A2E2A] placeholder-stone-500 outline-none mb-3"
-          />
-
-          <div className="flex flex-col gap-2">
-            <button
-              onClick={handleSubmitBlessing}
-              className="w-full py-3 rounded-full bg-[#4C342F] text-amber-50 font-bold text-xs uppercase tracking-widest border border-[#D4AF37]"
-            >
-              SUBMIT BLESSING
-            </button>
-            <button
-              onClick={() => setShowAllModal(true)}
-              className="w-full py-2.5 rounded-full bg-white border border-[#D4AF37] text-[#4C342F] font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2"
-            >
-              <Eye className="w-4 h-4 text-[#AA771C]" />
-              <span>VIEW ALL BLESSINGS</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          {floatingCards.map((card) => (
-            <div key={card.id} className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-[#D4C3B5] shadow-md">
-              <img src={card.photo} alt={card.author} className="w-full h-32 object-cover rounded-xl mb-2" />
-              <div className="flex items-center justify-between mb-1">
-                <h4 className="font-bold text-[#4C342F] text-xs">{card.author}</h4>
-                <span className="text-[9px] uppercase font-bold text-[#8B5E5A] px-2 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
-                  {card.relation}
-                </span>
-              </div>
-              <p className="text-xs text-[#5C4D46] italic">"{card.message}"</p>
+          <form onSubmit={handleSubmitBlessing} className="space-y-4 relative z-10">
+            <div>
+              <p className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.3em] font-bold text-[#C5A059] mb-1">
+                ROYAL GUESTBOOK & BLESSINGS
+              </p>
             </div>
-          ))}
+
+            <div className="py-2 px-3 rounded-2xl bg-white/80 border border-[#D4AF37]/40 shadow-xs">
+              <p className="font-[family-name:var(--font-script)] text-2xl text-[#AA771C]">
+                Dear '{templateGuestName}',
+              </p>
+            </div>
+
+            <textarea
+              required
+              rows={3}
+              value={blessingText}
+              onChange={(e) => setBlessingText(e.target.value)}
+              placeholder="SHARE YOUR BLESSING..."
+              className="w-full rounded-2xl p-3.5 bg-white/90 border border-[#D4C3B5] text-xs text-[#3A2E2A] placeholder-stone-500 outline-none focus:border-[#C5A059] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
+            />
+
+            <div className="flex flex-col gap-3 pt-1">
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 font-bold text-xs uppercase tracking-[0.2em] border-2 border-[#D4AF37] shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Send className="w-4 h-4 text-[#D4AF37]" />
+                <span>SUBMIT BLESSING</span>
+              </button>
+
+              {/* POPUP VIEW MODAL BUTTON */}
+              <button
+                type="button"
+                onClick={() => setShowAllModal(true)}
+                className="w-full py-3.5 rounded-full bg-white/90 border-2 border-[#C5A059] text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-md hover:bg-stone-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Eye className="w-4 h-4 text-[#AA771C]" />
+                <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -444,68 +442,93 @@ export function BlessingsSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowAllModal(false)}
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md p-4 flex items-center justify-center overflow-y-auto"
+            className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md p-3 sm:p-6 flex items-center justify-center overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-cream max-w-3xl w-full rounded-3xl p-6 sm:p-8 border-2 border-[#D4AF37] shadow-2xl relative max-h-[85vh] overflow-y-auto"
+              className="bg-[#FFFDF9] max-w-3xl w-full rounded-[32px] p-5 sm:p-8 border-2 border-[#D4AF37] shadow-2xl relative max-h-[88vh] flex flex-col overflow-hidden"
             >
-              <button
-                onClick={() => setShowAllModal(false)}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#4C342F] text-white flex items-center justify-center hover:bg-[#3A2320] transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="text-center mb-6">
-                <span className="text-xs uppercase tracking-widest text-[#AA771C] font-bold">
-                  ROYAL GUESTBOOK SHOWCASE
-                </span>
-                <h3 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[#4C342F]">
-                  All Guest Blessings ({floatingCards.length})
-                </h3>
+              {/* Modal Header */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-[#EBDBC9] mb-4">
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest text-[#AA771C] font-bold">
+                    ROYAL GUESTBOOK SHOWCASE
+                  </span>
+                  <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-3xl font-bold text-[#4C342F]">
+                    All Guest Blessings ({floatingCards.length})
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setShowAllModal(false)}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#4C342F] text-amber-100 flex items-center justify-center hover:bg-[#3A2320] transition-colors cursor-pointer border border-[#D4AF37]"
+                >
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {floatingCards.map((card) => (
-                  <div key={card.id} className="soft-card rounded-2xl p-4 border border-[#D4AF37]/30">
-                    <div className="w-full h-36 rounded-xl overflow-hidden mb-3 border border-white">
-                      <img src={card.photo} alt={card.author} className="w-full h-full object-cover" />
+              {/* Modal Content Scroll Area */}
+              <div className="overflow-y-auto pr-1 space-y-4 flex-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {floatingCards.map((card) => (
+                    <div
+                      key={card.id}
+                      className="soft-card rounded-2xl p-4 border border-[#D4AF37]/40 bg-white/80 backdrop-blur-md shadow-sm flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="w-full h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-white shadow-inner">
+                          <img
+                            src={card.photo}
+                            alt={card.author}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <h4 className="font-bold text-[#4C342F] text-xs sm:text-sm tracking-wide">
+                            {card.author}
+                          </h4>
+                          <span className="text-[9px] sm:text-[10px] font-bold text-[#8B5E5A] px-2 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
+                            {card.relation}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#5C4D46] italic leading-relaxed">
+                          "{card.message}"
+                        </p>
+                      </div>
+
+                      <div className="mt-3 pt-2 border-t border-stone-200/60 flex justify-end">
+                        <button
+                          onClick={() => toggleLike(card.id)}
+                          className="flex items-center gap-1.5 text-xs text-[#4C342F] bg-white px-3 py-1 rounded-full border border-stone-200 shadow-xs hover:bg-stone-50 transition-colors cursor-pointer"
+                        >
+                          <Heart
+                            className={`w-3.5 h-3.5 ${
+                              userLiked[card.id] ? "fill-red-500 text-red-500" : "text-[#4C342F]"
+                            }`}
+                          />
+                          <span>{card.likes}</span>
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <h4 className="font-bold text-[#4C342F] text-sm">{card.author}</h4>
-                      <span className="text-[10px] font-bold text-[#8B5E5A] px-2 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
-                        {card.relation}
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#5C4D46] italic">"{card.message}"</p>
-                    <div className="mt-2 flex justify-end">
-                      <button
-                        onClick={() => toggleLike(card.id)}
-                        className="flex items-center gap-1 text-xs text-[#4C342F] bg-white px-2.5 py-1 rounded-full border border-gray-200"
-                      >
-                        <Heart className={`w-3.5 h-3.5 ${userLiked[card.id] ? "fill-red-500 text-red-500" : "text-[#4C342F]"}`} />
-                        <span>{card.likes}</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              <button
-                onClick={() => setShowAllModal(false)}
-                className="mt-6 w-full py-3.5 rounded-xl bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-colors shadow-md cursor-pointer"
-              >
-                Close Guestbook Modal
-              </button>
+              {/* Modal Footer Close Button */}
+              <div className="pt-3.5 border-t border-[#EBDBC9] mt-2">
+                <button
+                  onClick={() => setShowAllModal(false)}
+                  className="w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-colors shadow-md cursor-pointer border border-[#D4AF37]"
+                >
+                  Close Guestbook Showcase
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </section>
   );
 }

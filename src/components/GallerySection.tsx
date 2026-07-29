@@ -55,7 +55,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "g6",
     src: venuePhoto,
-    caption: "Villa Love — Royal Sanctuary Venue",
+    caption: "Fateh Palace — Royal Sanctuary Venue",
     category: "events",
     likes: 165,
   },
@@ -96,10 +96,10 @@ function GlassPhotoCard({
   return (
     <div
       onClick={onClick}
-      className={`relative w-full h-full rounded-[28px] p-2.5 sm:p-3 bg-white/45 backdrop-blur-xl border-2 border-white/80 transition-all duration-300 cursor-pointer group flex flex-col justify-between ${
+      className={`relative w-full h-full rounded-[28px] p-2.5 sm:p-3 bg-white/70 backdrop-blur-md border-2 border-white/90 transition-all duration-300 cursor-pointer group flex flex-col justify-between transform-gpu ${
         isHero
-          ? "shadow-[0_30px_70px_rgba(76,52,47,0.25),0_0_50px_rgba(255,215,130,0.5)] ring-2 ring-white/90"
-          : "shadow-[0_20px_45px_rgba(76,52,47,0.16)] hover:shadow-[0_25px_60px_rgba(212,175,55,0.3)]"
+          ? "shadow-[0_20px_50px_rgba(76,52,47,0.22),0_0_35px_rgba(255,215,130,0.45)] ring-2 ring-white/90 hover:scale-102"
+          : "shadow-[0_12px_32px_rgba(76,52,47,0.14)] hover:shadow-[0_20px_45px_rgba(212,175,55,0.28)] hover:-translate-y-1.5"
       }`}
     >
       {/* Reflected Glass Shine Overlay */}
@@ -111,7 +111,7 @@ function GlassPhotoCard({
           alt={caption}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 p-3 flex flex-col justify-end text-white">
           <p className="text-xs font-bold leading-tight">{caption}</p>
           <span className="text-[9px] uppercase tracking-wider text-amber-200 mt-1 flex items-center gap-1 font-semibold">
             <Camera className="w-3 h-3 text-[#C5A059]" /> TAP TO VIEW
@@ -136,7 +136,7 @@ export function GallerySection() {
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
 
   const [likesMap, setLikesMap] = useState<Record<string, number>>(() =>
-    GALLERY_ITEMS.reduce((acc, item) => ({ ...acc, [item.id]: item.likes }), {})
+    GALLERY_ITEMS.reduce((acc, item) => ({ ...acc, [item.id]: item.likes }), {}),
   );
   const [userLiked, setUserLiked] = useState<Record<string, boolean>>({});
 
@@ -152,8 +152,11 @@ export function GallerySection() {
     });
   };
 
+  const prevMobileIndex = (mobileActiveIndex - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+  const nextMobileIndex = (mobileActiveIndex + 1) % GALLERY_ITEMS.length;
+
   return (
-    <section className="mt-16 sm:mt-24 relative select-none w-full overflow-x-hidden">
+    <section className="mt-16 sm:mt-24 relative select-none w-full overflow-visible">
       {/* 1. HEADER (ROYAL PHOTO GALLERY & FEATHER ORNAMENT) */}
       <div className="text-center">
         <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.25em] uppercase text-[#4C342F]">
@@ -163,38 +166,62 @@ export function GallerySection() {
         <FeatherOrnament />
       </div>
 
-      {/* 2. DESKTOP & TABLET 5-LAYER FLOATING GLASS STACK */}
+      {/* 2. DESKTOP & TABLET WIDE SPACIOUS 5-LAYER FLOATING GLASS STACK */}
       <div className="hidden sm:block relative w-full py-8 sm:py-14 overflow-visible">
-        <div className="max-w-7xl mx-auto flex items-center justify-center relative min-h-[580px] md:min-h-[660px]">
-
+        <div className="w-full mx-auto flex items-center justify-center relative min-h-[580px] md:min-h-[660px]">
           {/* Ambient Radial Golden Glow behind center */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(255,215,130,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,215,130,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
           {/* PANEL 1: Far Left Edge Panel */}
-          <div className="absolute left-[0%] md:left-[2%] top-[30%] w-32 md:w-44 h-60 md:h-68 z-1 hidden md:block">
+          <motion.div
+            animate={{ y: [-15, 15, -15], rotate: [-4, 2, -4] }}
+            transition={{
+              duration: 3.3,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute left-[1%] md:left-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block"
+          >
             <GlassPhotoCard
               src={sangeetPhoto}
               caption="Palace Interior"
               onClick={() => setActiveLightboxIndex(5)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 2: Second Left Frosted Glass Card ("The Royal traditions") */}
-          <div className="absolute left-[6%] sm:left-[8%] top-[22%] w-44 sm:w-52 md:w-56 h-72 sm:h-80 z-2">
+          <motion.div
+            animate={{ y: [13, -13, 13], rotate: [3, -2, 3] }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute left-[5%] sm:left-[6%] md:left-[7%] top-[22%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2"
+          >
             <GlassPhotoCard
               src={sangeetPhoto}
               caption="Royal Traditions"
               badgeText="The Royal traditions"
               onClick={() => setActiveLightboxIndex(4)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 3: Indian Wedding Group */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 0 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
-            className="absolute left-[18%] sm:left-[20%] top-[10%] w-56 sm:w-68 md:w-72 h-84 sm:h-96 md:h-[430px] z-3"
+            animate={{ y: [-14, 14, -14], rotate: [-2, 2, -2] }}
+            transition={{
+              duration: 3.5,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute left-[15%] sm:left-[16%] md:left-[17%] top-[10%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3"
           >
             <GlassPhotoCard
               src={brideFamilyPhoto}
@@ -205,10 +232,17 @@ export function GallerySection() {
 
           {/* PANEL 4: MAIN CENTER HERO CARD */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 1 }}
+            whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            className="relative z-20 w-64 sm:w-76 md:w-84 h-[420px] sm:h-[500px] md:h-[520px]"
+            animate={{ y: [-10, 10, -10] }}
+            transition={{
+              duration: 3.0,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="relative z-20 w-64 sm:w-80 md:w-88 h-[420px] sm:h-[510px] md:h-[530px]"
           >
             <GlassPhotoCard
               isHero
@@ -220,10 +254,17 @@ export function GallerySection() {
 
           {/* PANEL 5: BOTTOM OVERLAPPING BOUQUET CARD */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 0 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
-            className="absolute bottom-[-4%] sm:bottom-[0%] left-[50%] -translate-x-1/2 w-48 sm:w-56 md:w-64 h-48 sm:h-56 md:h-64 z-30"
+            animate={{ y: [16, -16, 16], rotate: [3, -3, 3] }}
+            transition={{
+              duration: 2.9,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-[-4%] sm:bottom-[0%] left-[50%] -translate-x-1/2 w-48 sm:w-60 md:w-68 h-48 sm:h-60 md:h-68 z-30"
           >
             <GlassPhotoCard
               src={bouquetPhoto}
@@ -234,10 +275,17 @@ export function GallerySection() {
 
           {/* PANEL 6: Fourth Right - Haldi Ceremony */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 0 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
-            className="absolute right-[18%] sm:right-[20%] top-[12%] w-56 sm:w-68 md:w-72 h-84 sm:h-96 md:h-[430px] z-3"
+            animate={{ y: [-14, 14, -14], rotate: [2, -2, 2] }}
+            transition={{
+              duration: 3.4,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute right-[15%] sm:right-[16%] md:right-[17%] top-[12%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3"
           >
             <GlassPhotoCard
               src={haldiPhoto}
@@ -247,74 +295,133 @@ export function GallerySection() {
           </motion.div>
 
           {/* PANEL 7: Fifth Right - Bride Outdoor Portrait */}
-          <div className="absolute right-[6%] sm:right-[8%] top-[20%] w-44 sm:w-52 md:w-56 h-72 sm:h-80 z-2">
+          <motion.div
+            animate={{ y: [12, -12, 12], rotate: [-3, 2, -3] }}
+            transition={{
+              duration: 2.7,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute right-[5%] sm:right-[6%] md:right-[7%] top-[20%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2"
+          >
             <GlassPhotoCard
               src={couplePhoto}
               caption="Bride Outdoor Portrait"
               onClick={() => setActiveLightboxIndex(4)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 8: Far Right Edge Panel */}
-          <div className="absolute right-[0%] md:right-[2%] top-[30%] w-32 md:w-44 h-60 md:h-68 z-1 hidden md:block">
+          <motion.div
+            animate={{ y: [-15, 15, -15], rotate: [4, -2, 4] }}
+            transition={{
+              duration: 3.2,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="absolute right-[1%] md:right-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block"
+          >
             <GlassPhotoCard
               src={venuePhoto}
               caption="Palace Sanctuary"
               onClick={() => setActiveLightboxIndex(5)}
             />
-          </div>
-
+          </motion.div>
         </div>
       </div>
 
-      {/* 3. MOBILE SCREEN OPTIMIZED GLASS CAROUSEL (< 640px) */}
-      <div className="block sm:hidden my-8 px-4">
-        <div className="relative w-full h-[420px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={mobileActiveIndex}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="w-72 h-[380px]"
-            >
-              <GlassPhotoCard
-                isHero={mobileActiveIndex === 0}
-                src={GALLERY_ITEMS[mobileActiveIndex]?.src || couplePhoto}
-                caption={GALLERY_ITEMS[mobileActiveIndex]?.caption || "Royal Memory"}
-                onClick={() => setActiveLightboxIndex(mobileActiveIndex)}
-              />
-            </motion.div>
-          </AnimatePresence>
+      {/* 3. MOBILE SCREEN 3D LAYERED COVERFLOW CAROUSEL (< 640px) WITH FLOATING ANIMATION */}
+      <div className="block sm:hidden my-8 px-2 overflow-visible">
+        <div className="relative w-full h-[430px] flex items-center justify-center overflow-visible">
+          {/* Ambient Glow */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[radial-gradient(circle,rgba(255,215,130,0.5)_0%,transparent_70%)] pointer-events-none blur-xl" />
 
+          {/* LEFT PEEKING CARD */}
+          <motion.div
+            key={`prev-${prevMobileIndex}`}
+            initial={{ opacity: 0.85, x: 0, scale: 0.8 }}
+            animate={{ opacity: 0.85, x: 0, scale: 0.8, y: [6, -6, 6], rotate: [-3, -1, -3] }}
+            transition={{
+              x: { duration: 0.35 },
+              scale: { duration: 0.35 },
+              y: { duration: 2.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+              rotate: { duration: 2.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+            }}
+            onClick={() => setMobileActiveIndex(prevMobileIndex)}
+            className="absolute left-[1%] xs:left-[2%] top-[12%] w-48 xs:w-52 h-[320px] xs:h-[340px] z-10 cursor-pointer"
+          >
+            <GlassPhotoCard
+              src={GALLERY_ITEMS[prevMobileIndex]?.src || couplePhoto}
+              caption={GALLERY_ITEMS[prevMobileIndex]?.caption || "Royal Memory"}
+              onClick={() => setMobileActiveIndex(prevMobileIndex)}
+            />
+          </motion.div>
+
+          {/* CENTER HERO ACTIVE CARD */}
+          <motion.div
+            key={`curr-${mobileActiveIndex}`}
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1, y: [-8, 8, -8] }}
+            transition={{
+              scale: { duration: 0.35 },
+              y: { duration: 3.0, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+            }}
+            className="relative z-20 w-64 h-[395px]"
+          >
+            <GlassPhotoCard
+              isHero
+              src={GALLERY_ITEMS[mobileActiveIndex]?.src || couplePhoto}
+              caption={GALLERY_ITEMS[mobileActiveIndex]?.caption || "Royal Memory"}
+              onClick={() => setActiveLightboxIndex(mobileActiveIndex)}
+            />
+          </motion.div>
+
+          {/* RIGHT PEEKING CARD */}
+          <motion.div
+            key={`next-${nextMobileIndex}`}
+            initial={{ opacity: 0.85, x: 0, scale: 0.8 }}
+            animate={{ opacity: 0.85, x: 0, scale: 0.8, y: [-6, 6, -6], rotate: [3, 1, 3] }}
+            transition={{
+              x: { duration: 0.35 },
+              scale: { duration: 0.35 },
+              y: { duration: 3.2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+              rotate: { duration: 3.2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+            }}
+            onClick={() => setMobileActiveIndex(nextMobileIndex)}
+            className="absolute right-[1%] xs:right-[2%] top-[12%] w-48 xs:w-52 h-[320px] xs:h-[340px] z-10 cursor-pointer"
+          >
+            <GlassPhotoCard
+              src={GALLERY_ITEMS[nextMobileIndex]?.src || couplePhoto}
+              caption={GALLERY_ITEMS[nextMobileIndex]?.caption || "Royal Memory"}
+              onClick={() => setMobileActiveIndex(nextMobileIndex)}
+            />
+          </motion.div>
+
+          {/* Touch Navigation Buttons */}
           <button
-            onClick={() =>
-              setMobileActiveIndex(
-                (prev) => (prev - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length
-              )
-            }
-            className="absolute left-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 backdrop-blur-md shadow-md flex items-center justify-center text-[#4C342F]"
+            onClick={() => setMobileActiveIndex(prevMobileIndex)}
+            className="absolute left-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md shadow-lg flex items-center justify-center text-[#4C342F] z-30 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
-            onClick={() =>
-              setMobileActiveIndex((prev) => (prev + 1) % GALLERY_ITEMS.length)
-            }
-            className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 backdrop-blur-md shadow-md flex items-center justify-center text-[#4C342F]"
+            onClick={() => setMobileActiveIndex(nextMobileIndex)}
+            className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md shadow-lg flex items-center justify-center text-[#4C342F] z-30 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
+        {/* Indicator Dots */}
         <div className="flex justify-center gap-1.5 mt-4">
           {GALLERY_ITEMS.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setMobileActiveIndex(idx)}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                mobileActiveIndex === idx ? "bg-[#4C342F] w-6" : "bg-[#D4C3B5]"
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                mobileActiveIndex === idx ? "bg-[#AA771C] w-6" : "bg-[#D4C3B5] w-2"
               }`}
             />
           ))}
@@ -333,7 +440,7 @@ export function GallerySection() {
           >
             <button
               onClick={() => setActiveLightboxIndex(null)}
-              className="absolute top-6 right-6 text-white hover:text-amber-300 transition-colors"
+              className="absolute top-6 right-6 text-white hover:text-amber-300 transition-colors cursor-pointer"
             >
               <X className="w-8 h-8" />
             </button>
@@ -342,10 +449,10 @@ export function GallerySection() {
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveLightboxIndex((prev) =>
-                  prev !== null ? (prev - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length : 0
+                  prev !== null ? (prev - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length : 0,
                 );
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-amber-300 transition-colors p-2 bg-black/40 rounded-full"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-amber-300 transition-colors p-2 bg-black/40 rounded-full cursor-pointer"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
@@ -354,10 +461,10 @@ export function GallerySection() {
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveLightboxIndex((prev) =>
-                  prev !== null ? (prev + 1) % GALLERY_ITEMS.length : 0
+                  prev !== null ? (prev + 1) % GALLERY_ITEMS.length : 0,
                 );
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-amber-300 transition-colors p-2 bg-black/40 rounded-full"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-amber-300 transition-colors p-2 bg-black/40 rounded-full cursor-pointer"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -376,12 +483,10 @@ export function GallerySection() {
                 className="max-h-[70vh] w-auto object-contain rounded-2xl border-2 border-[color:var(--color-gold)] shadow-2xl"
               />
               <div className="mt-4 flex items-center justify-between w-full max-w-xl text-white px-2">
-                <p className="text-sm font-medium">
-                  {GALLERY_ITEMS[activeLightboxIndex]?.caption}
-                </p>
+                <p className="text-sm font-medium">{GALLERY_ITEMS[activeLightboxIndex]?.caption}</p>
                 <button
                   onClick={(e) => toggleLike(GALLERY_ITEMS[activeLightboxIndex]?.id || "g1", e)}
-                  className="flex items-center gap-1.5 text-sm bg-white/20 px-3 py-1.5 rounded-full backdrop-blur-md hover:bg-white/30 transition-colors"
+                  className="flex items-center gap-1.5 text-sm bg-white/20 px-3 py-1.5 rounded-full backdrop-blur-md hover:bg-white/30 transition-colors cursor-pointer"
                 >
                   <Heart
                     className={`w-4 h-4 ${

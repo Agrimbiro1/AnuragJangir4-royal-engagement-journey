@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, Heart, PartyPopper, CheckCircle2 } from "lucide-react";
+import { Sparkles, Crown, CheckCircle2 } from "lucide-react";
 
 // Line-Art Engraved Bottom Border SVG
 function EngravedBottomBorder() {
   return (
     <svg
       viewBox="0 0 600 100"
-      className="w-full max-w-2xl h-20 text-[#C5A059] opacity-50 my-6 pointer-events-none"
+      className="w-full max-w-2xl h-16 sm:h-20 text-[#C5A059] opacity-60 my-4 pointer-events-none"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.2"
@@ -33,46 +33,29 @@ function EngravedBottomBorder() {
   );
 }
 
-// Glowing Gold Fireworks & Confetti Illustration
-function GoldFireworksBurst() {
+// Gold Filigree Line Flourish SVG
+function GoldFlourish() {
   return (
-    <div className="relative w-64 sm:w-80 h-32 mx-auto my-4 flex items-center justify-center pointer-events-none">
-      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FFD700] via-[#D4AF37] to-[#AA771C] text-white flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.6)] border-2 border-white animate-pulse">
-        <Heart className="w-7 h-7 fill-current text-white" />
-      </div>
-
-      <svg
-        viewBox="0 0 240 120"
-        className="absolute inset-0 w-full h-full text-[#C5A059]"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      >
-        <g transform="translate(45, 50)">
-          <path d="M0 -15 L0 15 M-15 0 L15 0 M-10 -10 L10 10 M-10 10 L10 -10" />
-          <circle cx="-18" cy="-12" r="2" fill="currentColor" />
-          <circle cx="18" cy="12" r="2" fill="currentColor" />
-        </g>
-
-        <g transform="translate(195, 50)">
-          <path d="M0 -15 L0 15 M-15 0 L15 0 M-10 -10 L10 10 M-10 10 L10 -10" />
-          <circle cx="18" cy="-14" r="2" fill="currentColor" />
-          <circle cx="-18" cy="14" r="2" fill="currentColor" />
-        </g>
-
-        <path d="M 75 25 Q 85 12, 95 30" stroke="#AA771C" strokeWidth="2" />
-        <path d="M 145 25 Q 155 12, 165 30" stroke="#AA771C" strokeWidth="2" />
-        <circle cx="110" cy="22" r="2.5" fill="#D4AF37" />
-        <circle cx="130" cy="22" r="2.5" fill="#8B5E5A" />
-      </svg>
-    </div>
+    <svg
+      viewBox="0 0 160 24"
+      className="w-36 sm:w-44 h-6 mx-auto text-[#C5A059] opacity-85 my-3"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+    >
+      <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
+      <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
+      <path d="M 50 12 Q 40 8, 30 12" />
+      <path d="M 110 12 Q 120 8, 130 12" />
+      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
+    </svg>
   );
 }
 
 export function RsvpSection() {
   const [accepted, setAccepted] = useState(false);
 
-  const triggerPartyBomb = () => {
+  const handleAccept = () => {
     setAccepted(true);
 
     confetti({
@@ -114,75 +97,94 @@ export function RsvpSection() {
   };
 
   return (
-    <section className="my-24 sm:my-36 py-16 sm:py-24 relative select-none w-full max-w-5xl mx-auto px-4">
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+    <section className="my-20 sm:my-32 py-12 sm:py-20 relative select-none w-full max-w-5xl mx-auto px-4">
+      {/* Soft Ambient Gold Radial Glow */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,225,160,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
-      <div className="relative z-10 text-center flex flex-col items-center justify-center space-y-8">
-        
-        {/* QUOTATION SCRIPT (SLIDES FROM TOP) */}
+      <div className="relative z-10 text-center flex flex-col items-center justify-center space-y-6 sm:space-y-8">
+        {/* ROYAL CREST BADGE */}
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="max-w-3xl mx-auto px-4"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100/80 border border-[#C5A059]/50 shadow-xs"
+        >
+          <Crown className="w-4 h-4 text-[#AA771C]" />
+          <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
+            Royal Invitation
+          </span>
+          <Crown className="w-4 h-4 text-[#AA771C]" />
+        </motion.div>
+
+        {/* QUOTATION SCRIPT & TITLE */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="max-w-3xl mx-auto space-y-3"
         >
           <p className="font-[family-name:var(--font-script)] text-3xl sm:text-4xl md:text-5xl text-[#AA771C] leading-relaxed font-normal">
             “Two souls with but a single thought, two hearts that beat as one.”
           </p>
 
-          <p className="text-xs sm:text-sm text-[#8B5E5A] font-serif italic mt-4 tracking-wide">
-            Kindly respond by August 15, 2025 so we may reserve your royal seat
+          <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#3A2E2A] tracking-wide pt-2">
+            JOIN US IN CELEBRATING OUR <span className="italic gold-text">ETERNAL UNION</span>
+          </h3>
+
+          <GoldFlourish />
+
+          <p className="text-xs sm:text-sm text-[#8B5E5A] font-serif italic tracking-wide uppercase font-semibold">
+            Kindly respond by August 15, 2026 so we may reserve your royal seat
           </p>
         </motion.div>
 
-        {/* FIREWORKS BURST (SCALES FROM CENTER) */}
+        {/* ULTRA-LUXURY ARCHITECTURAL ACCEPT INVITATION BUTTON */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          className="pt-4"
         >
-          <GoldFireworksBurst />
+          <button
+            onClick={handleAccept}
+            className="relative px-10 sm:px-14 py-4.5 sm:py-5 rounded-full bg-[#FFFDF9] backdrop-blur-md border-2 border-[#C5A059] text-[#3A2E2A] font-[family-name:var(--font-heading)] font-extrabold text-xs sm:text-sm uppercase tracking-[0.35em] shadow-[0_15px_40px_rgba(197,160,89,0.25)] hover:shadow-[0_20px_50px_rgba(197,160,89,0.45)] hover:bg-[#FDF7EE] transition-all flex items-center justify-center gap-3.5 cursor-pointer group active:scale-98 overflow-hidden"
+          >
+            {/* Inner Razor-Thin Accent Rim */}
+            <div className="absolute inset-1 rounded-full border border-[#C5A059]/40 pointer-events-none group-hover:border-[#C5A059]/70 transition-colors" />
+
+            <Crown className="w-4 h-4 text-[#AA771C] group-hover:scale-110 transition-transform relative z-10" />
+            <span className="relative z-10">
+              {accepted ? "INVITATION ACCEPTED" : "ACCEPT INVITATION"}
+            </span>
+            <Sparkles className="w-4 h-4 text-[#AA771C] group-hover:rotate-12 transition-transform relative z-10" />
+          </button>
         </motion.div>
 
-        {/* CTA BUTTON (POPS FROM BOTTOM) */}
-        <motion.button
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={triggerPartyBomb}
-          className="relative px-10 sm:px-14 py-5 sm:py-6 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FFF1B0] to-[#AA771C] text-[#2C1A14] font-bold text-xs sm:text-sm uppercase tracking-[0.25em] shadow-[0_20px_50px_rgba(212,175,55,0.45)] hover:shadow-[0_25px_60px_rgba(212,175,55,0.65)] border-2 border-white transition-all flex items-center justify-center gap-3 cursor-pointer group"
-        >
-          <Sparkles className="w-5 h-5 text-[#4C342F] animate-spin" />
-          <span>CONFIRM ATTENDANCE & ACCEPT PARTY BOMB!</span>
-          <PartyPopper className="w-5 h-5 text-[#4C342F] group-hover:rotate-12 transition-transform" />
-        </motion.button>
-
-        {/* CONFIRMATION BADGE */}
+        {/* REFINED CONFIRMATION BADGE */}
         <AnimatePresence>
           {accepted && (
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              initial={{ opacity: 0, y: 15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 border-2 border-[#D4AF37] shadow-lg text-[#4C342F] font-bold text-xs uppercase tracking-wider"
+              exit={{ opacity: 0 }}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/90 backdrop-blur-md border border-[#C5A059] shadow-md text-[#3A2E2A] font-[family-name:var(--font-heading)] font-extrabold text-xs uppercase tracking-[0.25em]"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
-              <span>Royal Invitation Accepted! Celebration Confirmed! 🎉</span>
+              <CheckCircle2 className="w-4 h-4 text-[#AA771C] shrink-0" />
+              <span>ROYAL INVITATION ACCEPTED WITH HONOR</span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* ENGRAVED BOTTOM BORDER (SLIDES FROM BOTTOM) */}
+        {/* ENGRAVED BOTTOM BORDER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full flex justify-center"
+          className="w-full flex justify-center pt-2"
         >
           <EngravedBottomBorder />
         </motion.div>

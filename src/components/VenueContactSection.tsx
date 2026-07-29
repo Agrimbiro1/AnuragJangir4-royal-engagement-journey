@@ -38,12 +38,11 @@ function GoldFlourish() {
 }
 
 export function VenueContactSection() {
-  const googleMapsUrl = "https://maps.google.com/?q=Villa+Love+Lapino";
-  const directionsUrl = "https://www.google.com/maps/dir/?api=1&destination=Villa+Love+Lapino";
+  const googleMapsUrl = "https://maps.google.com/?q=Fateh+Palace+Udaipur";
+  const directionsUrl = "https://www.google.com/maps/dir/?api=1&destination=Fateh+Palace+Udaipur";
 
   return (
     <section className="mt-20 sm:mt-28 py-10 relative select-none w-full max-w-6xl mx-auto px-4">
-      
       {/* 1. VENUE LOCATION HEADER (SLIDE FROM TOP) */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -65,7 +64,6 @@ export function VenueContactSection() {
 
       {/* 2. LUXURY VENUE CARD */}
       <div className="space-y-16">
-        
         {/* MAIN VENUE DETAILS */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,13 +73,12 @@ export function VenueContactSection() {
           className="soft-card rounded-[36px] overflow-hidden border-2 border-[color:var(--color-gold)]/50 shadow-[0_25px_60px_rgba(76,52,47,0.18)] p-6 sm:p-10 relative"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
             {/* VENUE PHOTO & BADGE (5 COLS) */}
             <div className="lg:col-span-5 relative group">
               <div className="w-full h-72 sm:h-80 rounded-3xl overflow-hidden border-2 border-white shadow-xl relative">
                 <img
                   src={venuePhoto}
-                  alt="Villa Love Estate"
+                  alt="Fateh Palace Estate"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -104,7 +101,7 @@ export function VenueContactSection() {
               </div>
 
               <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#4C342F] leading-tight">
-                Villa Love Estate & Sun Valley Gardens
+                Fateh Palace Estate & Lakefront Gardens
               </h3>
 
               <div className="p-4 rounded-2xl bg-white/60 border border-[#D4C3B5] space-y-1">
@@ -112,7 +109,7 @@ export function VenueContactSection() {
                   Full Address:
                 </p>
                 <p className="text-sm font-semibold text-[#3A2E2A] leading-relaxed">
-                  Sun Valley Estate, 12 Royal Pines Boulevard, Lapino Countryside
+                  Fateh Palace Estate, 12 Raj Mahal Boulevard, Udaipur, Rajasthan
                 </p>
               </div>
 
@@ -145,7 +142,7 @@ export function VenueContactSection() {
                   className="px-6 py-3.5 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md flex items-center gap-2 border border-[#D4AF37]"
                 >
                   <Navigation className="w-4 h-4 text-[#FFD700]" />
-                  <span>Open in Google Maps 🗺️</span>
+                  <span>Open in Google Maps</span>
                 </a>
 
                 <a
@@ -155,18 +152,15 @@ export function VenueContactSection() {
                   className="px-6 py-3.5 rounded-full bg-white text-[#4C342F] text-xs font-bold uppercase tracking-widest hover:bg-stone-50 transition-all border border-[#D4C3B5] shadow-sm flex items-center gap-2"
                 >
                   <Compass className="w-4 h-4 text-[#AA771C]" />
-                  <span>Get Driving Directions 🚗</span>
+                  <span>Get Driving Directions</span>
                 </a>
               </div>
-
             </div>
-
           </div>
         </motion.div>
 
         {/* 3. UNIQUE & ELEGANT DUAL FAMILY REPRESENTATIVES LAYOUT (EXACTLY 1 FROM GROOM SIDE & 1 FROM BRIDE SIDE) */}
         <div className="pt-8">
-          
           {/* HEADER */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -188,8 +182,7 @@ export function VenueContactSection() {
 
           {/* DUAL PORTRAIT REPRESENTATIVE CARDS (1 GROOM REPRESENTATIVE & 1 BRIDE REPRESENTATIVE) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            
-            {/* 1. GROOM SIDE REPRESENTATIVE: LORD RICHARD */}
+            {/* 1. GROOM SIDE REPRESENTATIVE: MAHARAJA VIKRAM SINGH */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -209,14 +202,14 @@ export function VenueContactSection() {
                   <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
                     <img
                       src={groomFamilyPhoto}
-                      alt="Lord Richard"
+                      alt="Maharaja Vikram Singh"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
 
                 <h4 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F]">
-                  Lord Richard
+                  Maharaja Vikram Singh
                 </h4>
                 <p className="text-xs uppercase font-bold tracking-widest text-[#AA771C] mt-1">
                   Father of the Groom
@@ -247,7 +240,7 @@ export function VenueContactSection() {
               </div>
             </motion.div>
 
-            {/* 2. BRIDE SIDE REPRESENTATIVE: LADY ELIZABETH */}
+            {/* 2. BRIDE SIDE REPRESENTATIVE: SUNITA SHARMA */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -267,14 +260,14 @@ export function VenueContactSection() {
                   <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
                     <img
                       src={brideFamilyPhoto}
-                      alt="Lady Elizabeth"
+                      alt="Sunita Sharma"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
 
                 <h4 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F]">
-                  Lady Elizabeth
+                  Sunita Sharma
                 </h4>
                 <p className="text-xs uppercase font-bold tracking-widest text-[#AA771C] mt-1">
                   Mother of the Bride
@@ -304,13 +297,9 @@ export function VenueContactSection() {
                 </a>
               </div>
             </motion.div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

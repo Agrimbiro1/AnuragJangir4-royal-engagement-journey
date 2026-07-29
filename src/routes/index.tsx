@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Crown } from "lucide-react";
 
 // Import feature components
@@ -22,12 +22,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details.",
+          "Join Arjun & Ananya for their royal engagement celebration on August 28, 2026 at Fateh Palace Estate, Udaipur. Video hero, events, family details, gallery, countdown, RSVP & venue details.",
       },
       { property: "og:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
       {
         property: "og:description",
-        content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2025 at Villa Love Estate. Video hero, events, family details, gallery, countdown, RSVP & venue details.",
+        content: "A royal invitation to celebrate our eternal love — 28.08.2026",
       },
       { property: "og:type", content: "website" },
     ],
@@ -38,45 +38,55 @@ export const Route = createFileRoute("/")({
 function Invitation() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Manage Body Scroll Lock & Force Top Scroll when Opening Animation is Active
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      document.body.style.overflow = "";
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const handleOpen = () => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    setIsOpen(true);
+  };
+
+  const handleReopen = () => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleCustomReopen = () => {
+      handleReopen();
+    };
+
+    window.addEventListener("reopen-envelope", handleCustomReopen);
+
+    return () => {
+      window.removeEventListener("reopen-envelope", handleCustomReopen);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-cream text-[color:var(--color-ink)] font-[family-name:var(--font-body)] relative selection:bg-[color:var(--color-gold-light)]">
-      {/* 1. 3D LASER-CUT PAPER MANDAP ENVELOPE OPENING OVERLAY */}
-      <OpeningAnimation isOpen={isOpen} onOpen={() => setIsOpen(true)} />
-
-      {/* STICKY TOP CONTROL HEADER */}
-      {isOpen && (
-        <header className="fixed top-0 left-0 right-0 z-40 bg-black/40 backdrop-blur-md border-b border-amber-200/20 px-4 py-3 shadow-md">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Crown className="w-5 h-5 text-amber-300 animate-pulse" />
-              <span className="font-[family-name:var(--font-heading)] font-bold text-lg tracking-widest text-amber-100">
-                ARJUN & ANANYA
-              </span>
-            </div>
-
-            {/* Sticky Controls: Audio Toggle + Re-open Envelope */}
-            <div className="flex items-center gap-3">
-              <AudioPlayer />
-
-              <button
-                onClick={() => setIsOpen(false)}
-                className="px-3.5 py-1.5 rounded-full bg-amber-200/20 text-amber-100 text-xs font-bold uppercase tracking-wider hover:bg-amber-200/30 transition-colors flex items-center gap-1.5 border border-amber-200/40 shadow-xs"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Re-open Envelope</span>
-              </button>
-            </div>
-          </div>
-        </header>
-      )}
+    <div className="min-h-screen bg-black text-[color:var(--color-ink)] font-[family-name:var(--font-body)] relative selection:bg-[color:var(--color-gold-light)]">
+      {/* 1. 3D ENVELOPE OPENING OVERLAY */}
+      <OpeningAnimation isOpen={isOpen} onOpen={handleOpen} />
 
       {/* 2. PINNED FULL-SCREEN 100VH HERO SECTION (SLIDES UNDER CURTAIN) */}
-      <HeroVideoSection />
+      <HeroVideoSection onReopenEnvelope={handleReopen} />
 
       {/* 3. CURTAIN SCROLL OVERLAY MAIN CONTENT (SLIDES UP COVERING HERO COMPLETELY) */}
-      <main className="relative z-10 w-full bg-cream py-16 space-y-16 rounded-t-[40px] sm:rounded-t-[60px] shadow-[0_-30px_70px_rgba(76,52,47,0.35)] border-t-2 border-[color:var(--color-gold)]/40">
+      <main className="relative z-10 w-full bg-cream textured-bg py-16 space-y-16 rounded-t-[40px] sm:rounded-t-[60px] shadow-[0_-30px_70px_rgba(76,52,47,0.35)] border-t-2 border-[color:var(--color-gold)]/40">
         {/* EVENTS SECTION */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="max-w-6xl lg:max-w-7xl mx-auto px-4 sm:px-6">
           <EventsSection />
         </div>
 
@@ -85,8 +95,8 @@ function Invitation() {
           <FamilySection />
         </div>
 
-        {/* GALLERY SECTION */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* GALLERY SECTION (EXPANDED CONTAINER FOR MORE HORIZONTAL GAPS) */}
+        <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-6 overflow-visible">
           <GallerySection />
         </div>
 
