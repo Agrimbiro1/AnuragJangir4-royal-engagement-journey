@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Bell, Crown, Heart, CheckCircle2 } from "lucide-react";
+import { Calendar, Bell, Crown, Heart, CheckCircle2, Sparkles } from "lucide-react";
 
 const TARGET_DATE = new Date("2026-08-28T16:00:00");
 
@@ -56,26 +56,24 @@ export function CountdownSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="relative max-w-4xl mx-auto rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-14 bg-gradient-to-br from-[#FFFDF9]/95 via-[#FDF8F0]/90 to-[#F9EFE0]/95 backdrop-blur-2xl border border-[#C5A059]/40 shadow-[0_25px_60px_rgba(76,52,47,0.12)] text-center overflow-hidden"
+        className="relative max-w-4xl mx-auto rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-14 bg-gradient-to-br from-[#FFFDF9]/95 via-[#FDF8F0]/90 to-[#F9EFE0]/95 backdrop-blur-2xl border border-[#C5A059]/40 shadow-[0_30px_90px_rgba(212,175,55,0.18),0_10px_35px_rgba(120,80,60,0.06)] text-center overflow-hidden"
       >
         {/* Soft Ambient Radial Background Glow */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
         {/* Outer Fine Accent Border Line */}
         <div className="absolute inset-2 sm:inset-3 rounded-[26px] sm:rounded-[34px] border border-[#C5A059]/25 pointer-events-none" />
 
         {/* 1. SECTION HEADER */}
-        <div className="relative z-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/70 border border-[#C5A059]/40 mb-1 shadow-xs">
-            <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
-            <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
-              Save The Date
-            </span>
-            <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
-          </div>
+        <div className="relative z-10 space-y-2 text-center max-w-3xl mx-auto">
+          <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+            SAVE THE DATE
+            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+          </p>
 
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide text-[#3A2E2A] leading-tight">
-            COUNTDOWN TO THE <span className="italic gold-text">CELEBRATION</span>
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+            COUNTDOWN TO THE CELEBRATION
           </h2>
 
           <GoldLineFlourish />
@@ -97,7 +95,7 @@ export function CountdownSection() {
               key={item.label}
               whileHover={{ y: -5, scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-7 bg-white/70 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_10px_30px_rgba(76,52,47,0.08)] flex flex-col items-center justify-center group cursor-pointer"
+              className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-7 bg-white/80 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_20px_45px_rgba(212,175,55,0.15),0_6px_18px_rgba(0,0,0,0.04)] flex flex-col items-center justify-center group cursor-pointer"
             >
               {/* Card Inner Subtle Glow */}
               <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-amber-100/30 via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -121,7 +119,7 @@ export function CountdownSection() {
             href={googleCalendarUrl}
             target="_blank"
             rel="noreferrer"
-            className="px-6 sm:px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#AA771C] to-[#8B5E5A] text-white font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-all shadow-[0_10px_25px_rgba(170,119,28,0.3)] hover:shadow-[0_15px_30px_rgba(170,119,28,0.4)] flex items-center gap-2 cursor-pointer active:scale-98"
+            className="px-6 sm:px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#AA771C] to-[#8B5E5A] text-white font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-all shadow-[0_20px_50px_rgba(170,119,28,0.35)] flex items-center gap-2 cursor-pointer active:scale-98"
           >
             <Calendar className="w-4 h-4" />
             <span>Add to Google Calendar</span>
@@ -129,7 +127,7 @@ export function CountdownSection() {
 
           <button
             onClick={handleReminder}
-            className="px-6 sm:px-8 py-3.5 rounded-full bg-white/80 hover:bg-white text-[#3A2E2A] font-extrabold text-xs uppercase tracking-widest transition-all border border-[#C5A059]/50 shadow-sm flex items-center gap-2 cursor-pointer active:scale-98"
+            className="px-6 sm:px-8 py-3.5 rounded-full bg-white/90 hover:bg-white text-[#3A2E2A] font-extrabold text-xs uppercase tracking-widest transition-all border border-[#C5A059]/50 shadow-[0_15px_40px_rgba(212,175,55,0.2),0_4px_12px_rgba(0,0,0,0.04)] flex items-center gap-2 cursor-pointer active:scale-98"
           >
             {notified ? (
               <>

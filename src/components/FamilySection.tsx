@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Crown, Sparkles, Users, X, ChevronRight, Quote, Heart, Star } from "lucide-react";
+import { Crown, Sparkles, X, ChevronRight, Star, Heart } from "lucide-react";
 import groomFamilyPhoto from "../assets/groom_family.png";
 import brideFamilyPhoto from "../assets/bride_family.png";
 import couplePhoto from "../assets/couple.jpg";
 import haldiPhoto from "../assets/haldi.png";
 import sangeetPhoto from "../assets/sangeet.png";
-import bouquetPhoto from "../assets/bouquet.png";
 
 interface FamilyMember {
   id: string;
@@ -30,7 +30,7 @@ const GROOM_FAMILY_MEMBERS: FamilyMember[] = [
     id: "g2",
     name: "Maharani Gayatri Devi",
     relation: "Mother of the Groom",
-    avatar: brideFamilyPhoto,
+    avatar: groomFamilyPhoto,
     description: "The heart of the household, bestowing warmth, elegance, and maternal blessings.",
     quote: "May your bond grow stronger with each passing sunrise.",
   },
@@ -47,7 +47,7 @@ const GROOM_FAMILY_MEMBERS: FamilyMember[] = [
     id: "g4",
     name: "Rajkumari Aditi",
     relation: "Sister of the Groom",
-    avatar: bouquetPhoto,
+    avatar: couplePhoto,
     description: "Spreading joy, laughter, and royal floral grace across all wedding festivities.",
     quote: "So thrilled for my brother Arjun and my new sister Ananya!",
   },
@@ -66,7 +66,7 @@ const BRIDE_FAMILY_MEMBERS: FamilyMember[] = [
     id: "b2",
     name: "Sunita Sharma",
     relation: "Mother of the Bride",
-    avatar: groomFamilyPhoto,
+    avatar: brideFamilyPhoto,
     description: "Pillar of royal elegance and hospitality, filling every moment with warmth.",
     quote: "True love is a flower that blooms forever in the garden of the heart.",
   },
@@ -137,7 +137,7 @@ export function FamilySection() {
         <GoldOrnament />
       </motion.div>
 
-      {/* 2. BRIGHT & UNIQUE DUAL FAMILY CARDS (GROOM CARD & BRIDE CARD) */}
+      {/* 2. DUAL FAMILY CARDS (GROOM CARD & BRIDE CARD) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {/* GROOM SECTION CARD */}
         <motion.div
@@ -146,7 +146,7 @@ export function FamilySection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
           whileHover={{ y: -6 }}
-          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_22px_55px_rgba(76,52,47,0.18)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
+          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_30px_90px_rgba(212,175,55,0.2),0_10px_30px_rgba(120,80,60,0.06)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
         >
           {/* Radial Warm Glow */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 w-80 h-80 bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl" />
@@ -169,9 +169,6 @@ export function FamilySection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="absolute bottom-1 right-1 p-2 rounded-full bg-[#4C342F] text-amber-200 border border-[#D4AF37] shadow-md">
-              <Star className="w-3.5 h-3.5 fill-current text-[#FFD700]" />
-            </span>
           </div>
 
           {/* Card Title & Bio */}
@@ -188,10 +185,9 @@ export function FamilySection() {
           {/* Action Button */}
           <button
             onClick={() => setActiveModal("groom")}
-            className="z-10 mt-8 w-full py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 border border-[#D4AF37] cursor-pointer"
+            className="z-10 mt-8 w-full py-3.5 sm:py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 border border-[#D4AF37] cursor-pointer"
           >
-            <Users className="w-4 h-4 text-[#FFD700]" />
-            <span>Meet Arjun's Family Members</span>
+            <span>Meet Groom's Family</span>
             <ChevronRight className="w-4 h-4 text-[#FFD700]" />
           </button>
         </motion.div>
@@ -203,7 +199,7 @@ export function FamilySection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
           whileHover={{ y: -6 }}
-          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_22px_55px_rgba(76,52,47,0.18)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
+          className="soft-card rounded-[38px] p-7 sm:p-10 border-2 border-[color:var(--color-gold)]/60 shadow-[0_30px_90px_rgba(212,175,55,0.2),0_10px_30px_rgba(120,80,60,0.06)] bg-gradient-to-b from-white via-[#FFFDF9] to-[#FBF6EE] flex flex-col items-center justify-between text-center relative overflow-hidden group"
         >
           {/* Radial Warm Glow */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 w-80 h-80 bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl" />
@@ -226,9 +222,6 @@ export function FamilySection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="absolute bottom-1 right-1 p-2 rounded-full bg-[#4C342F] text-amber-200 border border-[#D4AF37] shadow-md">
-              <Heart className="w-3.5 h-3.5 fill-current text-[#E86F68]" />
-            </span>
           </div>
 
           {/* Card Title & Bio */}
@@ -245,24 +238,24 @@ export function FamilySection() {
           {/* Action Button */}
           <button
             onClick={() => setActiveModal("bride")}
-            className="z-10 mt-8 w-full py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 border border-[#D4AF37] cursor-pointer"
+            className="z-10 mt-8 w-full py-3.5 sm:py-4 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 border border-[#D4AF37] cursor-pointer"
           >
-            <Users className="w-4 h-4 text-[#FFD700]" />
-            <span>Meet Ananya's Family Members</span>
+            <span>Meet Bride's Family</span>
             <ChevronRight className="w-4 h-4 text-[#FFD700]" />
           </button>
         </motion.div>
       </div>
 
-      {/* 3. INTERACTIVE POP-UP MODAL WITH SMALL INDIVIDUAL FAMILY CARDS */}
-      <AnimatePresence>
+      {/* 3. INTERACTIVE POP-UP MODAL — rendered via Portal at document.body to escape overflow-hidden */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
         {activeModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveModal(null)}
-            className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md p-4 sm:p-6 flex items-center justify-center overflow-y-auto"
+            className="fixed inset-0 z-[9999] bg-black/75 backdrop-blur-md p-4 sm:p-6 flex items-center justify-center overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.92, y: 25 }}
@@ -364,12 +357,15 @@ export function FamilySection() {
                 onClick={() => setActiveModal(null)}
                 className="mt-8 w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-colors border border-[#D4AF37] shadow-md cursor-pointer"
               >
-                Close Family Window
+                Close Window
               </button>
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
+

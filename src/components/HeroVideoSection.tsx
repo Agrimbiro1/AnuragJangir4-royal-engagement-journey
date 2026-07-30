@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Volume2, VolumeX, Mail, Sparkles } from "lucide-react";
-import couplePhoto from "../assets/couple.jpg";
+import { ChevronDown, Mail, Sparkles } from "lucide-react";
 
 interface HeroVideoSectionProps {
   onReopenEnvelope?: () => void;
@@ -251,15 +250,19 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
   };
 
   return (
-    <section className="sticky top-0 w-full h-[100dvh] min-h-[100dvh] sm:h-screen sm:min-h-screen overflow-hidden flex flex-col items-center justify-between select-none z-0 bg-black">
-      {/* LAYER 1: Full-Screen Grayscale Cinematic Background Video */}
+    <section className="sticky top-0 w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col items-center justify-between select-none z-0 bg-black">
+      {/* LAYER 1: Full-Screen Grayscale Cinematic Background Video (Rotated 90 Deg Left) */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        poster={couplePhoto}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vh] h-[100vw] min-w-[100vh] min-h-[100vw] object-cover -rotate-90 filter grayscale contrast-125 scale-150 sm:scale-125 pointer-events-none z-0"
+        style={{
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          willChange: "transform",
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100dvh] h-[100dvw] min-w-[100dvh] min-h-[100dvw] object-cover -rotate-90 scale-125 sm:scale-100 filter grayscale contrast-125 pointer-events-none z-0 transform-gpu"
       >
         {/* User uploaded video file from public directory */}
         <source src="/engagement video template.mp4" type="video/mp4" />
@@ -287,40 +290,30 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
       <CinematicPetalCanvas />
 
       {/* LAYER 5: Fixed Top Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 w-full flex justify-between items-center px-2.5 py-3 sm:px-10 sm:py-6 z-40">
-        {/* Left Pill Button: MUSIC ON / OFF */}
-        <button
-          onClick={toggleMusic}
-          className="px-2.5 py-1.5 xs:px-3.5 xs:py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 backdrop-blur-md border border-[#D4AF37]/35 text-[#FFF1B0] text-[9px] xs:text-[10px] uppercase tracking-[0.15em] xs:tracking-[0.25em] font-semibold hover:bg-black/70 transition-all flex items-center gap-1.5 shadow-lg cursor-pointer group shrink-0"
-        >
-          {isPlayingMusic ? (
-            <>
-              <Volume2 className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#FFD700] animate-pulse" />
-              <span>MUSIC ON</span>
-            </>
-          ) : (
-            <>
-              <VolumeX className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-stone-300" />
-              <span>MUSIC OFF</span>
-            </>
-          )}
-        </button>
+      <header className="fixed top-0 left-0 right-0 w-full grid grid-cols-3 items-center px-3 py-3 sm:px-10 sm:py-6 z-40 pointer-events-none">
+        {/* Left Column Spacer */}
+        <div />
 
-        {/* Center: Interlocking "AA" Monogram Logo */}
-        <InterlockingAAMonogram />
+        {/* Center Column: 100% Dead-Centered Interlocking "AA" Monogram Logo */}
+        <div className="flex justify-center pointer-events-auto">
+          <InterlockingAAMonogram />
+        </div>
 
-        {/* Right Pill Button: RE-OPEN ENVELOPE */}
-        <button
-          onClick={handleReopen}
-          className="px-2.5 py-1.5 xs:px-3.5 xs:py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 backdrop-blur-md border border-[#D4AF37]/35 text-[#FFF1B0] text-[9px] xs:text-[10px] uppercase tracking-[0.15em] xs:tracking-[0.25em] font-semibold hover:bg-black/70 transition-all flex items-center gap-1.5 shadow-lg cursor-pointer group shrink-0"
-        >
-          <Mail className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#FFD700] group-hover:rotate-12 transition-transform" />
-          <span>RE-OPEN ENVELOPE</span>
-        </button>
+        {/* Right Column: Right Pill Button: RE-OPEN ENVELOPE */}
+        <div className="flex justify-end pointer-events-auto">
+          <button
+            onClick={handleReopen}
+            className="px-2.5 py-1.5 xs:px-3.5 xs:py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 border border-[#D4AF37]/35 text-[#FFF1B0] text-[9px] xs:text-[10px] uppercase tracking-[0.15em] xs:tracking-[0.25em] font-semibold hover:bg-black/80 transition-colors duration-200 flex items-center gap-1.5 shadow-lg cursor-pointer group shrink-0"
+          >
+            <Mail className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#FFD700] group-hover:rotate-12 transition-transform" />
+            <span className="hidden xs:inline">RE-OPEN ENVELOPE</span>
+            <span className="xs:hidden">ENVELOPE</span>
+          </button>
+        </div>
       </header>
 
       {/* LAYER 4: Center Typography Container (3-Phase Reveal) */}
-      <div className="relative z-30 text-center px-4 max-w-5xl mx-auto flex flex-col items-center justify-center my-auto pt-16 sm:pt-0">
+      <div className="relative z-30 text-center px-4 max-w-5xl mx-auto flex flex-col items-center justify-center my-auto pt-14 pb-12 sm:pt-0 sm:pb-0">
         <AnimatePresence>
           {phase >= 2 && (
             <motion.div
@@ -334,11 +327,9 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.3em] xs:tracking-[0.45em] text-amber-200/90 font-semibold mb-1 sm:mb-3 drop-shadow-md flex items-center gap-1.5 xs:gap-2"
+                className="text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.25em] xs:tracking-[0.45em] text-amber-200/90 font-semibold mb-1 sm:mb-3 drop-shadow-md flex items-center justify-center"
               >
-                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700] animate-pulse" />
                 <span>THE ROYAL ENGAGEMENT CELEBRATION</span>
-                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700] animate-pulse" />
               </motion.p>
 
               {/* Central Metallic Gold Calligraphy Names */}
@@ -346,7 +337,7 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
                 initial={{ scale: 0.96 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                className="font-[family-name:var(--font-couple)] text-3xl xs:text-4xl sm:text-7xl md:text-8xl py-1 my-1 sm:my-3 leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] tracking-normal whitespace-nowrap"
+                className="font-[family-name:var(--font-couple)] text-[34px] xs:text-5xl sm:text-7xl md:text-8xl py-1 my-1 sm:my-3 leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] tracking-normal max-w-full"
                 style={{
                   background:
                     "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
@@ -366,20 +357,20 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
                   className="mt-3 sm:mt-8 flex flex-col items-center space-y-1.5 sm:space-y-3"
                 >
                   {/* Gold Filigree Line Divider */}
-                  <div className="flex items-center gap-4 text-amber-200/80 my-0.5 sm:my-1">
-                    <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-[#D4AF37]" />
-                    <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
+                  <div className="flex items-center gap-3 sm:gap-4 text-amber-200/80 my-0.5 sm:my-1">
+                    <span className="h-[1px] w-8 sm:w-24 bg-gradient-to-r from-transparent to-[#D4AF37]" />
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
                       SAVE THE DATE
                     </span>
-                    <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]" />
+                    <span className="h-[1px] w-8 sm:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]" />
                   </div>
 
                   {/* Date in Minimal Tracked Sans-Serif */}
-                  <p className="font-[family-name:var(--font-heading)] text-sm sm:text-2xl text-amber-100 font-bold tracking-[0.3em] uppercase drop-shadow-md">
+                  <p className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl text-amber-100 font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase drop-shadow-md">
                     AUGUST 26-28, 2026
                   </p>
 
-                  <p className="text-[9px] sm:text-xs text-stone-200/90 tracking-[0.2em] sm:tracking-[0.25em] uppercase drop-shadow-sm font-light">
+                  <p className="text-[9px] sm:text-xs text-stone-200/90 tracking-[0.15em] sm:tracking-[0.25em] uppercase drop-shadow-sm font-light">
                     FATEH PALACE ESTATE · UDAIPUR, RAJASTHAN
                   </p>
                 </motion.div>
@@ -395,13 +386,13 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 0.8 }}
         onClick={scrollToContent}
-        className="relative sm:absolute bottom-4 sm:bottom-7 z-30 flex flex-col items-center gap-1 text-stone-200 hover:text-amber-300 transition-colors cursor-pointer group mb-2 sm:mb-0"
+        className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 text-stone-200 hover:text-amber-300 transition-colors duration-200 cursor-pointer group mb-1 sm:mb-0"
       >
-        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.35em] font-semibold text-amber-200/90 group-hover:tracking-[0.45em] transition-all">
+        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.35em] font-semibold text-amber-200/90 transition-colors duration-200">
           Scroll to explore
         </span>
-        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-amber-200/40 flex items-center justify-center bg-black/40 backdrop-blur-xs animate-bounce shadow-lg">
-          <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-200" />
+        <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full border border-amber-200/40 flex items-center justify-center bg-black/40 animate-bounce shadow-lg">
+          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-amber-200" />
         </div>
       </motion.button>
     </section>

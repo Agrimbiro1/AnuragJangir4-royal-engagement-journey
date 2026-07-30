@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Send, Eye, X } from "lucide-react";
+import { Heart, Send, Eye, X, Sparkles } from "lucide-react";
 import couplePhoto from "../assets/couple.jpg";
 import venuePhoto from "../assets/venue.jpg";
 import sangeetPhoto from "../assets/sangeet.png";
@@ -33,10 +33,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "May your sacred union bring eternal joy, grace, and noble fortune to both families!",
     photo: couplePhoto,
     likes: 54,
-    posClass: "top-[1%] left-[2%] lg:left-[4%]",
-    baseRotate: -8,
-    floatY: [-24, 24, -24],
-    floatDuration: 2.7,
+    posClass: "top-[8%] left-[4%]",
+    baseRotate: -7,
+    floatY: [-10, 10, -10],
+    floatDuration: 3.2,
     zIndex: 10,
   },
   {
@@ -46,10 +46,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "A royal toast to eternal love, endless laughter, and brilliant celebrations!",
     photo: venuePhoto,
     likes: 42,
-    posClass: "top-[34%] left-[1%] lg:left-[3%]",
-    baseRotate: 6,
-    floatY: [24, -24, 24],
-    floatDuration: 3.1,
+    posClass: "top-[36%] left-[3.5%]",
+    baseRotate: 5,
+    floatY: [10, -10, 10],
+    floatDuration: 3.5,
     zIndex: 15,
   },
   {
@@ -59,10 +59,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "Wishing you a lifetime of grand adventures, late night laughter, and pure happiness!",
     photo: sangeetPhoto,
     likes: 63,
-    posClass: "bottom-[1%] left-[2%] lg:left-[4%]",
-    baseRotate: -7,
-    floatY: [-24, 24, -24],
-    floatDuration: 2.5,
+    posClass: "bottom-[10%] left-[4%]",
+    baseRotate: -6,
+    floatY: [-10, 10, -10],
+    floatDuration: 3.0,
     zIndex: 10,
   },
   // INNER LEFT CARD OVERLAPPING TOP-LEFT CORNER OF CENTRAL INPUT CARD
@@ -73,11 +73,11 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "Pillars of heritage and tradition, passing down golden values of love and honor.",
     photo: haldiPhoto,
     likes: 67,
-    posClass: "top-[12%] left-[22%] lg:left-[24%]",
-    baseRotate: -6,
-    floatY: [20, -20, 20],
-    floatDuration: 2.9,
-    zIndex: 40, // Overlaps Central Input Card (z-30)
+    posClass: "top-[16%] left-[21%]",
+    baseRotate: -5,
+    floatY: [8, -8, 8],
+    floatDuration: 3.4,
+    zIndex: 40,
   },
   {
     id: "fb9",
@@ -86,10 +86,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "Sacred light and divine grace guide your steps as you walk as one.",
     photo: brideFamilyPhoto,
     likes: 59,
-    posClass: "bottom-[14%] left-[20%] lg:left-[22%]",
-    baseRotate: 7,
-    floatY: [-20, 20, -20],
-    floatDuration: 2.8,
+    posClass: "bottom-[18%] left-[19%]",
+    baseRotate: 6,
+    floatY: [-8, 8, -8],
+    floatDuration: 3.1,
     zIndex: 20,
   },
 
@@ -101,10 +101,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "All my love and sacred heirloom blessings to Arjun & Ananya on this magical day.",
     photo: couplePhoto,
     likes: 89,
-    posClass: "top-[1%] right-[2%] lg:right-[4%]",
-    baseRotate: 9,
-    floatY: [24, -24, 24],
-    floatDuration: 3.2,
+    posClass: "top-[8%] right-[4%]",
+    baseRotate: 8,
+    floatY: [10, -10, 10],
+    floatDuration: 3.6,
     zIndex: 10,
   },
   {
@@ -114,10 +114,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "Watching you both walk together hand in hand fills our hearts with infinite pride.",
     photo: sangeetPhoto,
     likes: 76,
-    posClass: "top-[34%] right-[1%] lg:right-[3%]",
-    baseRotate: -7,
-    floatY: [-24, 24, -24],
-    floatDuration: 2.8,
+    posClass: "top-[36%] right-[3.5%]",
+    baseRotate: -6,
+    floatY: [-10, 10, -10],
+    floatDuration: 3.3,
     zIndex: 15,
   },
   {
@@ -127,10 +127,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "So thrilled for my brother Arjun and my new sister Ananya! Welcome to the family!",
     photo: brideFamilyPhoto,
     likes: 58,
-    posClass: "bottom-[1%] right-[2%] lg:right-[4%]",
-    baseRotate: 8,
-    floatY: [24, -24, 24],
-    floatDuration: 3.0,
+    posClass: "bottom-[10%] right-[4%]",
+    baseRotate: 7,
+    floatY: [10, -10, 10],
+    floatDuration: 3.4,
     zIndex: 10,
   },
   // INNER RIGHT CARD OVERLAPPING TOP-RIGHT CORNER OF CENTRAL INPUT CARD
@@ -141,11 +141,11 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "You two are made for each other! Let the royal celebrations begin!",
     photo: ringsPhoto,
     likes: 71,
-    posClass: "top-[12%] right-[22%] lg:right-[24%]",
-    baseRotate: 6,
-    floatY: [-20, 20, -20],
-    floatDuration: 3.0,
-    zIndex: 40, // Overlaps Central Input Card (z-30)
+    posClass: "top-[16%] right-[21%]",
+    baseRotate: 5,
+    floatY: [-8, 8, -8],
+    floatDuration: 3.2,
+    zIndex: 40,
   },
   {
     id: "fb10",
@@ -154,10 +154,10 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     message: "May your hearts beat as one through every chapter of life.",
     photo: groomFamilyPhoto,
     likes: 64,
-    posClass: "bottom-[14%] right-[20%] lg:right-[22%]",
+    posClass: "bottom-[18%] right-[19%]",
     baseRotate: -5,
-    floatY: [20, -20, 20],
-    floatDuration: 2.6,
+    floatY: [8, -8, 8],
+    floatDuration: 3.0,
     zIndex: 20,
   },
 ];
@@ -188,13 +188,19 @@ export function BlessingsSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [userLiked, setUserLiked] = useState<Record<string, boolean>>({});
   const [showAllModal, setShowAllModal] = useState(false);
+  const rafRef = React.useRef<number | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (rafRef.current !== null) return;
     const { clientX, clientY, currentTarget } = e;
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
     const x = (clientX - left) / width - 0.5;
     const y = (clientY - top) / height - 0.5;
-    setMousePos({ x, y });
+
+    rafRef.current = requestAnimationFrame(() => {
+      setMousePos({ x, y });
+      rafRef.current = null;
+    });
   };
 
   const handleSubmitBlessing = (e: React.FormEvent) => {
@@ -212,31 +218,36 @@ export function BlessingsSection() {
       baseRotate: -4,
       floatY: [-20, 20, -20],
       floatDuration: 3,
-      zIndex: 25,
+      zIndex: 50,
     };
 
-    setFloatingCards([newCard, ...floatingCards]);
+    setFloatingCards((prev) => [newCard, ...prev.slice(0, 9)]);
     setBlessingText("");
   };
 
   const toggleLike = (id: string) => {
-    setUserLiked((prev) => {
-      const isLiked = prev[id];
-      setFloatingCards((list) =>
-        list.map((c) => (c.id === id ? { ...c, likes: c.likes + (isLiked ? -1 : 1) } : c)),
-      );
-      return { ...prev, [id]: !isLiked };
-    });
+    setUserLiked((prev) => ({ ...prev, [id]: !prev[id] }));
+    setFloatingCards((prev) =>
+      prev.map((c) =>
+        c.id === id ? { ...c, likes: c.likes + (userLiked[id] ? -1 : 1) } : c
+      )
+    );
   };
 
   return (
-    <section className="mt-16 sm:mt-24 relative select-none w-full max-w-[1450px] mx-auto px-2 sm:px-4 overflow-x-hidden">
+    <section className="mt-16 sm:mt-24 py-8 relative select-none w-full max-w-7xl mx-auto px-4 overflow-hidden">
       {/* BACKGROUND WARM RADIAL GLOW AURA */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-2xl" />
 
       {/* 1. SECTION HEADER */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto mb-4">
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.2em] uppercase text-[#4C342F] drop-shadow-sm">
+      <div className="relative z-10 text-center max-w-3xl mx-auto mb-6">
+        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+          GUESTBOOK & WISHES
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+        </p>
+
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F] drop-shadow-sm">
           BLESSINGS & WISHES
         </h2>
 
@@ -247,7 +258,7 @@ export function BlessingsSection() {
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setMousePos({ x: 0, y: 0 })}
-        className="relative w-full min-h-[680px] sm:min-h-[720px] md:min-h-[740px] hidden sm:flex items-center justify-center py-4 overflow-visible"
+        className="relative w-full min-h-[820px] sm:min-h-[880px] md:min-h-[920px] hidden sm:flex items-center justify-center py-12 px-6 overflow-hidden"
       >
         {/* 10 ANGLED FLOATING CARDS (SOME OVERLAPPING CENTER CARD AT z-40) */}
         {floatingCards.map((card) => (
@@ -258,6 +269,7 @@ export function BlessingsSection() {
               x: mousePos.x * 18,
               rotate: [card.baseRotate - 2, card.baseRotate + 2, card.baseRotate - 2],
             }}
+            whileHover={{ scale: 1.06, zIndex: 50 }}
             transition={{
               y: {
                 duration: card.floatDuration,
@@ -272,32 +284,30 @@ export function BlessingsSection() {
                 ease: "easeInOut",
               },
               x: { type: "spring", stiffness: 80, damping: 20 },
+              scale: { duration: 0.2 },
             }}
-            style={{ zIndex: card.zIndex }}
-            className={`absolute ${card.posClass} w-56 sm:w-60 md:w-64 h-[225px] p-3 rounded-[22px] bg-white/60 backdrop-blur-xl border-2 border-white/90 shadow-[0_20px_40px_rgba(76,52,47,0.18)] hover:scale-108 hover:z-50 hover:bg-white/80 transition-all duration-300 group flex flex-col justify-between`}
+            style={{
+              zIndex: card.zIndex,
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              willChange: "transform",
+            }}
+            className={`absolute ${card.posClass} w-56 sm:w-60 md:w-64 h-[160px] sm:h-[170px] p-3.5 sm:p-4 rounded-[22px] bg-[#FFFDF9] border-2 border-[#D4AF37]/50 shadow-[0_20px_40px_rgba(140,90,60,0.12),0_8px_20px_rgba(212,175,55,0.15)] group flex flex-col justify-between cursor-pointer`}
           >
             <div className="absolute inset-0 rounded-[22px] bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
 
             <div>
-              {/* COMPACT PHOTO CONTAINER */}
-              <div className="w-full h-22 rounded-xl overflow-hidden mb-1.5 border border-white shadow-inner">
-                <img
-                  src={card.photo}
-                  alt={card.author}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              <div className="flex items-center justify-between mb-1">
-                <h4 className="font-bold text-[#4C342F] text-[11px] sm:text-xs tracking-wide truncate max-w-[120px]">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="font-bold text-[#4C342F] text-[11.5px] sm:text-xs tracking-wide truncate max-w-[130px]">
                   {card.author}
                 </h4>
-                <span className="text-[8px] uppercase tracking-wider text-[#8B5E5A] font-semibold px-2 py-0.5 rounded-full bg-white/80 border border-[#D4C3B5]">
+                <span className="text-[8px] uppercase tracking-wider text-[#8B5E5A] font-semibold px-2 py-0.5 rounded-full bg-white/90 border border-[#D4C3B5]">
                   {card.relation}
                 </span>
               </div>
 
-              <p className="text-[10.5px] text-[#5C4D46] font-normal leading-tight line-clamp-2 italic">
+              <p className="text-[11px] sm:text-xs text-[#5C4D46] font-normal leading-relaxed line-clamp-3 italic">
                 "{card.message}"
               </p>
             </div>
@@ -325,7 +335,13 @@ export function BlessingsSection() {
             y: mousePos.y * 10,
           }}
           transition={{ type: "spring", stiffness: 100, damping: 25 }}
-          className="relative z-30 w-full max-w-md p-6 sm:p-7 rounded-[32px] bg-white/65 backdrop-blur-2xl border-2 border-[color:var(--color-gold)]/60 shadow-[0_30px_70px_rgba(76,52,47,0.22)] text-center flex flex-col items-center"
+          style={{
+            transform: "translateZ(0)",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            willChange: "transform",
+          }}
+          className="relative z-30 w-full max-w-md p-6 sm:p-7 rounded-[32px] bg-[#FFFDF9] border-2 border-[color:var(--color-gold)]/60 shadow-[0_25px_50px_rgba(140,90,60,0.15),0_10px_30px_rgba(212,175,55,0.2)] text-center flex flex-col items-center"
         >
           <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
 
@@ -478,22 +494,15 @@ export function BlessingsSection() {
                       className="soft-card rounded-2xl p-4 border border-[#D4AF37]/40 bg-white/80 backdrop-blur-md shadow-sm flex flex-col justify-between"
                     >
                       <div>
-                        <div className="w-full h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-white shadow-inner">
-                          <img
-                            src={card.photo}
-                            alt={card.author}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center justify-between mb-2">
                           <h4 className="font-bold text-[#4C342F] text-xs sm:text-sm tracking-wide">
                             {card.author}
                           </h4>
-                          <span className="text-[9px] sm:text-[10px] font-bold text-[#8B5E5A] px-2 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-[#8B5E5A] px-2.5 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
                             {card.relation}
                           </span>
                         </div>
-                        <p className="text-xs text-[#5C4D46] italic leading-relaxed">
+                        <p className="text-xs sm:text-sm text-[#5C4D46] italic leading-relaxed">
                           "{card.message}"
                         </p>
                       </div>

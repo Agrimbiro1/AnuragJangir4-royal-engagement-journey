@@ -14,6 +14,7 @@ import { RsvpSection } from "../components/RsvpSection";
 import { BlessingsSection } from "../components/BlessingsSection";
 import { VenueContactSection } from "../components/VenueContactSection";
 import { FooterSection } from "../components/FooterSection";
+import { WaveDivider } from "../components/WaveDivider";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,50 +81,89 @@ function Invitation() {
       {/* 1. 3D ENVELOPE OPENING OVERLAY */}
       <OpeningAnimation isOpen={isOpen} onOpen={handleOpen} />
 
-      {/* 2. PINNED FULL-SCREEN 100VH HERO SECTION (SLIDES UNDER CURTAIN) */}
-      <HeroVideoSection onReopenEnvelope={handleReopen} />
+      {/* 2. PINNED FULL-SCREEN 100VH HERO SECTION (FIXED BEHIND SCROLLING CURTAIN) */}
+      <div className="fixed top-0 left-0 w-full h-[100dvh] z-0 pointer-events-auto">
+        <HeroVideoSection onReopenEnvelope={handleReopen} />
+      </div>
 
-      {/* 3. CURTAIN SCROLL OVERLAY MAIN CONTENT (SLIDES UP COVERING HERO COMPLETELY) */}
-      <main className="relative z-10 w-full bg-cream textured-bg py-16 space-y-16 rounded-t-[40px] sm:rounded-t-[60px] shadow-[0_-30px_70px_rgba(76,52,47,0.35)] border-t-2 border-[color:var(--color-gold)]/40">
-        {/* EVENTS SECTION */}
-        <div className="max-w-6xl lg:max-w-7xl mx-auto px-4 sm:px-6">
-          <EventsSection />
-        </div>
+      {/* 3. CURTAIN SCROLL OVERLAY MAIN CONTENT (SLIDES UP & OVERLAPS FIXED HERO COMPLETELY) */}
+      <main className="relative z-20 w-full mt-[100dvh] rounded-t-[48px] sm:rounded-t-[68px] shadow-[0_-40px_100px_rgba(0,0,0,0.75)] border-t-2 border-[#D4AF37] overflow-hidden bg-transparent">
+        {/* EVENTS SECTION - RICH EMERALD MINT GRADIENT OVERLAPPING HERO */}
+        <section className="w-full bg-gradient-to-br from-[#DCECE0] via-[#C9E2CF] to-[#B8D7BF] textured-bg pt-14 sm:pt-20 pb-16 sm:pb-20 overflow-hidden rounded-t-[48px] sm:rounded-t-[68px]">
+          <div className="max-w-6xl lg:max-w-7xl mx-auto px-4 sm:px-6">
+            <EventsSection />
+          </div>
+        </section>
 
-        {/* FAMILY SECTION */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <FamilySection />
-        </div>
+        {/* WAVE: Events (Green) → Family (Pink) */}
+        <WaveDivider variant={1} />
 
-        {/* GALLERY SECTION (EXPANDED CONTAINER FOR MORE HORIZONTAL GAPS) */}
-        <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-6 overflow-visible">
-          <GallerySection />
-        </div>
+        {/* FAMILY SECTION - RICH ROSE BLUSH CHAMPAGNE GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#F7E2E6] via-[#EBCDD4] to-[#DFB9C3] textured-bg py-16 sm:py-20 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <FamilySection />
+          </div>
+        </section>
 
-        {/* WEDDING COUNTDOWN */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <CountdownSection />
-        </div>
+        {/* WAVE: Family (Pink) → Gallery (Blue) */}
+        <WaveDivider variant={2} />
 
-        {/* RSVP INVITATION WITH PARTY-BOMB */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <RsvpSection />
-        </div>
+        {/* GALLERY SECTION - RICH SAPPHIRE POWDER BLUE GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#DAE9F7] via-[#C4DDED] to-[#B0CFE4] textured-bg py-16 sm:py-20 overflow-hidden">
+          <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-6 overflow-hidden">
+            <GallerySection />
+          </div>
+        </section>
 
-        {/* BLESSINGS SHOWCASE (FULL SCREEN WIDTH UNBOUNDED) */}
-        <div className="w-full">
-          <BlessingsSection />
-        </div>
+        {/* WAVE: Gallery (Blue) → Countdown (Lavender) */}
+        <WaveDivider variant={3} />
 
-        {/* VENUE MAP & REPRESENTATIVES CONTACTS */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <VenueContactSection />
-        </div>
+        {/* WEDDING COUNTDOWN - RICH ROYAL LAVENDER IRIS GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#EAE2F7] via-[#D8C9EF] to-[#C7B2E5] textured-bg py-16 sm:py-20 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <CountdownSection />
+          </div>
+        </section>
 
-        {/* THANK YOU FOOTER */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <FooterSection />
-        </div>
+        {/* WAVE: Countdown (Lavender) → RSVP (Peach) */}
+        <WaveDivider variant={1} />
+
+        {/* RSVP INVITATION - RICH PEACH AMBER GOLD GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#F7E6D7] via-[#EED1BD] to-[#E3BAA2] textured-bg py-16 sm:py-20 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <RsvpSection />
+          </div>
+        </section>
+
+        {/* WAVE: RSVP (Peach) → Blessings (Jade) */}
+        <WaveDivider variant={2} />
+
+        {/* BLESSINGS SHOWCASE - RICH JADE SEAFOAM GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#DCEDE5] via-[#C6E2D4] to-[#B0D7C4] textured-bg py-24 sm:py-32 overflow-hidden">
+          <div className="w-full max-w-7xl mx-auto px-4">
+            <BlessingsSection />
+          </div>
+        </section>
+
+        {/* WAVE: Blessings (Jade) → Venue (Sandstone) */}
+        <WaveDivider variant={3} />
+
+        {/* VENUE MAP & REPRESENTATIVES CONTACTS - RICH PALACE SANDSTONE GRADIENT */}
+        <section className="w-full bg-gradient-to-br from-[#F7EAD7] via-[#EED7BF] to-[#E4C3A6] textured-bg py-16 sm:py-20 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <VenueContactSection />
+          </div>
+        </section>
+
+        {/* WAVE: Venue (Sandstone) → Footer (Rose) */}
+        <WaveDivider variant={1} />
+
+        {/* THANK YOU FOOTER - RICH DUSK VELVET ROSE GRADIENT */}
+        <footer className="w-full bg-gradient-to-br from-[#EFE1EA] via-[#DEC5D5] to-[#CCA8BF] textured-bg py-12 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <FooterSection />
+          </div>
+        </footer>
       </main>
     </div>
   );

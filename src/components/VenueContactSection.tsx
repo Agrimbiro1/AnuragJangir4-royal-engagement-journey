@@ -51,8 +51,10 @@ export function VenueContactSection() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-center max-w-3xl mx-auto mb-14"
       >
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2">
+        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
           LOCATION & DESTINATION
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
         </p>
 
         <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">

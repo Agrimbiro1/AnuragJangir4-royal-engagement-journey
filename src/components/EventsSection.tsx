@@ -50,7 +50,7 @@ function SleekMinimalPhotoFrame({ src, alt }: { src: string; alt: string }) {
     <motion.div
       whileHover={{ scale: 1.04, y: -2 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="relative w-16 xs:w-22 sm:w-44 md:w-64 h-16 xs:h-22 sm:h-44 md:h-64 p-0.5 sm:p-2 rounded-full bg-white/70 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_12px_28px_rgba(76,52,47,0.15)] flex items-center justify-center group cursor-pointer shrink-0"
+      className="relative w-24 xs:w-32 sm:w-44 md:w-64 h-24 xs:h-32 sm:h-44 md:h-64 p-1 sm:p-2 rounded-full bg-white/70 backdrop-blur-md border border-[#C5A059]/40 shadow-[0_12px_28px_rgba(76,52,47,0.15)] flex items-center justify-center group cursor-pointer shrink-0"
     >
       {/* Outer Fine Gold Accent Ring */}
       <div className="absolute inset-0.5 rounded-full border border-[#C5A059]/30 pointer-events-none group-hover:border-[#C5A059]/60 transition-colors duration-500" />
@@ -125,7 +125,7 @@ function CurledSTimelineSpine() {
 
 export function EventsSection() {
   return (
-    <section className="mt-16 sm:mt-24 py-8 relative select-none w-full">
+    <section className="mt-16 sm:mt-24 py-8 relative select-none w-full max-w-6xl mx-auto px-4 overflow-hidden">
       {/* 1. HEADER SECTION */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -134,17 +134,14 @@ export function EventsSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center max-w-4xl mx-auto px-4 mb-12 sm:mb-24"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/70 border border-[#C5A059]/40 mb-3 shadow-xs">
-          <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
-          <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
-            Schedule & Celebrations
-          </span>
-          <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
-        </div>
+        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+          SCHEDULE & CELEBRATIONS
+          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+        </p>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-[#3A2E2A] leading-tight">
-          ENGAGEMENT Festivities:{" "}
-          <span className="italic gold-text">The Journey of Love Begins</span>
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+          ROYAL ENGAGEMENT FESTIVITIES
         </h2>
 
         <GoldFlourish />
@@ -153,7 +150,7 @@ export function EventsSection() {
       {/* 2. ALTERNATING TIMELINE WITH SUBTLE SATIN GOLD SPINE */}
       <div className="relative w-full max-w-6xl lg:max-w-7xl mx-auto px-2 sm:px-6">
         {/* Soft Radial Ambient Backdrop Glow */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(212,175,55,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
         {/* ROYAL CREST TOP CAP */}
         <TimelineRoyalTopCrest />

@@ -97,41 +97,28 @@ export function RsvpSection() {
   };
 
   return (
-    <section className="my-20 sm:my-32 py-12 sm:py-20 relative select-none w-full max-w-5xl mx-auto px-4">
+    <section className="my-20 sm:my-32 py-12 sm:py-20 relative select-none w-full max-w-5xl mx-auto px-4 overflow-hidden">
       {/* Soft Ambient Gold Radial Glow */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,225,160,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,225,160,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
       <div className="relative z-10 text-center flex flex-col items-center justify-center space-y-6 sm:space-y-8">
-        {/* ROYAL CREST BADGE */}
+        {/* SECTION HEADER */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100/80 border border-[#C5A059]/50 shadow-xs"
+          className="text-center max-w-3xl mx-auto space-y-2"
         >
-          <Crown className="w-4 h-4 text-[#AA771C]" />
-          <span className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#AA771C] font-extrabold">
-            Royal Invitation
-          </span>
-          <Crown className="w-4 h-4 text-[#AA771C]" />
-        </motion.div>
-
-        {/* QUOTATION SCRIPT & TITLE */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="max-w-3xl mx-auto space-y-3"
-        >
-          <p className="font-[family-name:var(--font-script)] text-3xl sm:text-4xl md:text-5xl text-[#AA771C] leading-relaxed font-normal">
-            “Two souls with but a single thought, two hearts that beat as one.”
+          <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+            ROYAL INVITATION & RSVP
+            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
           </p>
 
-          <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#3A2E2A] tracking-wide pt-2">
-            JOIN US IN CELEBRATING OUR <span className="italic gold-text">ETERNAL UNION</span>
-          </h3>
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+            JOIN US IN CELEBRATING
+          </h2>
 
           <GoldFlourish />
 

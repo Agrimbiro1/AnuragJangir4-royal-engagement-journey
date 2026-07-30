@@ -56,7 +56,7 @@ export function FooterSection() {
   return (
     <footer className="mt-20 sm:mt-20 pt-20 pb-36 sm:pt-10 sm:pb-20 text-center relative px-4 select-none max-w-4xl mx-auto min-h-[650px] sm:min-h-0 flex flex-col justify-center">
       {/* WARM AMBER RADIAL GLOW AURA */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
       {/* COMPACT DIRECT PAGE LAYOUT */}
       <motion.div
