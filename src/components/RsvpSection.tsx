@@ -2,33 +2,69 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, Crown, CheckCircle2 } from "lucide-react";
+import royalSealPhoto from "../assets/royal_seal.jpg";
 
 // Line-Art Engraved Bottom Border SVG
 function EngravedBottomBorder() {
   return (
     <svg
-      viewBox="0 0 600 100"
-      className="w-full max-w-2xl h-16 sm:h-20 text-[#C5A059] opacity-60 my-4 pointer-events-none"
+      viewBox="0 0 700 90"
+      className="w-full max-w-3xl h-20 sm:h-24 my-4 pointer-events-none select-none"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M 280 60 L 300 30 L 320 60 L 310 70 L 290 70 Z" />
-      <circle cx="300" cy="24" r="3" fill="currentColor" />
+      <defs>
+        <linearGradient id="rsvpGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#AA771C" stopOpacity="0.2" />
+          <stop offset="20%" stopColor="#D4AF37" stopOpacity="0.85" />
+          <stop offset="40%" stopColor="#FFF1B0" stopOpacity="1" />
+          <stop offset="50%" stopColor="#FFD700" stopOpacity="1" />
+          <stop offset="60%" stopColor="#FFF1B0" stopOpacity="1" />
+          <stop offset="80%" stopColor="#D4AF37" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#AA771C" stopOpacity="0.2" />
+        </linearGradient>
 
-      <rect x="80" y="40" width="36" height="36" rx="4" />
-      <path d="M 98 40 L 98 76 M 80 58 L 116 58" />
-      <path d="M 170 50 C 170 30, 185 30, 185 50 L 185 75 M 170 75 L 200 75" />
-      <circle cx="160" cy="30" r="10" />
-      <circle cx="180" cy="30" r="10" />
+        <filter id="rsvpGlow" x="-20%" y="-50%" width="140%" height="200%">
+          <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#FFD700" floodOpacity="0.5" />
+        </filter>
+      </defs>
 
-      <rect x="485" y="40" width="36" height="36" rx="4" />
-      <path d="M 503 40 L 503 76 M 485 58 L 521 58" />
-      <path d="M 420 50 C 420 30, 435 30, 435 50 L 435 75 M 420 75 L 450 75" />
-      <circle cx="410" cy="30" r="10" />
-      <circle cx="430" cy="30" r="10" />
+      <g stroke="url(#rsvpGoldGrad)" strokeWidth="1.5" filter="url(#rsvpGlow)">
+        {/* Main Sweeping S-Curve Filigree Vines */}
+        <path d="M 350 35 C 270 10, 190 55, 70 30 C 40 20, 20 35, 10 30" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M 350 35 C 430 10, 510 55, 630 30 C 660 20, 680 35, 690 30" strokeWidth="1.8" strokeLinecap="round" />
 
-      <path d="M 20 90 C 150 50, 450 50, 580 90" />
+        {/* Secondary Inner Accent Vines */}
+        <path d="M 350 42 C 290 25, 220 50, 120 35" strokeWidth="1" strokeDasharray="4 3" opacity="0.8" />
+        <path d="M 350 42 C 410 25, 480 50, 580 35" strokeWidth="1" strokeDasharray="4 3" opacity="0.8" />
+
+        {/* Lotus Petal Flourishes (Left & Right) */}
+        <path d="M 230 26 Q 210 12, 190 26 Q 210 38, 230 26 Z" fill="#D4AF37" fillOpacity="0.2" strokeWidth="1" />
+        <path d="M 470 26 Q 490 12, 510 26 Q 490 38, 470 26 Z" fill="#D4AF37" fillOpacity="0.2" strokeWidth="1" />
+
+        {/* Bottom Sweeping Arch Line with Pearl Beads */}
+        <path d="M 80 65 Q 350 90, 620 65" strokeWidth="1.2" strokeDasharray="2 8" strokeLinecap="round" />
+
+        {/* Decorative Pearl Dots along Vines */}
+        <circle cx="190" cy="26" r="2.5" fill="#FFD700" stroke="#AA771C" strokeWidth="0.5" />
+        <circle cx="510" cy="26" r="2.5" fill="#FFD700" stroke="#AA771C" strokeWidth="0.5" />
+        <circle cx="120" cy="35" r="2" fill="#D4AF37" />
+        <circle cx="580" cy="35" r="2" fill="#D4AF37" />
+        <circle cx="40" cy="25" r="1.5" fill="#D4AF37" />
+        <circle cx="660" cy="25" r="1.5" fill="#D4AF37" />
+      </g>
+
+      {/* CENTRAL ROYAL CREST MEDALLION (X=350, Y=35) */}
+      <g transform="translate(350, 35)" filter="url(#rsvpGlow)">
+        {/* Outer Gold Diamond */}
+        <polygon points="0,-18 14,0 0,18 -14,0" fill="#FFFDF9" stroke="url(#rsvpGoldGrad)" strokeWidth="1.6" />
+        {/* Inner Gold Diamond Core */}
+        <polygon points="0,-10 8,0 0,10 -8,0" fill="#D4AF37" fillOpacity="0.3" stroke="#AA771C" strokeWidth="1" />
+        {/* Center Sparkle Point */}
+        <circle cx="0" cy="0" r="2.5" fill="#FFD700" />
+        {/* 4-Point Star Rays */}
+        <path d="M 0,-24 L 0,24 M -24,0 L 24,0" stroke="url(#rsvpGoldGrad)" strokeWidth="1" strokeLinecap="round" />
+      </g>
     </svg>
   );
 }
@@ -37,18 +73,54 @@ function EngravedBottomBorder() {
 function GoldFlourish() {
   return (
     <svg
-      viewBox="0 0 160 24"
-      className="w-36 sm:w-44 h-5 mx-auto text-[#C5A059] opacity-85 my-2"
+      viewBox="0 0 240 30"
+      className="w-44 sm:w-56 h-6 mx-auto my-2 pointer-events-none select-none"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
-      <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
-      <path d="M 50 12 Q 40 8, 30 12" />
-      <path d="M 110 12 Q 120 8, 130 12" />
-      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
+      <defs>
+        <linearGradient id="flourishGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#AA771C" stopOpacity="0.3" />
+          <stop offset="30%" stopColor="#D4AF37" />
+          <stop offset="50%" stopColor="#FFF1B0" />
+          <stop offset="70%" stopColor="#D4AF37" />
+          <stop offset="100%" stopColor="#AA771C" stopOpacity="0.3" />
+        </linearGradient>
+      </defs>
+      <g stroke="url(#flourishGrad)" strokeWidth="1.4" strokeLinecap="round">
+        {/* S-Curves Left */}
+        <path d="M 120 15 Q 90 2, 50 15 Q 20 28, 0 15" />
+        <path d="M 100 15 Q 80 8, 60 15" strokeWidth="0.9" opacity="0.7" />
+        {/* S-Curves Right */}
+        <path d="M 120 15 Q 150 2, 190 15 Q 220 28, 240 15" />
+        <path d="M 140 15 Q 160 8, 180 15" strokeWidth="0.9" opacity="0.7" />
+        {/* Center Diamond Jewel */}
+        <polygon points="120,8 125,15 120,22 115,15" fill="#FFFDF9" stroke="#D4AF37" strokeWidth="1.2" />
+        <circle cx="120" cy="15" r="1.8" fill="#FFD700" />
+      </g>
     </svg>
+  );
+}
+// Interactive Royal Wax Seal Crest
+function RoyalWaxSeal({ onClick }: { onClick?: () => void }) {
+  return (
+    <div
+      onClick={onClick}
+      className="relative w-28 h-28 sm:w-36 sm:h-36 mx-auto cursor-pointer group transform hover:scale-105 transition-transform duration-300 select-none"
+      title="Click to Accept Royal Invitation"
+    >
+      {/* Outer Golden Glow */}
+      <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-[#AA771C] via-[#FFD700] to-[#D4AF37] blur-md opacity-60 group-hover:opacity-95 transition-opacity" />
+
+      {/* Royal Seal Image Frame */}
+      <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#AA771C] border-2 border-[#D4AF37] shadow-[0_15px_40px_rgba(120,75,40,0.35)] overflow-hidden">
+        <img
+          src={royalSealPhoto}
+          alt="Arjun & Ananya Royal Seal"
+          className="w-full h-full object-cover rounded-full scale-[1.38] group-hover:scale-[1.45] transition-transform duration-500"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -59,7 +131,7 @@ export function RsvpSection() {
     setAccepted(true);
 
     confetti({
-      particleCount: 150,
+      particleCount: 160,
       spread: 120,
       origin: { y: 0.6 },
       colors: ["#D4AF37", "#8B5E5A", "#E8D5CC", "#FFD700", "#AA771C"],
@@ -67,7 +139,7 @@ export function RsvpSection() {
 
     setTimeout(() => {
       confetti({
-        particleCount: 110,
+        particleCount: 120,
         angle: 60,
         spread: 85,
         origin: { x: 0.1, y: 0.6 },
@@ -77,7 +149,7 @@ export function RsvpSection() {
 
     setTimeout(() => {
       confetti({
-        particleCount: 110,
+        particleCount: 120,
         angle: 120,
         spread: 85,
         origin: { x: 0.9, y: 0.6 },
@@ -97,20 +169,30 @@ export function RsvpSection() {
   };
 
   return (
-    <section className="my-20 sm:my-32 py-12 sm:py-20 relative select-none w-full max-w-5xl mx-auto px-4 overflow-hidden">
-      {/* Soft Ambient Gold Radial Glow */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,225,160,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+    <section className="my-16 sm:my-28 py-10 sm:py-16 relative select-none w-full max-w-5xl mx-auto px-4 overflow-hidden">
+      {/* Soft Ambient Gold Glow */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
       <div className="relative z-10 text-center flex flex-col items-center justify-center space-y-6 sm:space-y-8">
-        {/* SECTION HEADER */}
+        {/* 1. ROYAL WAX SEAL EMBLEM */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <RoyalWaxSeal onClick={handleAccept} />
+        </motion.div>
+
+        {/* 2. SECTION HEADER & FORMAL INVITATION */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center max-w-3xl mx-auto space-y-2"
+          className="text-center max-w-3xl mx-auto space-y-3"
         >
-          <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
+          <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold flex items-center justify-center gap-2">
             <Sparkles className="w-4 h-4 text-[#D4AF37]" />
             ROYAL INVITATION & RSVP
             <Sparkles className="w-4 h-4 text-[#D4AF37]" />
@@ -122,50 +204,55 @@ export function RsvpSection() {
 
           <GoldFlourish />
 
-          <p className="text-xs sm:text-sm text-[#8B5E5A] font-serif italic tracking-wide uppercase font-semibold">
-            Kindly respond by August 15, 2026 so we may reserve your royal seat
+          <p className="text-sm sm:text-base text-[#4C342F] max-w-2xl mx-auto leading-relaxed font-serif">
+            Their Highnesses <strong>Maharaja Vikram Singh & Maharani Gayatri Devi</strong> and{" "}
+            <strong>Dr. Harshvardhan Sharma & Sunita Sharma</strong> request the honor of your presence
+            at the grand engagement celebration of their children <strong>Arjun & Ananya</strong>.
           </p>
+
+          <div className="pt-2 inline-block">
+            <span className="px-4 py-1.5 rounded-full bg-[#EBDBC9] border border-[#C5A059]/60 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-xs">
+              Kindly Respond by August 15, 2026
+            </span>
+          </div>
         </motion.div>
 
-        {/* ULTRA-LUXURY ARCHITECTURAL ACCEPT INVITATION BUTTON */}
+        {/* 3. SINGLE ACCEPT INVITATION BUTTON */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="pt-4"
+          className="pt-2"
         >
           <button
             onClick={handleAccept}
-            className="relative px-10 sm:px-14 py-4.5 sm:py-5 rounded-full bg-[#FFFDF9] backdrop-blur-md border-2 border-[#C5A059] text-[#3A2E2A] font-[family-name:var(--font-heading)] font-extrabold text-xs sm:text-sm uppercase tracking-[0.35em] shadow-[0_15px_40px_rgba(197,160,89,0.25)] hover:shadow-[0_20px_50px_rgba(197,160,89,0.45)] hover:bg-[#FDF7EE] transition-all flex items-center justify-center gap-3.5 cursor-pointer group active:scale-98 overflow-hidden"
+            className="relative px-10 sm:px-14 py-4.5 sm:py-5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#4C342F] text-amber-50 font-[family-name:var(--font-heading)] font-extrabold text-xs sm:text-sm uppercase tracking-[0.35em] shadow-[0_15px_40px_rgba(76,52,47,0.25)] hover:shadow-[0_20px_50px_rgba(212,175,55,0.45)] transition-all flex items-center justify-center gap-3.5 cursor-pointer border border-[#D4AF37] group active:scale-98 overflow-hidden"
           >
-            {/* Inner Razor-Thin Accent Rim */}
-            <div className="absolute inset-1 rounded-full border border-[#C5A059]/40 pointer-events-none group-hover:border-[#C5A059]/70 transition-colors" />
-
-            <Crown className="w-4 h-4 text-[#AA771C] group-hover:scale-110 transition-transform relative z-10" />
+            <Crown className="w-4 h-4 text-[#FFD700] group-hover:scale-110 transition-transform relative z-10" />
             <span className="relative z-10">
               {accepted ? "INVITATION ACCEPTED" : "ACCEPT INVITATION"}
             </span>
-            <Sparkles className="w-4 h-4 text-[#AA771C] group-hover:rotate-12 transition-transform relative z-10" />
+            <Sparkles className="w-4 h-4 text-[#FFD700] group-hover:rotate-12 transition-transform relative z-10" />
           </button>
         </motion.div>
 
-        {/* REFINED CONFIRMATION BADGE */}
+        {/* 4. CONFIRMATION BADGE */}
         <AnimatePresence>
           {accepted && (
             <motion.div
               initial={{ opacity: 0, y: 15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0 }}
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/90 backdrop-blur-md border border-[#C5A059] shadow-md text-[#3A2E2A] font-[family-name:var(--font-heading)] font-extrabold text-xs uppercase tracking-[0.25em]"
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#4C342F] text-amber-100 border border-[#D4AF37] shadow-xl font-[family-name:var(--font-heading)] font-extrabold text-xs uppercase tracking-[0.25em]"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#AA771C] shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-[#FFD700] shrink-0" />
               <span>ROYAL INVITATION ACCEPTED WITH HONOR</span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* ENGRAVED BOTTOM BORDER */}
+        {/* 5. ENGRAVED BOTTOM BORDER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

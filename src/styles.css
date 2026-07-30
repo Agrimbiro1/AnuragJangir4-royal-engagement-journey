@@ -5,7 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 html, body {
-  scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
   overflow-x: clip !important;
@@ -16,40 +15,32 @@ html, body {
   box-sizing: border-box;
 }
 
+/* Lenis Ultra-Smooth Scrolling Physics */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 #root, main, section {
   overflow-x: clip !important;
   max-width: 100vw !important;
   width: 100% !important;
   box-sizing: border-box;
-}
-
-/* -------------------------------------------------------------------------- */
-/* CRITICAL GPU COMPOSITING & HOVER ANTI-FLICKER PROTECTION                   */
-/* -------------------------------------------------------------------------- */
-*, *::before, *::after {
-  -webkit-backface-visibility: hidden !important;
-  backface-visibility: hidden !important;
-}
-
-video, canvas, img, svg {
-  -webkit-transform: translateZ(0) !important;
-  transform: translateZ(0) !important;
-  will-change: transform;
-  -webkit-backface-visibility: hidden !important;
-  backface-visibility: hidden !important;
-}
-
-/* Disable GPU-thrashing backdrop-filters globally to eliminate section & card flickering on hover */
-[class*="backdrop-blur"] {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-button, a, img, [role="button"] {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 html::-webkit-scrollbar,
@@ -148,7 +139,7 @@ body::-webkit-scrollbar,
   position: relative;
 }
 
-/* Layer 1: Organic paper grain — fine multi-octave fractal noise */
+/* Layer 1: Subtle organic paper grain overlay without blend mode (flicker-free) */
 .textured-bg::before {
   content: "";
   position: absolute;
@@ -156,14 +147,13 @@ body::-webkit-scrollbar,
   pointer-events: none;
   z-index: 0;
   border-radius: inherit;
-  opacity: 0.28;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 300px 300px;
-  mix-blend-mode: multiply;
+  background-size: 200px 200px;
 }
 
-/* Layer 2: Premium Animated Gold Floral Background Pattern */
+/* Layer 2: Luxury Royal Gold Damask & Mandala SVG Lattice Pattern (Static & Flicker-Free) */
 .textured-bg::after {
   content: "";
   position: absolute;
@@ -171,45 +161,10 @@ body::-webkit-scrollbar,
   pointer-events: none;
   z-index: 0;
   border-radius: inherit;
-  opacity: 0.38;
-  background-image:
-    /* High-contrast Gold Flower Mandala Pattern */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFD700' stop-opacity='0.95'/%3E%3Cstop offset='50%25' stop-color='%23D4AF37' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%23B8860B' stop-opacity='0.75'/%3E%3C/linearGradient%3E%3CradialGradient id='fc' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23FFF8DC' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%23DAA520' stop-opacity='0.5'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='1.2'%3E%3Ccircle cx='140' cy='140' r='18' fill='url(%23fc)' stroke-width='1'/%3E%3Cpath d='M140 112 C132 120 132 132 140 140 C148 132 148 120 140 112 Z' fill='%23FFD700' fill-opacity='0.3'/%3E%3Cpath d='M140 168 C132 160 132 148 140 140 C148 148 148 160 140 168 Z' fill='%23FFD700' fill-opacity='0.3'/%3E%3Cpath d='M112 140 C120 132 132 132 140 140 C132 148 120 148 112 140 Z' fill='%23FFD700' fill-opacity='0.3'/%3E%3Cpath d='M168 140 C160 132 148 132 140 140 C148 148 160 148 168 140 Z' fill='%23FFD700' fill-opacity='0.3'/%3E%3Cpath d='M140 92 C120 98 108 120 140 140 C172 120 160 98 140 92 Z' stroke-width='1.4'/%3E%3Cpath d='M140 188 C120 182 108 160 140 140 C172 160 160 182 140 188 Z' stroke-width='1.4'/%3E%3Cpath d='M92 140 C98 120 120 108 140 140 C120 172 98 160 92 140 Z' stroke-width='1.4'/%3E%3Cpath d='M188 140 C182 120 160 108 140 140 C160 172 182 160 188 140 Z' stroke-width='1.4'/%3E%3Cpath d='M106 106 C100 125 120 135 140 140 C135 120 125 100 106 106 Z' fill='%23D4AF37' fill-opacity='0.25'/%3E%3Cpath d='M174 106 C180 125 160 135 140 140 C145 120 155 100 174 106 Z' fill='%23D4AF37' fill-opacity='0.25'/%3E%3Cpath d='M106 174 C100 155 120 145 140 140 C135 160 125 180 106 174 Z' fill='%23D4AF37' fill-opacity='0.25'/%3E%3Cpath d='M174 174 C180 155 160 145 140 140 C145 160 155 180 174 174 Z' fill='%23D4AF37' fill-opacity='0.25'/%3E%3Ccircle cx='140' cy='140' r='62' stroke='%23FFD700' stroke-width='1' stroke-dasharray='4 4'/%3E%3Ccircle cx='140' cy='140' r='75' stroke='%23D4AF37' stroke-width='0.8'/%3E%3Ccircle cx='0' cy='0' r='14' fill='url(%23fc)'/%3E%3Cpath d='M0 32 C15 25 25 15 0 0 C-25 15 -15 25 0 32 Z' stroke-width='1.2'/%3E%3Cpath d='M32 0 C25 15 15 25 0 0 C15 -25 25 -15 32 0 Z' stroke-width='1.2'/%3E%3Ccircle cx='280' cy='0' r='14' fill='url(%23fc)'/%3E%3Cpath d='M280 32 C265 25 255 15 280 0 C305 15 295 25 280 32 Z' stroke-width='1.2'/%3E%3Cpath d='M248 0 C255 15 265 25 280 0 C265 -25 255 -15 248 0 Z' stroke-width='1.2'/%3E%3Ccircle cx='0' cy='280' r='14' fill='url(%23fc)'/%3E%3Cpath d='M0 248 C15 255 25 265 0 280 C-25 265 -15 255 0 248 Z' stroke-width='1.2'/%3E%3Cpath d='M32 280 C25 265 15 255 0 280 C15 305 25 295 32 280 Z' stroke-width='1.2'/%3E%3Ccircle cx='280' cy='280' r='14' fill='url(%23fc)'/%3E%3Cpath d='M280 248 C265 255 255 265 280 280 C305 265 295 255 280 248 Z' stroke-width='1.2'/%3E%3Cpath d='M248 280 C255 265 265 255 280 280 C265 305 255 295 248 280 Z' stroke-width='1.2'/%3E%3C/g%3E%3C/svg%3E"),
-    /* Gold Foil Dust Speckles */
-    radial-gradient(circle 0.8px at 12% 8%, rgba(212, 175, 55, 0.45) 0%, transparent 100%),
-    radial-gradient(circle 0.6px at 28% 22%, rgba(195, 165, 55, 0.35) 0%, transparent 100%),
-    radial-gradient(circle 0.9px at 45% 5%, rgba(255, 215, 0, 0.4) 0%, transparent 100%),
-    radial-gradient(circle 0.6px at 83% 12%, rgba(212, 175, 55, 0.38) 0%, transparent 100%),
-    radial-gradient(circle 0.7px at 72% 45%, rgba(212, 175, 55, 0.35) 0%, transparent 100%),
-    radial-gradient(circle 0.8px at 88% 85%, rgba(212, 175, 55, 0.4) 0%, transparent 100%);
-  background-size: 280px 280px, 220px 220px;
-  background-repeat: repeat, repeat;
-  animation: goldFlowerDrift 35s linear infinite alternate, goldFlowerPulse 6s ease-in-out infinite alternate;
-  mix-blend-mode: color-burn;
-}
-
-@keyframes goldFlowerDrift {
-  0% {
-    background-position: 0px 0px, 0px 0px;
-  }
-  50% {
-    background-position: 70px 90px, -30px 45px;
-  }
-  100% {
-    background-position: 140px 180px, -60px 90px;
-  }
-}
-
-@keyframes goldFlowerPulse {
-  0% {
-    opacity: 0.32;
-  }
-  50% {
-    opacity: 0.48;
-  }
-  100% {
-    opacity: 0.35;
-  }
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFD700' stop-opacity='0.75'/%3E%3Cstop offset='50%25' stop-color='%23C5A059' stop-opacity='0.55'/%3E%3Cstop offset='100%25' stop-color='%238B6508' stop-opacity='0.35'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='1.2'%3E%3Cpath d='M120 12 L228 120 L120 228 L12 120 Z' stroke-opacity='0.35' stroke-dasharray='4 4'/%3E%3Ccircle cx='120' cy='120' r='46' stroke-width='1'/%3E%3Ccircle cx='120' cy='120' r='24' fill='%23D4AF37' fill-opacity='0.07'/%3E%3Cpath d='M120 74 Q110 95 120 120 Q130 95 120 74 Z' fill='%23FFD700' fill-opacity='0.15'/%3E%3Cpath d='M120 166 Q110 145 120 120 Q130 145 120 166 Z' fill='%23FFD700' fill-opacity='0.15'/%3E%3Cpath d='M74 120 Q95 110 120 120 Q95 130 74 120 Z' fill='%23FFD700' fill-opacity='0.15'/%3E%3Cpath d='M166 120 Q145 110 120 120 Q145 130 166 120 Z' fill='%23FFD700' fill-opacity='0.15'/%3E%3Cpath d='M87 87 Q102 102 120 120 Q102 102 87 87 Z' fill='%23C5A059' fill-opacity='0.12'/%3E%3Cpath d='M153 87 Q138 102 120 120 Q138 102 153 87 Z' fill='%23C5A059' fill-opacity='0.12'/%3E%3Cpath d='M87 153 Q102 138 120 120 Q102 138 87 153 Z' fill='%23C5A059' fill-opacity='0.12'/%3E%3Cpath d='M153 153 Q138 138 120 120 Q138 138 153 153 Z' fill='%23C5A059' fill-opacity='0.12'/%3E%3Cpath d='M0 45 Q22 22 45 0' stroke-width='1.4'/%3E%3Cpath d='M240 45 Q218 22 195 0' stroke-width='1.4'/%3E%3Cpath d='M0 195 Q22 218 45 240' stroke-width='1.4'/%3E%3Cpath d='M240 195 Q218 218 195 240' stroke-width='1.4'/%3E%3Ccircle cx='0' cy='0' r='18' fill='%23D4AF37' fill-opacity='0.1'/%3E%3Ccircle cx='240' cy='0' r='18' fill='%23D4AF37' fill-opacity='0.1'/%3E%3Ccircle cx='0' cy='240' r='18' fill='%23D4AF37' fill-opacity='0.1'/%3E%3Ccircle cx='240' cy='240' r='18' fill='%23D4AF37' fill-opacity='0.1'/%3E%3Ccircle cx='120' cy='120' r='3.5' fill='%23FFD700' fill-opacity='0.7'/%3E%3Ccircle cx='120' cy='12' r='2.5' fill='%23C5A059' fill-opacity='0.6'/%3E%3Ccircle cx='120' cy='228' r='2.5' fill='%23C5A059' fill-opacity='0.6'/%3E%3Ccircle cx='12' cy='120' r='2.5' fill='%23C5A059' fill-opacity='0.6'/%3E%3Ccircle cx='228' cy='120' r='2.5' fill='%23C5A059' fill-opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 240px 240px;
 }
 
 /* Ensure direct children sit above both texture layers */
@@ -226,9 +181,12 @@ body::-webkit-scrollbar,
 .soft-card {
   background: rgba(253, 249, 243, 0.85);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(212, 175, 55, 0.25);
   box-shadow: 0 8px 32px rgba(122, 75, 70, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .soft-card:hover {

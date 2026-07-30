@@ -190,8 +190,8 @@ export function VenueContactSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className="soft-card rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group"
+              whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
+              className="soft-card backdrop-blur-none rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform"
             >
               <div className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#EBDBC9] border border-[#C5A059]/40 text-[#4C342F] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                 <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
@@ -248,8 +248,8 @@ export function VenueContactSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className="soft-card rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group"
+              whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
+              className="soft-card backdrop-blur-none rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform"
             >
               <div className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#EBDBC9] border border-[#C5A059]/40 text-[#4C342F] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                 <Sparkles className="w-3.5 h-3.5 text-[#AA771C]" />

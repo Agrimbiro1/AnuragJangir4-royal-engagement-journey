@@ -267,15 +267,18 @@ export function GallerySection() {
   );
   const [userLiked, setUserLiked] = useState<Record<string, boolean>>({});
 
-  // Lock body scroll when Lightbox Pop-up is open
+  // Lock body scroll & pause Lenis when Lightbox Pop-up is open
   useEffect(() => {
     if (activeLightboxIndex !== null) {
       document.body.style.overflow = "hidden";
+      (window as any).lenis?.stop();
     } else {
       document.body.style.overflow = "";
+      (window as any).lenis?.start();
     }
     return () => {
       document.body.style.overflow = "";
+      (window as any).lenis?.start();
     };
   }, [activeLightboxIndex]);
 
@@ -524,28 +527,33 @@ export function GallerySection() {
             <motion.div
               key={`curr-${mobileActiveIndex}`}
               custom={mobileDirection}
-              initial={(dir: number) => ({
-                opacity: 0,
-                scale: 0.85,
-                x: dir > 0 ? 90 : dir < 0 ? -90 : 0,
-                rotateY: dir > 0 ? 25 : dir < 0 ? -25 : 0,
-                filter: "blur(6px)",
-              })}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                x: 0,
-                rotateY: 0,
-                filter: "blur(0px)",
-                y: [-8, 8, -8],
+              variants={{
+                initial: (dir: number) => ({
+                  opacity: 0,
+                  scale: 0.85,
+                  x: dir > 0 ? 90 : dir < 0 ? -90 : 0,
+                  rotateY: dir > 0 ? 25 : dir < 0 ? -25 : 0,
+                  filter: "blur(6px)",
+                }),
+                animate: {
+                  opacity: 1,
+                  scale: 1,
+                  x: 0,
+                  rotateY: 0,
+                  filter: "blur(0px)",
+                  y: [-8, 8, -8],
+                },
+                exit: (dir: number) => ({
+                  opacity: 0,
+                  scale: 0.85,
+                  x: dir > 0 ? -90 : dir < 0 ? 90 : 0,
+                  rotateY: dir > 0 ? -25 : dir < 0 ? 25 : 0,
+                  filter: "blur(6px)",
+                }),
               }}
-              exit={(dir: number) => ({
-                opacity: 0,
-                scale: 0.85,
-                x: dir > 0 ? -90 : dir < 0 ? 90 : 0,
-                rotateY: dir > 0 ? -25 : dir < 0 ? 25 : 0,
-                filter: "blur(6px)",
-              })}
+              initial="initial"
+              animate="animate"
+              exit="exit"
               transition={{
                 x: { type: "spring", stiffness: 320, damping: 26 },
                 scale: { duration: 0.35 },

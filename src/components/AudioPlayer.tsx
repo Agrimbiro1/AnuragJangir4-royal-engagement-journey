@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Volume2, VolumeX, Music } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 
 export function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const timerRef = useRef<number | null>(null);
 
-  // Simple Web Audio Synthesizer producing soft royal harp chimes
+  // Web Audio Synthesizer producing soft royal harp chimes
   const startChimeSequence = () => {
     try {
       const AudioContextClass =
@@ -96,22 +96,22 @@ export function AudioPlayer() {
   return (
     <button
       onClick={toggleAudio}
-      className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 border shadow-sm ${
+      className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border-2 shadow-xl cursor-pointer select-none ${
         isPlaying
-          ? "bg-[color:var(--color-gold-deep)] text-amber-50 border-[color:var(--color-gold)] animate-pulse"
-          : "bg-white/80 text-[color:var(--color-muted-ink)] border-[color:var(--color-gold)]/40 hover:bg-white"
+          ? "bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#4C342F] text-[#FFD700] border-[#D4AF37] shadow-[0_10px_25px_rgba(212,175,55,0.4)]"
+          : "bg-black/80 backdrop-blur-md text-[#FFF1B0] border-[#D4AF37]/50 hover:bg-black/95 shadow-md"
       }`}
       title={isPlaying ? "Mute Royal Chimes" : "Play Royal Chimes"}
     >
       {isPlaying ? (
         <>
-          <Volume2 className="w-3.5 h-3.5 text-[color:var(--color-gold-light)]" />
-          <span>Music ON</span>
+          <Volume2 className="w-4 h-4 text-[#FFD700]" />
+          <span>ROYAL MUSIC ON</span>
         </>
       ) : (
         <>
-          <VolumeX className="w-3.5 h-3.5" />
-          <span>Music OFF</span>
+          <VolumeX className="w-4 h-4 text-[#D4AF37]" />
+          <span>ROYAL MUSIC OFF</span>
         </>
       )}
     </button>

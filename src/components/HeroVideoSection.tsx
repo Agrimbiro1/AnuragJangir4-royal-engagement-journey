@@ -1,49 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail, Sparkles } from "lucide-react";
+import royalSealPhoto from "../assets/royal_seal.jpg";
 
 interface HeroVideoSectionProps {
   onReopenEnvelope?: () => void;
 }
 
 /* -------------------------------------------------------------------------- */
-/* INTERLOCKING "AA" MONOGRAM LOGO SVG                                        */
+/* ROYAL MONOGRAM INSIGNIA SEAL                                              */
 /* -------------------------------------------------------------------------- */
 function InterlockingAAMonogram() {
   return (
     <div className="flex flex-col items-center shrink-0 mx-1">
-      <svg
-        viewBox="0 0 100 100"
-        className="w-8 h-8 sm:w-11 sm:h-11 text-[#D4AF37] drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      >
-        {/* Double Gold Outer Ring */}
-        <circle cx="50" cy="50" r="46" stroke="#D4AF37" strokeWidth="1.2" opacity="0.9" />
-        <circle cx="50" cy="50" r="42" stroke="#FFF1B0" strokeWidth="0.8" opacity="0.6" />
-
-        {/* First 'A' */}
-        <path
-          d="M 32 68 L 44 32 L 56 68 M 36 56 L 52 56"
-          stroke="#D4AF37"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full p-0.5 bg-gradient-to-tr from-[#D4AF37] via-[#FFF1B0] to-[#AA771C] shadow-[0_2px_12px_rgba(212,175,55,0.6)] border border-[#D4AF37] overflow-hidden">
+        <img
+          src={royalSealPhoto}
+          alt="Arjun & Ananya Royal Seal"
+          className="w-full h-full object-cover rounded-full scale-[1.38]"
         />
-
-        {/* Interlocking Second 'A' (Shifted & Overlapped) */}
-        <path
-          d="M 44 68 L 56 32 L 68 68 M 48 56 L 64 56"
-          stroke="#FFF1B0"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-
-        {/* Central Crown Accent Dot */}
-        <circle cx="50" cy="24" r="2.5" fill="#D4AF37" />
-      </svg>
+      </div>
       <span className="hidden sm:block font-[family-name:var(--font-heading)] text-[10px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-semibold mt-1 drop-shadow-sm">
         ARJUN &amp; ANANYA
       </span>
@@ -181,10 +157,6 @@ function CinematicPetalCanvas() {
         const scaleY = Math.cos(p.rotationY);
         ctx.scale(1, Math.abs(scaleY) < 0.1 ? 0.1 : scaleY);
 
-        if (p.blur > 0.5) {
-          ctx.filter = `blur(${p.blur}px)`;
-        }
-
         if (p.type === "jasmine") {
           drawJasminePetal(p.size, currentOpacity);
         } else {
@@ -243,10 +215,14 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
   };
 
   const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+    if ((window as any).lenis) {
+      (window as any).lenis.scrollTo(window.innerHeight, { duration: 1.2 });
+    } else {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (

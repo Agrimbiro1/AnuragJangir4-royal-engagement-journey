@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Sparkles, Crown, ArrowRight, Calendar, MapPin } from "lucide-react";
 import couplePhoto from "../assets/couple.jpg";
+import royalSealPhoto from "../assets/royal_seal.jpg";
 
 interface OpeningAnimationProps {
   isOpen: boolean;
@@ -9,44 +10,19 @@ interface OpeningAnimationProps {
 }
 
 /* -------------------------------------------------------------------------- */
-/* INTERLOCKING "AA" MONOGRAM LOGO SVG                                        */
+/* ROYAL MONOGRAM INSIGNIA SEAL                                              */
 /* -------------------------------------------------------------------------- */
 function InterlockingAAMonogram() {
   return (
     <div className="flex flex-col items-center">
-      <svg
-        viewBox="0 0 100 100"
-        className="w-9 h-9 sm:w-16 sm:h-16 text-[#D4AF37] drop-shadow-[0_4px_14px_rgba(212,175,55,0.7)]"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      >
-        {/* Double Gold Outer Ring */}
-        <circle cx="50" cy="50" r="46" stroke="#D4AF37" strokeWidth="1.2" opacity="0.9" />
-        <circle cx="50" cy="50" r="42" stroke="#FFF1B0" strokeWidth="0.8" opacity="0.65" />
-
-        {/* First 'A' */}
-        <path
-          d="M 32 68 L 44 32 L 56 68 M 36 56 L 52 56"
-          stroke="#D4AF37"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-[#FFF1B0] to-[#AA771C] shadow-[0_4px_20px_rgba(212,175,55,0.7)] border-2 border-[#D4AF37] overflow-hidden">
+        <img
+          src={royalSealPhoto}
+          alt="Arjun & Ananya Royal Seal"
+          className="w-full h-full object-cover rounded-full scale-[1.38]"
         />
-
-        {/* Interlocking Second 'A' */}
-        <path
-          d="M 44 68 L 56 32 L 68 68 M 48 56 L 64 56"
-          stroke="#FFF1B0"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-
-        {/* Central Crown Accent Dot */}
-        <circle cx="50" cy="24" r="2.5" fill="#D4AF37" />
-      </svg>
-      <span className="font-[family-name:var(--font-heading)] text-[9px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-bold mt-1 sm:mt-1.5 drop-shadow-md">
+      </div>
+      <span className="font-[family-name:var(--font-heading)] text-[9px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-bold mt-1.5 sm:mt-2 drop-shadow-md">
         ARJUN &amp; ANANYA
       </span>
     </div>
