@@ -62,20 +62,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
 ];
 
-// Gold Feather Graphic SVG
-function FeatherOrnament() {
+// Gold Line Ornament SVG (matches FamilySection)
+function GoldOrnament() {
   return (
     <svg
-      viewBox="0 0 100 24"
-      className="w-20 h-6 mx-auto text-[#C5A059] opacity-80 my-1"
+      viewBox="0 0 160 24"
+      className="w-36 sm:w-44 h-5 mx-auto text-[#C5A059] opacity-85 my-2"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.2"
     >
-      <path d="M10 12 C 35 4, 65 4, 90 12 C 65 20, 35 20, 10 12 Z" />
-      <path d="M20 12 L 80 12" />
-      <path d="M30 12 L 24 8 M 45 12 L 39 8 M 60 12 L 54 8 M 75 12 L 69 8" />
-      <path d="M30 12 L 24 16 M 45 12 L 39 16 M 60 12 L 54 16 M 75 12 L 69 16" />
+      <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
+      <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
+      <path d="M 50 12 Q 40 8, 30 12" />
+      <path d="M 110 12 Q 120 8, 130 12" />
+      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
     </svg>
   );
 }
@@ -322,7 +323,7 @@ export function GallerySection() {
           ROYAL PHOTO GALLERY
         </h2>
 
-        <FeatherOrnament />
+        <GoldOrnament />
       </div>
 
       {/* 2. DESKTOP & TABLET WIDE SPACIOUS 5-LAYER FLOATING GLASS STACK */}

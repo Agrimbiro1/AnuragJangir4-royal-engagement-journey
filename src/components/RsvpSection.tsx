@@ -38,7 +38,7 @@ function GoldFlourish() {
   return (
     <svg
       viewBox="0 0 160 24"
-      className="w-36 sm:w-44 h-6 mx-auto text-[#C5A059] opacity-85 my-3"
+      className="w-36 sm:w-44 h-5 mx-auto text-[#C5A059] opacity-85 my-2"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.2"

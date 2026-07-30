@@ -54,7 +54,7 @@ function FloralCrestEmblem() {
 
 export function FooterSection() {
   return (
-    <footer className="mt-20 sm:mt-20 pt-20 pb-36 sm:pt-10 sm:pb-20 text-center relative px-4 select-none max-w-4xl mx-auto min-h-[650px] sm:min-h-0 flex flex-col justify-center">
+    <footer className="mt-6 sm:mt-8 pt-8 sm:pt-10 pb-10 sm:pb-16 text-center relative px-4 select-none max-w-4xl mx-auto flex flex-col justify-center">
       {/* WARM AMBER RADIAL GLOW AURA */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
@@ -64,10 +64,10 @@ export function FooterSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex flex-col items-center justify-center space-y-7 sm:space-y-4"
+        className="relative z-10 flex flex-col items-center justify-center space-y-5 sm:space-y-4"
       >
         {/* 1. ROYAL MONOGRAM INSIGNIA SEAL */}
-        <div className="relative my-3 sm:my-0">
+        <div className="relative my-2 sm:my-0">
           <div className="w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#4C342F] via-[#3A2320] to-[#201311] text-amber-100 flex flex-col items-center justify-center shadow-[0_12px_30px_rgba(76,52,47,0.25)] border-3 border-[#D4AF37]">
             <Crown className="w-5 h-5 text-[#FFD700] mb-0.5" />
             <span className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold tracking-widest text-[#FFF1B0]">
@@ -101,7 +101,7 @@ export function FooterSection() {
         <FloralCrestEmblem />
 
         {/* 5. COPYRIGHT NOTE */}
-        <p className="text-[10px] sm:text-[11px] text-[#8B5E5A] uppercase tracking-[0.25em] font-semibold mt-8 sm:mt-4 border-t border-stone-200/60 pt-5 sm:pt-3 w-full max-w-xs">
+        <p className="text-[10px] sm:text-[11px] text-[#8B5E5A] uppercase tracking-[0.25em] font-semibold mt-5 sm:mt-4 border-t border-stone-200/60 pt-4 sm:pt-3 w-full max-w-xs">
           © 2025 ARJUN & ANANYA — ROYAL ENGAGEMENT INVITATION
         </p>
       </motion.div>
