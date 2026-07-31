@@ -7,6 +7,7 @@ import royalSealPhoto from "../assets/royal_seal.jpg";
 interface OpeningAnimationProps {
   isOpen: boolean;
   onOpen: () => void;
+  guestName?: string;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -290,7 +291,8 @@ function FallingLeavesCanvas({ isBursting }: { isBursting: boolean }) {
 /* -------------------------------------------------------------------------- */
 /* MAIN OPENING ANIMATION COMPONENT (CARD-LESS DIRECT OVERLAY)               */
 /* -------------------------------------------------------------------------- */
-export function OpeningAnimation({ isOpen, onOpen }: OpeningAnimationProps) {
+export function OpeningAnimation({ isOpen, onOpen, guestName }: OpeningAnimationProps) {
+  const displayGuestName = guestName || "Priyadarshini Sharma";
   const containerRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);

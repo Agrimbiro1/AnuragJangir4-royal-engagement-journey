@@ -225,9 +225,20 @@ function triggerPartyBomb() {
   }, 450);
 }
 
-export function BlessingsSection() {
-  const [guestName, setGuestName] = useState("His Highness Maharaja & Honored Guests");
+interface BlessingsSectionProps {
+  guestName?: string;
+}
+
+export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionProps = {}) {
+  const initialGuest = propGuestName || "Priyadarshini Sharma";
+  const [guestName, setGuestName] = useState(initialGuest);
   const [blessingText, setBlessingText] = useState("");
+
+  React.useEffect(() => {
+    if (propGuestName) {
+      setGuestName(propGuestName);
+    }
+  }, [propGuestName]);
   const [floatingCards, setFloatingCards] =
     useState<FloatingBlessingCard[]>(OVERLAPPING_ANGLED_CARDS);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -484,21 +495,29 @@ export function BlessingsSection() {
         </motion.div>
       </div>
 
-      {/* 4. MOBILE SCREEN LAYOUT */}
+      {/* 4. MOBILE SCREEN LAYOUT — ENHANCED ROYAL INPUT BLESSING CARD */}
       <div className="sm:hidden py-4 px-2">
-        <div className="p-6 rounded-[32px] bg-white/75 backdrop-blur-xl border-2 border-[color:var(--color-gold)]/60 shadow-[0_20px_50px_rgba(76,52,47,0.18)] text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
+        <div className="p-6 rounded-[36px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37] shadow-[0_20px_50px_rgba(76,52,47,0.18)] text-center relative overflow-hidden">
+          {/* Subtle Inner Gold Accent Frame */}
+          <div className="absolute inset-2 rounded-[28px] border border-[#C5A059]/30 pointer-events-none" />
 
           <form onSubmit={handleSubmitBlessing} className="space-y-4 relative z-10">
-            <div>
-              <p className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.3em] font-bold text-[#C5A059] mb-1">
-                ROYAL GUESTBOOK & BLESSINGS
+            <div className="text-center">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F5EBE1] border border-[#D4AF37]/50 shadow-xs mb-1.5">
+                <Crown className="w-3.5 h-3.5 text-[#AA771C] animate-pulse" />
+                <span className="text-[9.5px] uppercase tracking-[0.25em] font-extrabold text-[#AA771C]">
+                  ROYAL GUESTBOOK & BLESSINGS
+                </span>
+                <Sparkles className="w-3 h-3 text-[#AA771C]" />
+              </div>
+              <p className="font-[family-name:var(--font-script)] text-2.5xl text-[#3A2E2A] drop-shadow-xs">
+                Send Your Sacred Wishes
               </p>
             </div>
 
             {/* MOBILE EDITABLE GUEST NAME FIELD */}
-            <div className="py-2 px-3 rounded-2xl bg-white/80 border border-[#D4AF37]/50 shadow-xs flex items-center gap-2">
-              <span className="font-[family-name:var(--font-script)] text-xl text-[#AA771C] shrink-0">
+            <div className="py-2.5 px-3.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2">
+              <span className="font-[family-name:var(--font-script)] text-xl text-[#AA771C] shrink-0 font-bold">
                 From:
               </span>
               <input
@@ -510,30 +529,32 @@ export function BlessingsSection() {
               />
             </div>
 
+            {/* MOBILE BLESSING MESSAGE TEXTAREA */}
             <textarea
               required
-              rows={3}
+              rows={4}
               value={blessingText}
               onChange={(e) => setBlessingText(e.target.value)}
               placeholder="SHARE YOUR BLESSINGS FOR ARJUN & ANANYA..."
-              className="w-full rounded-2xl p-3.5 bg-white/90 border border-[#D4C3B5] text-xs text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#C5A059] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
+              className="w-full rounded-2xl p-4 bg-white/90 border border-[#C5A059]/40 text-xs sm:text-sm text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#AA771C] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
             />
 
-            <div className="flex flex-col gap-3 pt-1">
+            {/* ACTION BUTTON STACK */}
+            <div className="flex flex-col gap-2.5 pt-1">
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 font-bold text-xs uppercase tracking-[0.2em] border-2 border-[#D4AF37] shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#2C1815] text-amber-50 font-extrabold text-xs uppercase tracking-[0.2em] border-2 border-[#D4AF37] shadow-[0_8px_20px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Send className="w-4 h-4 text-[#D4AF37]" />
+                <Send className="w-4 h-4 text-[#FFD700]" />
                 <span>SUBMIT BLESSING</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setShowAllModal(true)}
-                className="w-full py-3.5 rounded-full bg-white/90 border-2 border-[#C5A059] text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-md hover:bg-stone-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3 rounded-2xl bg-white/90 border border-[#D4AF37]/70 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-sm hover:bg-stone-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Eye className="w-4 h-4 text-[#AA771C]" />
+                <Eye className="w-3.5 h-3.5 text-[#AA771C]" />
                 <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
               </button>
             </div>

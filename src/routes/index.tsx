@@ -15,6 +15,7 @@ import { BlessingsSection } from "../components/BlessingsSection";
 import { VenueContactSection } from "../components/VenueContactSection";
 import { FooterSection } from "../components/FooterSection";
 import { WaveDivider } from "../components/WaveDivider";
+import { RoyalRightProgressBar } from "../components/RoyalRightProgressBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,9 +37,17 @@ export const Route = createFileRoute("/")({
   component: Invitation,
 });
 
+function getGuestNameFromUrl(): string {
+  if (typeof window === "undefined") return "Priyadarshini Sharma";
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("guest") || params.get("name");
+  return name ? decodeURIComponent(name) : "Priyadarshini Sharma";
+}
+
 function Invitation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showQuickNav, setShowQuickNav] = useState(false);
+  const [guestName] = useState(() => getGuestNameFromUrl());
 
   // Manage Body Scroll Lock & Force Top Scroll when Opening Animation is Active
   useEffect(() => {
@@ -129,9 +138,10 @@ function Invitation() {
   return (
     <div className="min-h-screen bg-black text-[color:var(--color-ink)] font-[family-name:var(--font-body)] relative selection:bg-[color:var(--color-gold-light)]">
       {/* 1. 3D ENVELOPE OPENING OVERLAY */}
-      <OpeningAnimation isOpen={isOpen} onOpen={handleOpen} />
+      <OpeningAnimation isOpen={isOpen} onOpen={handleOpen} guestName={guestName} />
 
-
+      {/* ROYAL ULTRA-LUXURY RIGHT-SIDE SCROLL PROGRESS BAR */}
+      {isOpen && <RoyalRightProgressBar />}
 
       {/* FLOATING QUICK NAV BAR ON SCROLL */}
       {isOpen && showQuickNav && (
@@ -168,7 +178,7 @@ function Invitation() {
 
       {/* 2. PINNED FULL-SCREEN 100VH HERO SECTION (FIXED BEHIND SCROLLING CURTAIN) */}
       <div className="fixed top-0 left-0 w-full h-[100dvh] z-0 pointer-events-auto">
-        <HeroVideoSection onReopenEnvelope={handleReopen} />
+        <HeroVideoSection onReopenEnvelope={handleReopen} guestName={guestName} />
       </div>
 
       {/* 3. CURTAIN SCROLL OVERLAY MAIN CONTENT (SLIDES UP & OVERLAPS FIXED HERO COMPLETELY) */}
@@ -226,7 +236,7 @@ function Invitation() {
         {/* BLESSINGS SHOWCASE - RICH JADE SEAFOAM GRADIENT */}
         <section id="blessings-section" className="relative w-full bg-gradient-to-br from-[#DCEDE5] via-[#C6E2D4] to-[#B0D7C4] textured-bg py-24 sm:py-32 overflow-hidden">
           <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
-            <BlessingsSection />
+            <BlessingsSection guestName={guestName} />
           </div>
         </section>
 

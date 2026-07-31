@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Mail, Sparkles } from "lucide-react";
+import { ChevronDown, Mail, Sparkles, Crown } from "lucide-react";
 import royalSealPhoto from "../assets/royal_seal.jpg";
 
 interface HeroVideoSectionProps {
   onReopenEnvelope?: () => void;
+  guestName?: string;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -185,7 +186,8 @@ function CinematicPetalCanvas() {
 /* -------------------------------------------------------------------------- */
 /* MAIN HERO VIDEO SECTION (100VH LUXURY CINEMATIC EXPERIENCE)                */
 /* -------------------------------------------------------------------------- */
-export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
+export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSectionProps) {
+  const displayGuestName = guestName || "Priyadarshini Sharma";
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [phase, setPhase] = useState<1 | 2 | 3>(1);
 
@@ -298,15 +300,20 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
               transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center space-y-1.5 sm:space-y-3"
             >
-              {/* Top Subtitle */}
-              <motion.p
+              {/* Clean Personalized Guest Invitation Subtitle */}
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.25em] xs:tracking-[0.45em] text-amber-200/90 font-semibold mb-1 sm:mb-3 drop-shadow-md flex items-center justify-center"
+                className="flex items-center gap-2 text-amber-200/90 font-medium mb-1 drop-shadow-md"
               >
-                <span>THE ROYAL ENGAGEMENT CELEBRATION</span>
-              </motion.p>
+                <span className="text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.35em]">
+                  Cordially Inviting
+                </span>
+                <span className="font-[family-name:var(--font-script)] text-xl xs:text-2xl sm:text-3xl text-[#FFF1B0] font-normal px-1">
+                  {displayGuestName}
+                </span>
+              </motion.div>
 
               {/* Central Metallic Gold Calligraphy Names */}
               <motion.h1
@@ -330,19 +337,12 @@ export function HeroVideoSection({ onReopenEnvelope }: HeroVideoSectionProps) {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.0, delay: 0.3 }}
-                  className="mt-3 sm:mt-8 flex flex-col items-center space-y-1.5 sm:space-y-3"
+                  className="mt-2 sm:mt-4 flex flex-col items-center space-y-1 sm:space-y-2"
                 >
-                  {/* Gold Filigree Line Divider */}
-                  <div className="flex items-center gap-3 sm:gap-4 text-amber-200/80 my-0.5 sm:my-1">
-                    <span className="h-[1px] w-8 sm:w-24 bg-gradient-to-r from-transparent to-[#D4AF37]" />
-                    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
-                      SAVE THE DATE
-                    </span>
-                    <span className="h-[1px] w-8 sm:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]" />
-                  </div>
+                  <div className="h-[1px] w-16 sm:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent my-1 sm:my-2" />
 
                   {/* Date in Minimal Tracked Sans-Serif */}
-                  <p className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl text-amber-100 font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase drop-shadow-md">
+                  <p className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-xl text-amber-100 font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase drop-shadow-md">
                     AUGUST 26-28, 2026
                   </p>
 
