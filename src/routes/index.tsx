@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
       {
         property: "og:description",
-        content: "A royal invitation to celebrate our eternal love — 28.08.2026",
+        content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2026 at Fateh Palace Estate, Udaipur. Video hero, events, family details, gallery, countdown, RSVP & venue details.",
       },
       { property: "og:type", content: "website" },
     ],
