@@ -394,21 +394,6 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
                 "{card.message}"
               </p>
             </div>
-
-            <div className="relative z-10 flex justify-end pt-1 border-t border-[#C5A059]/30">
-              <motion.button
-                whileTap={{ scale: 1.2 }}
-                onClick={() => toggleLike(card.id)}
-                className="flex items-center gap-1 text-[9.5px] font-bold text-[#4C342F] bg-white/90 px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-xs hover:bg-white transition-colors cursor-pointer"
-              >
-                <Heart
-                  className={`w-3 h-3 ${
-                    userLiked[card.id] ? "fill-red-500 text-red-500" : "text-[#4C342F]"
-                  }`}
-                />
-                <span>{card.likes}</span>
-              </motion.button>
-            </div>
           </motion.div>
         ))}
 
@@ -718,21 +703,6 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
                           <p className="text-xs sm:text-sm text-[#5C4D46] font-normal leading-relaxed italic relative pl-3 border-l-2 border-[#D4AF37]/70 py-0.5">
                             "{card.message}"
                           </p>
-                        </div>
-
-                        {/* Like Button Action Row */}
-                        <div className="relative z-10 pt-2 border-t border-[#C5A059]/30 flex justify-end">
-                          <button
-                            onClick={() => toggleLike(card.id)}
-                            className="flex items-center gap-1.5 text-xs font-bold text-[#4C342F] bg-white/90 px-3.5 py-1 rounded-full border border-[#D4AF37]/40 shadow-xs hover:bg-white active:scale-95 transition-all cursor-pointer"
-                          >
-                            <Heart
-                              className={`w-3.5 h-3.5 ${
-                                userLiked[card.id] ? "fill-red-500 text-red-500" : "text-[#4C342F]"
-                              }`}
-                            />
-                            <span>{card.likes}</span>
-                          </button>
                         </div>
                       </div>
                     ))}

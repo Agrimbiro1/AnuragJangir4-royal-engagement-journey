@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, X, ChevronLeft, ChevronRight, Camera, Sparkles } from "lucide-react";
+import { Heart, X, ChevronLeft, ChevronRight, Camera, Sparkles, Crown } from "lucide-react";
 import couplePhoto from "../assets/couple.jpg";
 import venuePhoto from "../assets/venue.jpg";
 import brideFamilyPhoto from "../assets/bride_family.png";
@@ -132,80 +132,81 @@ function GlassPhotoCard({
   );
 }
 
+interface LightboxModalProps {
+  activeLightboxIndex: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}
+
 /* Lightbox Modal Rendered via React Portal directly into document.body */
 function LightboxModalPortal({
   activeLightboxIndex,
   onClose,
   onPrev,
   onNext,
-  likesMap,
-  userLiked,
-  toggleLike,
-}: {
-  activeLightboxIndex: number;
-  onClose: () => void;
-  onPrev: () => void;
-  onNext: () => void;
-  likesMap: Record<string, number>;
-  userLiked: Record<string, boolean>;
-  toggleLike: (id: string, e: React.MouseEvent) => void;
-}) {
-  const [mounted, setMounted] = useState(false);
+}: LightboxModalProps) {
+  const currentItem = GALLERY_ITEMS[activeLightboxIndex] || GALLERY_ITEMS[0];
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted || typeof document === "undefined") return null;
-
-  const currentItem = GALLERY_ITEMS[activeLightboxIndex] || GALLERY_ITEMS[0];
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, onPrev, onNext]);
 
   return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[999999] bg-stone-950/92 backdrop-blur-xl flex flex-col justify-between items-center p-3 sm:p-6 overflow-hidden select-none"
       onClick={onClose}
-      className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl p-3 sm:p-6 flex flex-col items-center justify-between select-none"
     >
-      {/* Top Bar: Title & Close Button */}
-      <div className="w-full max-w-5xl flex items-center justify-between pt-2 px-2 z-50">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FFD700] animate-pulse" />
-          <span className="text-xs sm:text-sm font-bold tracking-[0.2em] text-amber-200 uppercase">
-            {activeLightboxIndex + 1} OF {GALLERY_ITEMS.length} · {currentItem.category}
-          </span>
+      {/* Top Bar: Close Button & Gold Crown Header */}
+      <div className="w-full max-w-5xl flex items-center justify-between z-50 pt-2 px-2">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/60 text-amber-200 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-extrabold shadow-lg">
+          <Crown className="w-3.5 h-3.5 text-[#FFD700] animate-pulse" />
+          <span>ROYAL GALLERY PORTRAIT</span>
+          <Sparkles className="w-3.5 h-3.5 text-[#FFD700]" />
         </div>
 
         <motion.button
-          whileTap={{ scale: 0.85 }}
+          whileHover={{ scale: 1.1, rotate: 90 }}
+          whileTap={{ scale: 0.9 }}
           onClick={onClose}
-          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 hover:bg-white/35 border border-white/40 flex items-center justify-center text-white backdrop-blur-md transition-all cursor-pointer shadow-2xl"
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] flex items-center justify-center text-amber-100 backdrop-blur-md transition-all cursor-pointer shadow-2xl"
+          title="Close Lightbox"
         >
-          <X className="w-6 h-6 sm:w-7 sm:h-7" />
+          <X className="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700]" />
         </motion.button>
       </div>
 
-      {/* Left Nav Arrow */}
+      {/* Navigation Arrows */}
       <motion.button
-        whileTap={{ scale: 0.85 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.88 }}
         onClick={(e) => {
           e.stopPropagation();
           onPrev();
         }}
-        className="fixed left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/75 border border-[#D4AF37]/60 text-[#FFD700] hover:bg-black/90 transition-all flex items-center justify-center z-50 cursor-pointer shadow-2xl"
+        className="fixed left-2 sm:left-7 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 backdrop-blur-md border-2 border-[#D4AF37] text-[#FFD700] hover:bg-black transition-all flex items-center justify-center z-50 cursor-pointer shadow-[0_10px_30px_rgba(212,175,55,0.4)]"
       >
         <ChevronLeft className="w-7 h-7 sm:w-9 sm:h-9" />
       </motion.button>
 
-      {/* Right Nav Arrow */}
       <motion.button
-        whileTap={{ scale: 0.85 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.88 }}
         onClick={(e) => {
           e.stopPropagation();
           onNext();
         }}
-        className="fixed right-2 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/75 border border-[#D4AF37]/60 text-[#FFD700] hover:bg-black/90 transition-all flex items-center justify-center z-50 cursor-pointer shadow-2xl"
+        className="fixed right-2 sm:right-7 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/80 backdrop-blur-md border-2 border-[#D4AF37] text-[#FFD700] hover:bg-black transition-all flex items-center justify-center z-50 cursor-pointer shadow-[0_10px_30px_rgba(212,175,55,0.4)]"
       >
         <ChevronRight className="w-7 h-7 sm:w-9 sm:h-9" />
       </motion.button>
@@ -213,44 +214,44 @@ function LightboxModalPortal({
       {/* Center Pop-up Content Card */}
       <motion.div
         key={activeLightboxIndex}
-        initial={{ scale: 0.88, opacity: 0, y: 15 }}
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.88, opacity: 0, y: 15 }}
-        transition={{ type: "spring", stiffness: 320, damping: 25 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: "spring", stiffness: 300, damping: 26 }}
         onClick={(e) => e.stopPropagation()}
-        className="my-auto max-w-3xl w-full flex flex-col items-center justify-center px-2 py-4 z-40"
+        className="my-auto max-w-4xl w-full flex flex-col items-center justify-center px-2 py-2 z-40 relative"
       >
-        {/* Main Photo Container */}
-        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_50px_rgba(212,175,55,0.4)] bg-stone-950 flex items-center justify-center">
-          <img
-            src={currentItem.src}
-            alt={currentItem.caption}
-            className="max-h-[60vh] sm:max-h-[70vh] w-auto max-w-full object-contain rounded-xl block"
-          />
+        {/* Soft Golden Ambient Backdrop Aura */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(212,175,55,0.35)_0%,transparent_75%)] pointer-events-none blur-3xl" />
+
+        {/* Main Photo Card Container */}
+        <div className="relative rounded-[28px] overflow-hidden border-2 border-[#D4AF37] shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_60px_rgba(212,175,55,0.45)] bg-stone-950 flex items-center justify-center group p-1.5 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C]">
+          <div className="relative rounded-[22px] overflow-hidden bg-stone-950 flex items-center justify-center max-h-[62vh] sm:max-h-[72vh] w-auto">
+            <img
+              src={currentItem.src}
+              alt={currentItem.caption}
+              className="max-h-[62vh] sm:max-h-[72vh] w-auto max-w-full object-contain rounded-[20px] block"
+            />
+            {/* Razor-Thin Gold Accent Rim Overlay */}
+            <div className="absolute inset-3 rounded-[16px] border border-[#D4AF37]/35 pointer-events-none z-10" />
+          </div>
         </div>
 
-        {/* Caption & Like Button Row */}
-        <div className="mt-4 flex items-center justify-between w-full max-w-2xl text-white px-4 py-3 bg-black/70 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl">
-          <p className="text-xs sm:text-base font-bold tracking-wide text-amber-100 pr-2">
+        {/* Caption & Photo Counter Bar */}
+        <div className="mt-5 flex items-center justify-between gap-4 w-full max-w-2xl px-6 py-3.5 bg-gradient-to-r from-stone-950/90 via-[#3A2E2A]/90 to-stone-950/90 backdrop-blur-md rounded-full border border-[#D4AF37]/60 shadow-2xl z-10">
+          <p className="text-xs sm:text-base font-extrabold tracking-wide text-[#FFF1B0] truncate">
             {currentItem.caption}
           </p>
-          <button
-            onClick={(e) => toggleLike(currentItem.id, e)}
-            className="flex items-center gap-2 text-xs sm:text-sm bg-white/20 px-3.5 py-1.5 rounded-full backdrop-blur-md hover:bg-white/30 transition-all cursor-pointer border border-white/30 shrink-0 active:scale-95"
-          >
-            <Heart
-              className={`w-4 h-4 sm:w-5 sm:h-5 ${
-                userLiked[currentItem.id] ? "fill-red-500 text-red-500" : "text-white"
-              }`}
-            />
-            <span className="font-bold">{likesMap[currentItem.id] || 0}</span>
-          </button>
+
+          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#FFD700] px-3 py-1 rounded-full bg-black/50 border border-[#D4AF37]/40 shrink-0">
+            {activeLightboxIndex + 1} / {GALLERY_ITEMS.length}
+          </span>
         </div>
       </motion.div>
 
-      {/* Footer Info */}
-      <div className="pb-3 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-amber-200/80 font-bold z-40">
-        TAP OUTSIDE OR × TO CLOSE
+      {/* Footer Instructions */}
+      <div className="pb-2 text-[9.5px] sm:text-xs uppercase tracking-[0.3em] text-amber-200/80 font-bold z-40 drop-shadow-md">
+        TAP OUTSIDE OR ESC TO CLOSE PORTRAIT
       </div>
     </motion.div>,
     document.body
@@ -559,9 +560,6 @@ export function GallerySection() {
                 prev !== null ? (prev + 1) % GALLERY_ITEMS.length : 0,
               )
             }
-            likesMap={likesMap}
-            userLiked={userLiked}
-            toggleLike={toggleLike}
           />
         )}
       </AnimatePresence>
