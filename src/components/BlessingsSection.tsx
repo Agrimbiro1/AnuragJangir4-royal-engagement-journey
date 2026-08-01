@@ -68,7 +68,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     floatDuration: 3.0,
     zIndex: 10,
   },
-  // INNER LEFT CARD OVERLAPPING TOP-LEFT CORNER OF CENTRAL INPUT CARD
+  // INNER LEFT CARD BEHIND TOP-LEFT CORNER OF CENTRAL INPUT CARD
   {
     id: "fb7",
     author: "Raja Brijraj Singh & Rani Devika Devi",
@@ -80,7 +80,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     baseRotate: -5,
     floatY: [8, -8, 8],
     floatDuration: 3.4,
-    zIndex: 40,
+    zIndex: 12,
   },
   {
     id: "fb9",
@@ -93,7 +93,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     baseRotate: 6,
     floatY: [-8, 8, -8],
     floatDuration: 3.1,
-    zIndex: 20,
+    zIndex: 14,
   },
 
   // --- RIGHT SIDE CLUSTER ---
@@ -136,7 +136,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     floatDuration: 3.4,
     zIndex: 10,
   },
-  // INNER RIGHT CARD OVERLAPPING TOP-RIGHT CORNER OF CENTRAL INPUT CARD
+  // INNER RIGHT CARD BEHIND TOP-RIGHT CORNER OF CENTRAL INPUT CARD
   {
     id: "fb8",
     author: "Isha & Vikram Sharma",
@@ -148,7 +148,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     baseRotate: 5,
     floatY: [-8, 8, -8],
     floatDuration: 3.2,
-    zIndex: 40,
+    zIndex: 12,
   },
   {
     id: "fb10",
@@ -161,7 +161,7 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     baseRotate: -5,
     floatY: [8, -8, 8],
     floatDuration: 3.0,
-    zIndex: 20,
+    zIndex: 14,
   },
 ];
 
@@ -229,10 +229,20 @@ interface BlessingsSectionProps {
   guestName?: string;
 }
 
+const RELATION_OPTIONS = [
+  "Family / Relative",
+  "Friend of Bride & Groom",
+  "College / School Friend",
+  "Well Wisher & Royal Guest",
+  "Custom Relation...",
+];
+
 export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionProps = {}) {
   const initialGuest = propGuestName || "Priyadarshini Sharma";
   const [guestName, setGuestName] = useState(initialGuest);
   const [blessingText, setBlessingText] = useState("");
+  const [selectedRelation, setSelectedRelation] = useState("Family / Relative");
+  const [customRelationText, setCustomRelationText] = useState("");
 
   React.useEffect(() => {
     if (propGuestName) {
@@ -284,10 +294,15 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
     // Trigger Party Bomb Fireworks Animation
     triggerPartyBomb();
 
+    const finalRelation =
+      selectedRelation === "Custom Relation..."
+        ? customRelationText.trim() || "Royal Guest"
+        : selectedRelation;
+
     const newCard: FloatingBlessingCard = {
       id: "fb-" + Date.now(),
       author: guestName.trim() || "Honored Royal Guest",
-      relation: "Royal Guest",
+      relation: finalRelation,
       message: blessingText.trim(),
       photo: couplePhoto,
       likes: 1,
@@ -300,6 +315,7 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
 
     setFloatingCards((prev) => [newCard, ...prev.slice(0, 9)]);
     setBlessingText("");
+    setCustomRelationText("");
   };
 
   const toggleLike = (id: string) => {
@@ -338,37 +354,18 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
         className="relative w-full min-h-[820px] sm:min-h-[880px] md:min-h-[920px] hidden sm:flex items-center justify-center py-12 px-6 overflow-hidden"
       >
         {/* 10 ANGLED FLOATING CARDS */}
-        {floatingCards.map((card) => (
+        {floatingCards.map((card, idx) => (
           <motion.div
             key={card.id}
-            animate={{
-              y: card.floatY,
-              rotate: [card.baseRotate - 2, card.baseRotate + 2, card.baseRotate - 2],
-            }}
             whileHover={{ scale: 1.06, y: -8, zIndex: 50 }}
-            transition={{
-              y: {
-                duration: card.floatDuration,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-              },
-              rotate: {
-                duration: card.floatDuration * 1.1,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-              },
-              scale: { duration: 0.2 },
-            }}
+            transition={{ scale: { duration: 0.2 } }}
             style={{
               zIndex: card.zIndex,
-              transform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              willChange: "transform",
+              transform: `rotate(${card.baseRotate}deg)`,
             }}
-            className={`absolute ${card.posClass} w-56 sm:w-60 md:w-64 h-[165px] sm:h-[175px] p-3.5 sm:p-4 rounded-[22px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37]/50 shadow-[0_20px_40px_rgba(140,90,60,0.14),0_8px_20px_rgba(212,175,55,0.18)] group flex flex-col justify-between cursor-pointer overflow-hidden`}
+            className={`absolute ${card.posClass} ${
+              idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
+            } w-56 sm:w-60 md:w-64 h-[165px] sm:h-[175px] p-3.5 sm:p-4 rounded-[22px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37]/50 shadow-[0_20px_40px_rgba(140,90,60,0.14),0_8px_20px_rgba(212,175,55,0.18)] group flex flex-col justify-between cursor-pointer overflow-hidden`}
           >
             {/* Inner Razor-Thin Gold Accent Rim */}
             <div className="absolute inset-1.5 rounded-[16px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors" />
@@ -428,141 +425,228 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
             WebkitBackfaceVisibility: "hidden",
             willChange: "transform",
           }}
-          className="relative z-30 w-full max-w-md p-6 sm:p-7 rounded-[32px] bg-[#FFFDF9] border-2 border-[color:var(--color-gold)]/60 shadow-[0_25px_50px_rgba(140,90,60,0.15),0_10px_30px_rgba(212,175,55,0.2)] text-center flex flex-col items-center"
+          className="relative z-50 w-full max-w-md p-1 sm:p-1.5 rounded-[40px] bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] via-[#D4AF37] to-[#AA771C] shadow-[0_30px_90px_rgba(212,175,55,0.35),0_12px_40px_rgba(76,52,47,0.15)] select-none transform-gpu"
         >
-          <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-white/50 via-transparent to-white/20 pointer-events-none" />
+          {/* Inner Ivory Card Frame */}
+          <div className="rounded-[36px] p-6 sm:p-8 bg-gradient-to-b from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] text-center flex flex-col items-center relative overflow-hidden">
+            {/* Razor-Thin Gold Inset Border */}
+            <div className="absolute inset-2 rounded-[28px] border border-[#C5A059]/35 pointer-events-none" />
 
-          <form onSubmit={handleSubmitBlessing} className="w-full space-y-3.5 relative z-10">
-            <div className="text-center">
-              <p className="font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.3em] font-bold text-[#C5A059] mb-1">
-                ROYAL GUESTBOOK & BLESSINGS
-              </p>
-            </div>
+            {/* Ambient Golden Center Aura */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[radial-gradient(circle,rgba(255,220,150,0.5)_0%,transparent_75%)] pointer-events-none blur-2xl" />
 
-            {/* EDITABLE GUEST NAME FIELD */}
-            <div className="py-2 px-3.5 rounded-2xl bg-white/80 border border-[#D4AF37]/50 shadow-xs flex items-center gap-2">
-              <span className="font-[family-name:var(--font-script)] text-xl sm:text-2xl text-[#AA771C] shrink-0">
-                From:
-              </span>
-              <input
-                type="text"
-                value={guestName}
-                onChange={(e) => setGuestName(e.target.value)}
-                placeholder="YOUR NAME & TITLE..."
-                className="w-full font-[family-name:var(--font-script)] text-xl sm:text-2xl text-[#AA771C] bg-transparent outline-none border-b border-dashed border-[#D4AF37]/50 focus:border-[#D4AF37] transition-colors"
-              />
-            </div>
+            <form onSubmit={handleSubmitBlessing} className="w-full space-y-4 relative z-10">
+              <div className="text-center space-y-1">
+                <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-[#FFFDF9] via-[#F5EBE1] to-[#FFFDF9] border border-[#D4AF37]/70 text-[#4C342F] font-extrabold text-[10.5px] uppercase tracking-[0.22em] shadow-xs">
+                  <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+                  <span>ROYAL GUESTBOOK & BLESSINGS</span>
+                  <Sparkles className="w-3 h-3 text-[#AA771C]" />
+                </div>
+                <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F]">
+                  Send Your Sacred Wishes
+                </h3>
+              </div>
 
-            <div>
-              <textarea
-                required
-                rows={3}
-                value={blessingText}
-                onChange={(e) => setBlessingText(e.target.value)}
-                placeholder="SHARE YOUR BLESSINGS FOR ARJUN & ANANYA..."
-                className="w-full rounded-2xl p-3.5 bg-white/90 border border-[#D4C3B5] text-xs sm:text-sm text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#C5A059] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
-              />
-            </div>
+              {/* EDITABLE GUEST NAME FIELD */}
+              <div className="py-2.5 px-4 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2 focus-within:border-[#D4AF37] focus-within:ring-2 focus-within:ring-[#D4AF37]/20 transition-all">
+                <span className="font-[family-name:var(--font-script)] text-xl sm:text-2xl text-[#AA771C] shrink-0 font-bold">
+                  From:
+                </span>
+                <input
+                  type="text"
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  placeholder="YOUR NAME & TITLE..."
+                  className="w-full font-[family-name:var(--font-script)] text-xl sm:text-2xl text-[#AA771C] bg-transparent outline-none border-b border-dashed border-[#D4AF37]/50 focus:border-[#D4AF37] transition-colors"
+                />
+              </div>
 
-            <div className="pt-1 flex justify-center">
-              <div className="relative inline-flex items-center justify-center">
-                <div className="absolute -inset-2 rounded-full border border-[#D4AF37]/50 animate-ping opacity-60 pointer-events-none" />
-                <div className="absolute -inset-4 rounded-full border border-[#C5A059]/30 animate-pulse pointer-events-none" />
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="submit"
-                  className="relative px-9 py-3 rounded-full bg-[#4C342F] text-amber-50 font-bold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_10px_30px_rgba(76,52,47,0.3)] hover:bg-[#3A2320] transition-all cursor-pointer flex items-center gap-2"
+              {/* GUEST RELATION SELECTOR FIELD */}
+              <div className="py-2 px-3.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2 text-left focus-within:border-[#D4AF37] focus-within:ring-2 focus-within:ring-[#D4AF37]/20 transition-all">
+                <span className="text-[11px] uppercase font-extrabold text-[#AA771C] tracking-wider shrink-0">
+                  Relation:
+                </span>
+                <select
+                  value={selectedRelation}
+                  onChange={(e) => setSelectedRelation(e.target.value)}
+                  className="w-full text-xs font-semibold text-[#4C342F] bg-transparent outline-none cursor-pointer py-1"
                 >
-                  <Send className="w-4 h-4 text-[#D4AF37]" />
+                  {RELATION_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt} className="bg-[#FFFDF9] text-[#4C342F]">
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* CUSTOM RELATION TEXT FIELD (SHOWS WHEN 'Custom Relation...' IS SELECTED) */}
+              <AnimatePresence>
+                {selectedRelation === "Custom Relation..." && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="py-2 px-3.5 rounded-2xl bg-amber-50/90 border border-[#D4AF37]/70 shadow-xs flex items-center gap-2"
+                  >
+                    <input
+                      type="text"
+                      value={customRelationText}
+                      onChange={(e) => setCustomRelationText(e.target.value)}
+                      placeholder="ENTER CUSTOM RELATION (e.g. Cousin, Bestie)..."
+                      className="w-full text-xs font-semibold text-[#4C342F] bg-transparent outline-none placeholder-amber-800/60 tracking-wider"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* BLESSING TEXTAREA */}
+              <div>
+                <textarea
+                  required
+                  rows={3}
+                  value={blessingText}
+                  onChange={(e) => setBlessingText(e.target.value)}
+                  placeholder="SHARE YOUR BLESSINGS FOR ARJUN & ANANYA..."
+                  className="w-full rounded-2xl p-4 bg-white/90 border border-[#C5A059]/40 text-xs sm:text-sm text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#AA771C] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all resize-none tracking-wider font-light uppercase shadow-inner"
+                />
+              </div>
+
+              {/* SUBMIT BUTTON */}
+              <div className="pt-1 flex justify-center">
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                  type="submit"
+                  className="w-full py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(76,52,47,0.3)] hover:brightness-110 transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <Send className="w-4 h-4 text-[#FFD700]" />
                   <span>SUBMIT BLESSING</span>
                 </motion.button>
               </div>
-            </div>
 
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={() => setShowAllModal(true)}
-                className="px-5 py-2 rounded-full bg-white/80 border border-[#D4AF37]/60 text-[#4C342F] font-bold text-[11px] uppercase tracking-widest hover:bg-white transition-all shadow-md flex items-center gap-2 mx-auto cursor-pointer"
-              >
-                <Eye className="w-3.5 h-3.5 text-[#AA771C]" />
-                <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
-              </button>
-            </div>
-          </form>
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowAllModal(true)}
+                  className="px-5 py-2 rounded-full bg-white/90 border border-[#D4AF37]/70 text-[#4C342F] font-bold text-[11px] uppercase tracking-widest hover:bg-white transition-all shadow-sm flex items-center gap-2 mx-auto cursor-pointer"
+                >
+                  <Eye className="w-3.5 h-3.5 text-[#AA771C]" />
+                  <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </motion.div>
       </div>
 
       {/* 4. MOBILE SCREEN LAYOUT — ENHANCED ROYAL INPUT BLESSING CARD */}
       <div className="sm:hidden py-4 px-2">
-        <div className="p-6 rounded-[36px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37] shadow-[0_20px_50px_rgba(76,52,47,0.18)] text-center relative overflow-hidden">
-          {/* Subtle Inner Gold Accent Frame */}
-          <div className="absolute inset-2 rounded-[28px] border border-[#C5A059]/30 pointer-events-none" />
+        <div className="p-1 rounded-[38px] bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] shadow-[0_20px_50px_rgba(76,52,47,0.2)]">
+          <div className="p-6 rounded-[34px] bg-gradient-to-b from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] text-center relative overflow-hidden">
+            {/* Subtle Inner Gold Accent Frame */}
+            <div className="absolute inset-2 rounded-[28px] border border-[#C5A059]/30 pointer-events-none" />
 
-          <form onSubmit={handleSubmitBlessing} className="space-y-4 relative z-10">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F5EBE1] border border-[#D4AF37]/50 shadow-xs mb-1.5">
-                <Crown className="w-3.5 h-3.5 text-[#AA771C] animate-pulse" />
-                <span className="text-[9.5px] uppercase tracking-[0.25em] font-extrabold text-[#AA771C]">
-                  ROYAL GUESTBOOK & BLESSINGS
-                </span>
-                <Sparkles className="w-3 h-3 text-[#AA771C]" />
+            <form onSubmit={handleSubmitBlessing} className="space-y-4 relative z-10">
+              <div className="text-center space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F5EBE1] border border-[#D4AF37]/50 shadow-xs">
+                  <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+                  <span className="text-[9.5px] uppercase tracking-[0.25em] font-extrabold text-[#AA771C]">
+                    ROYAL GUESTBOOK & BLESSINGS
+                  </span>
+                  <Sparkles className="w-3 h-3 text-[#AA771C]" />
+                </div>
+                <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-[#4C342F]">
+                  Send Your Sacred Wishes
+                </h3>
               </div>
-              <p className="font-[family-name:var(--font-script)] text-2.5xl text-[#3A2E2A] drop-shadow-xs">
-                Send Your Sacred Wishes
-              </p>
-            </div>
 
-            {/* MOBILE EDITABLE GUEST NAME FIELD */}
-            <div className="py-2.5 px-3.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2">
-              <span className="font-[family-name:var(--font-script)] text-xl text-[#AA771C] shrink-0 font-bold">
-                From:
-              </span>
-              <input
-                type="text"
-                value={guestName}
-                onChange={(e) => setGuestName(e.target.value)}
-                placeholder="YOUR NAME & TITLE..."
-                className="w-full font-[family-name:var(--font-script)] text-xl text-[#AA771C] bg-transparent outline-none border-b border-dashed border-[#D4AF37]/50 focus:border-[#D4AF37] transition-colors"
+              {/* MOBILE EDITABLE GUEST NAME FIELD */}
+              <div className="py-2.5 px-3.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2">
+                <span className="font-[family-name:var(--font-script)] text-xl text-[#AA771C] shrink-0 font-bold">
+                  From:
+                </span>
+                <input
+                  type="text"
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  placeholder="YOUR NAME & TITLE..."
+                  className="w-full font-[family-name:var(--font-script)] text-xl text-[#AA771C] bg-transparent outline-none border-b border-dashed border-[#D4AF37]/50 focus:border-[#D4AF37] transition-colors"
+                />
+              </div>
+
+              {/* MOBILE GUEST RELATION SELECTOR FIELD */}
+              <div className="py-2 px-3.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 shadow-xs flex items-center gap-2 text-left">
+                <span className="text-[11px] uppercase font-extrabold text-[#AA771C] tracking-wider shrink-0">
+                  Relation:
+                </span>
+                <select
+                  value={selectedRelation}
+                  onChange={(e) => setSelectedRelation(e.target.value)}
+                  className="w-full text-xs font-semibold text-[#4C342F] bg-transparent outline-none cursor-pointer py-1"
+                >
+                  {RELATION_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt} className="bg-[#FFFDF9] text-[#4C342F]">
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* MOBILE CUSTOM RELATION TEXT FIELD */}
+              <AnimatePresence>
+                {selectedRelation === "Custom Relation..." && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="py-2 px-3.5 rounded-2xl bg-amber-50/90 border border-[#D4AF37]/70 shadow-xs flex items-center gap-2"
+                  >
+                    <input
+                      type="text"
+                      value={customRelationText}
+                      onChange={(e) => setCustomRelationText(e.target.value)}
+                      placeholder="ENTER CUSTOM RELATION (e.g. Cousin, Bestie)..."
+                      className="w-full text-xs font-semibold text-[#4C342F] bg-transparent outline-none placeholder-amber-800/60 tracking-wider"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* MOBILE BLESSING MESSAGE TEXTAREA */}
+              <textarea
+                required
+                rows={4}
+                value={blessingText}
+                onChange={(e) => setBlessingText(e.target.value)}
+                placeholder="SHARE YOUR BLESSINGS FOR ARJUN & ANANYA..."
+                className="w-full rounded-2xl p-4 bg-white/90 border border-[#C5A059]/40 text-xs text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#AA771C] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
               />
-            </div>
 
-            {/* MOBILE BLESSING MESSAGE TEXTAREA */}
-            <textarea
-              required
-              rows={4}
-              value={blessingText}
-              onChange={(e) => setBlessingText(e.target.value)}
-              placeholder="SHARE YOUR BLESSINGS FOR ARJUN & ANANYA..."
-              className="w-full rounded-2xl p-4 bg-white/90 border border-[#C5A059]/40 text-xs sm:text-sm text-[#3A2E2A] placeholder-stone-400 outline-none focus:border-[#AA771C] transition-colors resize-none tracking-wider font-light uppercase shadow-inner"
-            />
+              {/* ACTION BUTTON STACK */}
+              <div className="flex flex-col gap-2.5 pt-1">
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_8px_20px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Send className="w-4 h-4 text-[#FFD700]" />
+                  <span>SUBMIT BLESSING</span>
+                </button>
 
-            {/* ACTION BUTTON STACK */}
-            <div className="flex flex-col gap-2.5 pt-1">
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#2C1815] text-amber-50 font-extrabold text-xs uppercase tracking-[0.2em] border-2 border-[#D4AF37] shadow-[0_8px_20px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Send className="w-4 h-4 text-[#FFD700]" />
-                <span>SUBMIT BLESSING</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShowAllModal(true)}
-                className="w-full py-3 rounded-2xl bg-white/90 border border-[#D4AF37]/70 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-sm hover:bg-stone-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Eye className="w-3.5 h-3.5 text-[#AA771C]" />
-                <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
-              </button>
-            </div>
-          </form>
+                <button
+                  type="button"
+                  onClick={() => setShowAllModal(true)}
+                  className="w-full py-3 rounded-full bg-white/90 border border-[#D4AF37]/70 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-sm hover:bg-stone-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Eye className="w-3.5 h-3.5 text-[#AA771C]" />
+                  <span>VIEW ALL BLESSINGS ({floatingCards.length})</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
-      {/* 5. VIEW ALL BLESSINGS POP-UP MODAL */}
+      {/* 5. VIEW ALL BLESSINGS POP-UP SHOWCASE MODAL */}
       {typeof document !== "undefined" && createPortal(
         <AnimatePresence>
           {showAllModal && (
@@ -572,60 +656,75 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
               exit={{ opacity: 0 }}
               onClick={() => setShowAllModal(false)}
               data-lenis-prevent
-              className="fixed inset-0 z-[999999] bg-black/75 backdrop-blur-md p-3 sm:p-6 flex items-center justify-center overflow-y-auto"
+              className="fixed inset-0 z-[999999] bg-black/80 backdrop-blur-md p-3 sm:p-6 flex items-center justify-center overflow-y-auto"
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.92, y: 25 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
+                exit={{ scale: 0.92, y: 25 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => e.stopPropagation()}
                 data-lenis-prevent
-                className="bg-[#FFFDF9] max-w-3xl w-full rounded-[32px] p-5 sm:p-8 border-2 border-[#D4AF37] shadow-2xl relative z-[9999999] max-h-[88vh] flex flex-col overflow-hidden"
+                className="bg-gradient-to-b from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] max-w-4xl w-full rounded-[36px] p-5 sm:p-8 md:p-10 border-3 border-[#D4AF37] shadow-2xl relative z-[9999999] max-h-[90vh] flex flex-col overflow-hidden"
               >
+                {/* Modal Close Button */}
+                <button
+                  onClick={() => setShowAllModal(false)}
+                  className="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37] flex items-center justify-center text-[#FFF1B0] hover:bg-[#AA771C] hover:text-white transition-all cursor-pointer shadow-md"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+
                 {/* Modal Header */}
-                <div className="flex items-center justify-between pb-3.5 border-b border-[#EBDBC9] mb-4">
-                  <div>
-                    <span className="text-[10px] uppercase tracking-widest text-[#AA771C] font-bold">
-                      ROYAL GUESTBOOK SHOWCASE
-                    </span>
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-3xl font-bold text-[#4C342F]">
-                      All Guest Blessings ({floatingCards.length})
-                    </h3>
-                  </div>
-                  <button
-                    onClick={() => setShowAllModal(false)}
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#4C342F] text-amber-100 flex items-center justify-center hover:bg-[#3A2320] transition-colors cursor-pointer border border-[#D4AF37]"
-                  >
-                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </button>
+                <div className="text-center pb-3 border-b border-[#C5A059]/30 mb-5">
+                  <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-bold block mb-1">
+                    ROYAL GUESTBOOK SHOWCASE
+                  </span>
+                  <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-4xl font-bold text-[#4C342F]">
+                    All Guest Blessings ({floatingCards.length})
+                  </h3>
                 </div>
 
                 {/* Modal Content Scroll Area */}
                 <div data-lenis-prevent className="overflow-y-auto pr-1 space-y-4 flex-1">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {floatingCards.map((card) => (
                       <div
                         key={card.id}
-                        className="soft-card rounded-2xl p-4 border border-[#D4AF37]/40 bg-white/80 backdrop-blur-md shadow-sm flex flex-col justify-between"
+                        className="rounded-[28px] p-5 border-2 border-[#D4AF37]/50 bg-gradient-to-br from-white via-[#FFFDF9] to-[#FDF8F0] shadow-[0_12px_30px_rgba(76,52,47,0.08)] hover:shadow-[0_18px_40px_rgba(212,175,55,0.22)] hover:border-[#D4AF37] transition-all flex flex-col justify-between relative overflow-hidden group space-y-3"
                       >
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-bold text-[#4C342F] text-xs sm:text-sm tracking-wide">
-                              {card.author}
-                            </h4>
-                            <span className="text-[9px] sm:text-[10px] font-bold text-[#8B5E5A] px-2.5 py-0.5 rounded-full bg-white border border-[#D4C3B5]">
+                        {/* Razor-Thin Inset Accent Rim */}
+                        <div className="absolute inset-2 rounded-[20px] border border-[#C5A059]/25 pointer-events-none group-hover:border-[#D4AF37]/50 transition-colors" />
+
+                        {/* Card Content Header */}
+                        <div className="relative z-10 space-y-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <div className="w-6 h-6 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center shrink-0">
+                                <Crown className="w-3 h-3 text-[#AA771C]" />
+                              </div>
+                              <h4 className="font-[family-name:var(--font-heading)] font-extrabold text-[#3A2E2A] text-sm sm:text-base tracking-wide truncate">
+                                {card.author}
+                              </h4>
+                            </div>
+
+                            {/* Relation Gold Badge */}
+                            <div className="shrink-0 inline-flex items-center justify-center px-3 py-1 rounded-full bg-gradient-to-r from-amber-100/90 via-amber-50 to-amber-100/90 border border-[#C5A059]/50 text-[10px] sm:text-[10.5px] font-extrabold text-[#AA771C] uppercase tracking-wider shadow-xs">
                               {card.relation}
-                            </span>
+                            </div>
                           </div>
-                          <p className="text-xs sm:text-sm text-[#5C4D46] italic leading-relaxed">
+
+                          {/* Message Body */}
+                          <p className="text-xs sm:text-sm text-[#5C4D46] font-normal leading-relaxed italic relative pl-3 border-l-2 border-[#D4AF37]/70 py-0.5">
                             "{card.message}"
                           </p>
                         </div>
 
-                        <div className="mt-3 pt-2 border-t border-stone-200/60 flex justify-end">
+                        {/* Like Button Action Row */}
+                        <div className="relative z-10 pt-2 border-t border-[#C5A059]/30 flex justify-end">
                           <button
                             onClick={() => toggleLike(card.id)}
-                            className="flex items-center gap-1.5 text-xs text-[#4C342F] bg-white px-3 py-1 rounded-full border border-stone-200 shadow-xs hover:bg-stone-50 transition-colors cursor-pointer"
+                            className="flex items-center gap-1.5 text-xs font-bold text-[#4C342F] bg-white/90 px-3.5 py-1 rounded-full border border-[#D4AF37]/40 shadow-xs hover:bg-white active:scale-95 transition-all cursor-pointer"
                           >
                             <Heart
                               className={`w-3.5 h-3.5 ${
@@ -641,10 +740,10 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
                 </div>
 
                 {/* Modal Footer Close Button */}
-                <div className="pt-3.5 border-t border-[#EBDBC9] mt-2">
+                <div className="pt-4 border-t border-[#C5A059]/30 mt-3">
                   <button
                     onClick={() => setShowAllModal(false)}
-                    className="w-full py-3.5 rounded-full bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-widest hover:bg-[#3A2320] transition-colors shadow-md cursor-pointer border border-[#D4AF37]"
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-lg hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer"
                   >
                     Close Guestbook Showcase
                   </button>

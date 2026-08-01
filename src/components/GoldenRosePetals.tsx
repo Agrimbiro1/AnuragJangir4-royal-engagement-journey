@@ -19,27 +19,16 @@ export function GoldenRosePetals({ count = 7 }: GoldenRosePetalsProps) {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
       {petals.map((petal, index) => (
-        <motion.div
+        <div
           key={index}
-          className="absolute"
+          className="absolute animate-float-petal"
           style={{
             left: petal.left,
             top: "-60px",
             width: petal.size,
             height: petal.size,
-          }}
-          animate={{
-            y: ["0%", "115%"],
-            x: [0, index % 2 === 0 ? 40 : -40, 0],
-            rotate: [petal.rotate, petal.rotate + 360],
-            rotateY: [0, 180, 360],
-            opacity: [0, 0.45, 0.45, 0],
-          }}
-          transition={{
-            duration: petal.duration,
-            repeat: Infinity,
-            delay: petal.delay,
-            ease: "easeInOut",
+            animationDuration: `${petal.duration}s`,
+            animationDelay: `${petal.delay}s`,
           }}
         >
           <svg
@@ -68,7 +57,7 @@ export function GoldenRosePetals({ count = 7 }: GoldenRosePetalsProps) {
               strokeOpacity="0.6"
             />
           </svg>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

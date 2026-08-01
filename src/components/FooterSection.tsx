@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Crown } from "lucide-react";
-import royalSealPhoto from "../assets/royal_seal.jpg";
+import royalSealPhoto from "../assets/royal_seal.png";
 
 // Gold Filigree Line Flourish SVG
 function GoldFlourish() {
@@ -69,11 +69,11 @@ export function FooterSection() {
       >
         {/* 1. ROYAL MONOGRAM INSIGNIA SEAL */}
         <div className="relative my-2 sm:my-0">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-[#FFF1B0] to-[#AA771C] shadow-[0_12px_35px_rgba(76,52,47,0.3)] border-2 border-[#D4AF37] overflow-hidden">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-0 bg-transparent shadow-[0_12px_35px_rgba(76,52,47,0.3)] overflow-hidden">
             <img
               src={royalSealPhoto}
               alt="Arjun & Ananya Royal Seal"
-              className="w-full h-full object-cover rounded-full scale-[1.38]"
+              className="w-full h-full object-contain rounded-full scale-100 hover:scale-105 transition-transform duration-500"
             />
           </div>
         </div>

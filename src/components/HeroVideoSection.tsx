@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail, Sparkles, Crown } from "lucide-react";
-import royalSealPhoto from "../assets/royal_seal.jpg";
+import royalSealPhoto from "../assets/royal_seal.png";
 
 interface HeroVideoSectionProps {
   onReopenEnvelope?: () => void;
@@ -14,11 +14,11 @@ interface HeroVideoSectionProps {
 function InterlockingAAMonogram() {
   return (
     <div className="flex flex-col items-center shrink-0 mx-1">
-      <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full p-0.5 bg-gradient-to-tr from-[#D4AF37] via-[#FFF1B0] to-[#AA771C] shadow-[0_2px_12px_rgba(212,175,55,0.6)] border border-[#D4AF37] overflow-hidden">
+      <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full p-0 bg-transparent shadow-[0_2px_10px_rgba(212,175,55,0.4)] overflow-hidden">
         <img
           src={royalSealPhoto}
           alt="Arjun & Ananya Royal Seal"
-          className="w-full h-full object-cover rounded-full scale-[1.38]"
+          className="w-full h-full object-contain rounded-full scale-100"
         />
       </div>
       <span className="hidden sm:block font-[family-name:var(--font-heading)] text-[10px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-semibold mt-1 drop-shadow-sm">
@@ -51,9 +51,18 @@ function CinematicPetalCanvas() {
     window.addEventListener("resize", handleResize);
 
     const startTime = Date.now();
+    let isVisible = true;
 
-    // Create 24 subtle organic Jasmine & Rose Petal particles for homepage
-    const petals = Array.from({ length: 24 }, () => ({
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(canvas);
+
+    // Create 20 subtle organic Jasmine & Rose Petal particles for homepage
+    const petals = Array.from({ length: 20 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height - height * 0.8,
       size: Math.random() * 8 + 5,
@@ -68,7 +77,6 @@ function CinematicPetalCanvas() {
       swayFreq: Math.random() * 0.015 + 0.008,
       step: Math.random() * 100,
       opacity: Math.random() * 0.6 + 0.25,
-      blur: 0,
     }));
 
     let animationFrameId: number;
@@ -107,65 +115,61 @@ function CinematicPetalCanvas() {
     };
 
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      if (isVisible) {
+        ctx.clearRect(0, 0, width, height);
 
-      const elapsed = (Date.now() - startTime) / 1000;
+        const elapsed = (Date.now() - startTime) / 1000;
 
-      // Define central Dissolve Zone bounding box
-      const dissolveLeft = width * 0.2;
-      const dissolveRight = width * 0.8;
-      const dissolveTop = height * 0.3;
-      const dissolveBottom = height * 0.7;
+        // Define central Dissolve Zone bounding box
+        const dissolveLeft = width * 0.2;
+        const dissolveRight = width * 0.8;
+        const dissolveTop = height * 0.3;
+        const dissolveBottom = height * 0.7;
 
-      petals.forEach((p) => {
-        p.y += p.speedY;
-        p.step += p.swayFreq;
-        p.x += Math.sin(p.step) * p.swayAmp + p.speedX;
-        p.rotation += p.rotationSpeed;
-        p.rotationY += 0.02;
+        petals.forEach((p) => {
+          p.y += p.speedY;
+          p.step += p.swayFreq;
+          p.x += Math.sin(p.step) * p.swayAmp + p.speedX;
+          p.rotation += p.rotationSpeed;
+          p.rotationY += 0.02;
 
-        // Reset off-screen particles
-        if (p.y > height + 30) {
-          p.y = -30;
-          p.x = Math.random() * width;
-          p.opacity = Math.random() * 0.7 + 0.3;
-          p.blur = 0;
-        }
+          // Reset off-screen particles
+          if (p.y > height + 30) {
+            p.y = -30;
+            p.x = Math.random() * width;
+            p.opacity = Math.random() * 0.7 + 0.3;
+          }
 
-        let currentOpacity = p.opacity;
+          let currentOpacity = p.opacity;
 
-        // Phase 2 & 3: Apply Dissolve Zone blur and fade when entering central bounding box
-        if (
-          elapsed > 2.0 &&
-          p.x > dissolveLeft &&
-          p.x < dissolveRight &&
-          p.y > dissolveTop &&
-          p.y < dissolveBottom
-        ) {
-          // Rapidly dissolve opacity
-          currentOpacity *= 0.75;
-          p.blur = Math.min(p.blur + 0.5, 6);
-        } else {
-          p.blur = Math.max(p.blur - 0.2, 0);
-        }
+          // Apply Dissolve Zone opacity fade when entering central bounding box
+          if (
+            elapsed > 2.0 &&
+            p.x > dissolveLeft &&
+            p.x < dissolveRight &&
+            p.y > dissolveTop &&
+            p.y < dissolveBottom
+          ) {
+            currentOpacity *= 0.75;
+          }
 
-        if (currentOpacity < 0.02) return;
+          if (currentOpacity < 0.02) return;
 
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-        // Apply 3D tumbling scaleY simulation
-        const scaleY = Math.cos(p.rotationY);
-        ctx.scale(1, Math.abs(scaleY) < 0.1 ? 0.1 : scaleY);
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation);
+          const scaleY = Math.cos(p.rotationY);
+          ctx.scale(1, Math.abs(scaleY) < 0.1 ? 0.1 : scaleY);
 
-        if (p.type === "jasmine") {
-          drawJasminePetal(p.size, currentOpacity);
-        } else {
-          drawRosePetal(p.size, currentOpacity);
-        }
+          if (p.type === "jasmine") {
+            drawJasminePetal(p.size, currentOpacity);
+          } else {
+            drawRosePetal(p.size, currentOpacity);
+          }
 
-        ctx.restore();
-      });
+          ctx.restore();
+        });
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -173,6 +177,7 @@ function CinematicPetalCanvas() {
     render();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
@@ -184,12 +189,151 @@ function CinematicPetalCanvas() {
 }
 
 /* -------------------------------------------------------------------------- */
+/* TYPEWRITER ANIMATION COMPONENT                                            */
+/* -------------------------------------------------------------------------- */
+function TypewriterText({ text, speed = 85, delay = 400 }: { text: string; speed?: number; delay?: number }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    let index = 0;
+    const startTimeout = setTimeout(() => {
+      const intervalId = setInterval(() => {
+        if (index < text.length) {
+          setDisplayedText(text.slice(0, index + 1));
+          index++;
+        } else {
+          clearInterval(intervalId);
+          setTimeout(() => setShowCursor(false), 2200);
+        }
+      }, speed);
+
+      return () => clearInterval(intervalId);
+    }, delay);
+
+    return () => clearTimeout(startTimeout);
+  }, [text, speed, delay]);
+
+  return (
+    <span className="inline-block relative">
+      {displayedText}
+      {showCursor && (
+        <motion.span
+          animate={{ opacity: [1, 0, 1] }}
+          transition={{ repeat: Infinity, duration: 0.65 }}
+          className="inline-block ml-0.5 text-[#FFD700] font-light"
+        >
+          |
+        </motion.span>
+      )}
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* ANIMATED ROYAL MOUSE CAPSULE SVG SCROLL INDICATOR                         */
+/* -------------------------------------------------------------------------- */
+function RoyalAnimatedScrollIndicator({ onClick }: { onClick: () => void }) {
+  return (
+    <motion.button
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 2.2, duration: 0.8 }}
+      onClick={onClick}
+      className="absolute bottom-4 sm:bottom-7 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 cursor-pointer group select-none mb-1 sm:mb-0"
+    >
+      {/* Text Label with Metallic Shimmer */}
+      <span className="text-[9.5px] sm:text-[10.5px] uppercase tracking-[0.35em] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#AA771C] drop-shadow-md group-hover:brightness-125 transition-all">
+        Scroll to Explore
+      </span>
+
+      {/* SVG Animated Mouse Capsule & Pulsating Rings */}
+      <div className="relative flex items-center justify-center">
+        {/* Outer Pulsating Golden Halo Glow */}
+        <motion.div
+          animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full bg-[#D4AF37]/30 blur-md pointer-events-none"
+        />
+
+        {/* Outer Glassmorphic Pill Frame */}
+        <div className="relative px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/70 shadow-[0_8px_25px_rgba(0,0,0,0.6)] flex items-center gap-2 group-hover:border-[#FFD700] transition-colors">
+          {/* Animated Royal Mouse Capsule SVG */}
+          <svg
+            viewBox="0 0 24 38"
+            className="w-4 h-6 sm:w-5 sm:h-7 text-[#D4AF37]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          >
+            {/* Mouse Capsule Outer Ring */}
+            <rect x="2" y="2" width="20" height="34" rx="10" stroke="currentColor" strokeWidth="1.6" />
+            
+            {/* Animated Inner Scroll Dot */}
+            <motion.circle
+              cx="12"
+              cy="10"
+              r="2.5"
+              fill="#FFD700"
+              stroke="none"
+              animate={{ cy: [10, 24, 10], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </svg>
+
+          {/* Sliding Animated Downward Arrow SVG */}
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFD700]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </motion.div>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /* MAIN HERO VIDEO SECTION (100VH LUXURY CINEMATIC EXPERIENCE)                */
 /* -------------------------------------------------------------------------- */
 export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSectionProps) {
   const displayGuestName = guestName || "Priyadarshini Sharma";
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [phase, setPhase] = useState<1 | 2 | 3>(1);
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Auto-pause video when hero section is not visible
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          videoEl.play().catch(() => {});
+        } else {
+          videoEl.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   // 3-Phase Animation Sequence Timers
   useEffect(() => {
@@ -204,7 +348,6 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
 
   const toggleMusic = () => {
     setIsPlayingMusic((prev) => !prev);
-    // Dispatch global event for AudioPlayer
     window.dispatchEvent(new CustomEvent("toggle-royal-audio"));
   };
 
@@ -228,9 +371,10 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
   };
 
   return (
-    <section className="sticky top-0 w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col items-center justify-between select-none z-0 bg-black">
-      {/* LAYER 1: Full-Screen Grayscale Cinematic Background Video (Rotated 90 Deg Left) */}
+    <section ref={sectionRef} className="sticky top-0 w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col items-center justify-between select-none z-0 bg-black">
+      {/* LAYER 1: Full-Screen Cinematic Background Video (Optimized without real-time filter overhead) */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
@@ -238,11 +382,9 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
         style={{
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
-          willChange: "transform",
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100dvh] h-[100dvw] min-w-[100dvh] min-h-[100dvw] object-cover -rotate-90 scale-125 sm:scale-100 filter grayscale contrast-125 pointer-events-none z-0 transform-gpu"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100dvh] h-[100dvw] min-w-[100dvh] min-h-[100dvw] object-cover -rotate-90 scale-125 sm:scale-100 pointer-events-none z-0 transform-gpu"
       >
-        {/* User uploaded video file from public directory */}
         <source src="/engagement video template.mp4" type="video/mp4" />
         <source src="/hero-video.mp4" type="video/mp4" />
         <source src="/video.mp4" type="video/mp4" />
@@ -250,7 +392,6 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
         <source src="/couple-video.mp4" type="video/mp4" />
         <source src="/couple.mp4" type="video/mp4" />
         <source src="/background.mp4" type="video/mp4" />
-        {/* Online stock video fallbacks */}
         <source
           src="https://assets.mixkit.co/videos/preview/mixkit-romantic-couple-walking-on-the-beach-at-sunset-41584-large.mp4"
           type="video/mp4"
@@ -261,8 +402,8 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
         />
       </video>
 
-      {/* LAYER 2: Dark Overlay Vignette (50% Black) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/80 pointer-events-none z-10" />
+      {/* LAYER 2: Dark Overlay Vignette (Monochrome Grayscale Tinting Overlay) */}
+      <div className="absolute inset-0 bg-black/60 bg-gradient-to-b from-black/70 via-black/50 to-black/85 pointer-events-none z-10" />
 
       {/* LAYER 3: Full-Screen Canvas Particle Engine (Cinematic Petal Shower) */}
       <CinematicPetalCanvas />
@@ -300,7 +441,7 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
               transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center space-y-1.5 sm:space-y-3"
             >
-              {/* Clean Personalized Guest Invitation Subtitle */}
+              {/* Clean Personalized Guest Invitation Subtitle with Typewriter Effect */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -311,7 +452,7 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
                   Cordially Inviting
                 </span>
                 <span className="font-[family-name:var(--font-script)] text-xl xs:text-2xl sm:text-3xl text-[#FFF1B0] font-normal px-1">
-                  {displayGuestName}
+                  <TypewriterText text={displayGuestName} speed={75} delay={300} />
                 </span>
               </motion.div>
 
@@ -331,7 +472,7 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
                 Arjun &amp; Ananya
               </motion.h1>
 
-              {/* Phase 3 Date & Venue Reveal */}
+              {/* Phase 3 Date & Venue Reveal with Typewriter Subtitle */}
               {phase >= 3 && (
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
@@ -347,7 +488,7 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
                   </p>
 
                   <p className="text-[9px] sm:text-xs text-stone-200/90 tracking-[0.15em] sm:tracking-[0.25em] uppercase drop-shadow-sm font-light">
-                    FATEH PALACE ESTATE · UDAIPUR, RAJASTHAN
+                    <TypewriterText text="FATEH PALACE ESTATE · UDAIPUR, RAJASTHAN" speed={55} delay={1000} />
                   </p>
                 </motion.div>
               )}
@@ -356,21 +497,8 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
         </AnimatePresence>
       </div>
 
-      {/* Bottom Bouncing Scroll Indicator */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 0.8 }}
-        onClick={scrollToContent}
-        className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 text-stone-200 hover:text-amber-300 transition-colors duration-200 cursor-pointer group mb-1 sm:mb-0"
-      >
-        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.35em] font-semibold text-amber-200/90 transition-colors duration-200">
-          Scroll to explore
-        </span>
-        <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full border border-amber-200/40 flex items-center justify-center bg-black/40 animate-bounce shadow-lg">
-          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-amber-200" />
-        </div>
-      </motion.button>
+      {/* Custom Animated Royal Mouse Capsule SVG Scroll Indicator */}
+      <RoyalAnimatedScrollIndicator onClick={scrollToContent} />
     </section>
   );
 }

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Gem, Wine, Music, MapPin, Sparkles, Crown, Calendar, Clock, ChevronRight, X } from "lucide-react";
+import { Gem, Wine, Music, MapPin, Sparkles, Crown, Calendar, Clock, ChevronRight, X, Navigation } from "lucide-react";
 import couplePhoto from "../assets/couple.jpg";
 import ringsPhoto from "../assets/rings.jpg";
 import sangeetPhoto from "../assets/sangeet.png";
+import dresscodeProposal from "../assets/dresscode_proposal.png";
+import dresscodeRing from "../assets/dresscode_ring.png";
+import dresscodeSangeet from "../assets/dresscode_sangeet.png";
+import dressProposalMaroon from "../assets/dress_proposal_maroon.png";
+import dressProposalPastel from "../assets/dress_proposal_pastel.png";
+import dressRingEmerald from "../assets/dress_ring_emerald.png";
+import dressRingGold from "../assets/dress_ring_gold.png";
+import dressSangeetSapphire from "../assets/dress_sangeet_sapphire.png";
+import dressSangeetGlamgold from "../assets/dress_sangeet_glamgold.png";
 
 // Gold Filigree Line Flourish SVG
 function GoldFlourish() {
@@ -25,32 +34,31 @@ function GoldFlourish() {
   );
 }
 
-// Royal Crest Top Cap for Timeline Spine
+// Royal Crest Top Cap Component
 function TimelineRoyalTopCrest() {
   return (
-    <motion.div
-      initial={{ scale: 0, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.5, ease: "backOut" }}
-      className="flex flex-col items-center absolute left-1/2 -top-7 sm:-top-9 -translate-x-1/2 z-20 pointer-events-none"
-    >
-      <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#FFFDF9] via-[#F3E5AB] to-[#C5A059] border-2 border-[#C5A059] shadow-md flex items-center justify-center text-[#7A4B46]">
-        <Crown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-[#7A4B46]" />
+    <div className="flex flex-col items-center justify-center relative z-20 mb-8 sm:mb-12">
+      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#F5EBE1] border-2 border-[#D4AF37] shadow-[0_8px_25px_rgba(212,175,55,0.3)] flex items-center justify-center">
+        <Crown className="w-5 h-5 sm:w-7 sm:h-7 text-[#AA771C] animate-pulse" />
       </div>
-      <div className="w-0.5 h-3 bg-gradient-to-b from-[#C5A059] to-transparent" />
-    </motion.div>
+      <div className="h-4 sm:h-6 w-[2px] bg-gradient-to-b from-[#D4AF37] to-transparent mt-1" />
+    </div>
   );
 }
 
+interface SleekMinimalPhotoFrameProps {
+  src: string;
+  alt: string;
+}
+
 // Crisp Circular Double-Gold Leaf Photo Frame (Flicker-Free & Cardless)
-function SleekMinimalPhotoFrame({ src, alt }: { src: string; alt: string }) {
+function SleekMinimalPhotoFrame({ src, alt }: SleekMinimalPhotoFrameProps) {
   return (
     <motion.div
       whileHover={{ scale: 1.03, y: -3 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       style={{ backfaceVisibility: "hidden" }}
-      className="relative w-24 xs:w-32 sm:w-44 md:w-64 h-24 xs:h-32 sm:h-44 md:h-64 p-1 sm:p-2 rounded-full bg-[#FFFDF9] border-2 border-[#D4AF37]/50 shadow-[0_12px_28px_rgba(76,52,47,0.15)] flex items-center justify-center group cursor-pointer shrink-0 transform-gpu will-change-transform"
+      className="relative w-32 xs:w-38 sm:w-48 md:w-64 h-32 xs:h-38 sm:h-48 md:h-64 p-1 sm:p-2 rounded-full bg-[#FFFDF9] border-2 border-[#D4AF37]/50 shadow-[0_12px_28px_rgba(76,52,47,0.15)] flex items-center justify-center group cursor-pointer shrink-0 transform-gpu will-change-transform"
     >
       {/* Outer Fine Gold Accent Ring */}
       <div className="absolute inset-0.5 rounded-full border border-[#C5A059]/40 pointer-events-none group-hover:border-[#D4AF37] transition-colors duration-300" />
@@ -71,7 +79,7 @@ function SleekMinimalPhotoFrame({ src, alt }: { src: string; alt: string }) {
 // Redesigned Liquid-Gold Wavelength Timeline Spine SVG
 function CurledSTimelineSpine() {
   return (
-    <div className="block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-24 sm:w-36 md:w-44 h-full pointer-events-none z-0">
+    <div className="block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-12 sm:w-36 md:w-44 h-full pointer-events-none z-0">
       <svg
         viewBox="0 0 160 850"
         preserveAspectRatio="none"
@@ -96,12 +104,6 @@ function CurledSTimelineSpine() {
             <stop offset="50%" stopColor="#FFFDF9" stopOpacity="0.95" />
             <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.6" />
           </linearGradient>
-
-          {/* Soft Glow Filter */}
-          <filter id="goldSpineGlow" x="-50%" y="-20%" width="200%" height="140%">
-            <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#FFF1B0" floodOpacity="0.8" />
-            <feDropShadow dx="0" dy="2" stdDeviation="8" floodColor="#D4AF37" floodOpacity="0.4" />
-          </filter>
         </defs>
 
         {/* 1. Ambient Glow Underlayer */}
@@ -111,7 +113,6 @@ function CurledSTimelineSpine() {
           stroke="#FFD700"
           strokeWidth="8"
           strokeOpacity="0.25"
-          filter="url(#goldSpineGlow)"
         />
 
         {/* 2. Dotted Parallel Gold Accent Thread */}
@@ -151,16 +152,17 @@ function CurledSTimelineSpine() {
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
 
-        {/* 5. Ornate Royal Medallions at Inflection Points (y=15, 425, 835) */}
+        {/* 5. Clean Minimal Golden Gem Beads at Inflection Points (y=15, 425, 835) */}
         {[15, 425, 835].map((y, idx) => (
           <g key={idx} transform={`translate(80, ${y})`}>
-            {/* Outer Ring */}
-            <circle cx="0" cy="0" r="10" fill="#FFFDF9" stroke="#D4AF37" strokeWidth="1.5" />
-            <circle cx="0" cy="0" r="7" fill="none" stroke="#AA771C" strokeWidth="0.8" strokeDasharray="2 2" />
-            {/* Center Diamond Jewel */}
-            <polygon points="0,-5 4,0 0,5 -4,0" fill="#AA771C" />
-            {/* 4-Point Star Rays */}
-            <path d="M 0,-12 L 0,12 M -12,0 L 12,0" stroke="#FFF1B0" strokeWidth="0.8" opacity="0.85" />
+            {/* Outer Subtle Gold Accent Ring */}
+            <circle cx="0" cy="0" r="8" fill="none" stroke="#D4AF37" strokeWidth="1" strokeOpacity="0.4" />
+            {/* Golden Gem Body */}
+            <circle cx="0" cy="0" r="5.5" fill="#FFFDF9" stroke="#D4AF37" strokeWidth="1.5" />
+            {/* Inner Core Bead */}
+            <circle cx="0" cy="0" r="3" fill="#AA771C" />
+            {/* Specular Highlight Point */}
+            <circle cx="-1" cy="-1" r="1" fill="#FFF1B0" />
           </g>
         ))}
       </svg>
@@ -177,6 +179,8 @@ interface EventDetail {
   subtitle: string;
   venue: string;
   photo: string;
+  dressCodePhoto: string;
+  dressOptions: { photo: string; colorName: string }[];
   theme: {
     name: string;
     colors: string[];
@@ -198,6 +202,11 @@ const EVENTS_DATA: EventDetail[] = [
     subtitle: "Royal Family Welcome, High Tea & Proposal Retelling",
     venue: "Fateh Palace Estate, Udaipur",
     photo: couplePhoto,
+    dressCodePhoto: dresscodeProposal,
+    dressOptions: [
+      { photo: dressProposalMaroon, colorName: "Royal Maroon & Gold" },
+      { photo: dressProposalPastel, colorName: "Pastel Silk & Zari" },
+    ],
     theme: {
       name: "ROYAL PASTEL & MAROON",
       colors: ["#5C443E", "#E8D5CC", "#D4AF37"],
@@ -218,6 +227,11 @@ const EVENTS_DATA: EventDetail[] = [
     subtitle: "Formal Engagement Ceremony, Vows & Family Blessings",
     venue: "Royal Gardens, Fateh Palace",
     photo: ringsPhoto,
+    dressCodePhoto: dresscodeRing,
+    dressOptions: [
+      { photo: dressRingEmerald, colorName: "Emerald Green Velvet" },
+      { photo: dressRingGold, colorName: "Imperial Gold & Ivory" },
+    ],
     theme: {
       name: "GOLD & EMERALD GREEN",
       colors: ["#FFD700", "#556B2F", "#D4AF37"],
@@ -238,6 +252,11 @@ const EVENTS_DATA: EventDetail[] = [
     subtitle: "Grand Musical Night, Royal Banquet & Dancing",
     venue: "Grand Pavilion, Fateh Palace",
     photo: sangeetPhoto,
+    dressCodePhoto: dresscodeSangeet,
+    dressOptions: [
+      { photo: dressSangeetSapphire, colorName: "Royal Sapphire Blue" },
+      { photo: dressSangeetGlamgold, colorName: "Glitz Gold & Velvet" },
+    ],
     theme: {
       name: "ROYAL SAPPHIRE & GOLD",
       colors: ["#1E3A8A", "#D4AF37", "#996515"],
@@ -311,7 +330,7 @@ export function EventsSection() {
         {/* ENHANCED S-SHAPED GOLD WAVELENGTH SPINE */}
         <CurledSTimelineSpine />
 
-        <div className="space-y-16 sm:space-y-24 md:space-y-28 relative z-10 pt-6 pb-6">
+        <div className="space-y-20 sm:space-y-24 md:space-y-28 relative z-10 pt-6 pb-6">
           {EVENTS_DATA.map((event, index) => {
             const IconComp = event.icon;
             const isEven = index % 2 === 0;
@@ -319,7 +338,7 @@ export function EventsSection() {
             return (
               <div
                 key={event.id}
-                className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 lg:gap-24 items-center relative"
+                className="grid grid-cols-12 gap-2 xs:gap-3 sm:gap-10 md:gap-16 lg:gap-24 items-center relative"
               >
                 {/* LEFT COLUMN */}
                 {isEven ? (
@@ -329,17 +348,17 @@ export function EventsSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="col-span-6 text-right flex flex-col items-end space-y-1 sm:space-y-3 pr-7 xs:pr-9 sm:pr-12 md:pr-16 lg:pr-20"
+                    className="col-span-6 text-right flex flex-col items-end space-y-1.5 sm:space-y-3 pr-5 xs:pr-7 sm:pr-12 md:pr-16 lg:pr-20"
                   >
                     <motion.div
                       whileHover={{ scale: 1.08, rotate: 6 }}
-                      className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#FFFDF9] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-md mb-1 cursor-pointer"
+                      className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#FFFDF9] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-md mb-0.5 cursor-pointer shrink-0"
                       onClick={() => toggleExpand(event.id)}
                     >
                       <IconComp className="w-4 h-4 sm:w-6 sm:h-6 text-[#AA771C]" />
                     </motion.div>
 
-                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/90 border border-[#C5A059]/40 text-[8px] xs:text-[9.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold shadow-xs">
+                    <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/90 border border-[#C5A059]/40 text-[7.5px] xs:text-[9.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold shadow-xs">
                       <Calendar className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
                       <span>{event.date}</span>
                       <span>·</span>
@@ -347,40 +366,22 @@ export function EventsSection() {
                       <span>{event.time}</span>
                     </div>
 
-                    <h3 className="font-[family-name:var(--font-heading)] text-[11px] xs:text-xs sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
+                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
                       {event.title}
                     </h3>
 
-                    <p className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#5C4D46] font-medium leading-tight sm:leading-relaxed max-w-md">
-                      {event.subtitle}
-                    </p>
-
-                    <p className="text-[8px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
+                    <p className="text-[7.5px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
                       <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
                       <span>{event.venue}</span>
                     </p>
 
-                    {/* DRESS CODE & THEME PILL */}
-                    <div className="pt-1 flex items-center gap-1.5 sm:gap-2">
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-[#EBDBC9]/90 border border-[#C5A059]/60 text-[7px] xs:text-[8px] sm:text-[10px] font-extrabold text-[#3A2E2A] shadow-xs">
-                        <span>THEME:</span>
-                        {event.theme.colors.map((c, i) => (
-                          <span
-                            key={i}
-                            className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border border-white shadow-xs"
-                            style={{ backgroundColor: c }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
                     {/* INTERACTIVE POPUP TRIGGER BUTTON */}
                     <button
                       onClick={() => toggleExpand(event.id)}
-                      className="mt-2 text-[8px] xs:text-[9px] sm:text-xs uppercase font-extrabold tracking-wider text-[#AA771C] hover:text-[#4C342F] flex items-center gap-1 transition-colors cursor-pointer"
+                      className="mt-1.5 xs:mt-2.5 px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-amber-100/90 border border-[#D4AF37]/50 text-[7.5px] xs:text-[9.5px] sm:text-xs uppercase font-extrabold tracking-wider text-[#AA771C] hover:bg-[#AA771C] hover:text-white transition-colors cursor-pointer flex items-center gap-1 shadow-xs"
                     >
-                      <span>View Programme & Details</span>
-                      <ChevronRight className="w-3 h-3 text-[#AA771C]" />
+                      <span>View Event Details</span>
+                      <ChevronRight className="w-3 h-3" />
                     </button>
                   </motion.div>
                 ) : (
@@ -390,7 +391,7 @@ export function EventsSection() {
                     whileInView={{ opacity: 1, x: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="col-span-6 flex justify-end pr-7 xs:pr-9 sm:pr-12 md:pr-16 lg:pr-20 relative"
+                    className="col-span-6 flex justify-end pr-5 xs:pr-7 sm:pr-12 md:pr-16 lg:pr-20 relative"
                   >
                     <SleekMinimalPhotoFrame src={event.photo} alt={event.title} />
                   </motion.div>
@@ -404,7 +405,7 @@ export function EventsSection() {
                     whileInView={{ opacity: 1, x: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="col-span-6 flex justify-start pl-7 xs:pl-9 sm:pl-12 md:pl-16 lg:pl-20 relative"
+                    className="col-span-6 flex justify-start pl-5 xs:pl-7 sm:pl-12 md:pl-16 lg:pl-20 relative"
                   >
                     <SleekMinimalPhotoFrame src={event.photo} alt={event.title} />
                   </motion.div>
@@ -415,17 +416,17 @@ export function EventsSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="col-span-6 text-left flex flex-col items-start space-y-1 sm:space-y-3 pl-7 xs:pl-9 sm:pl-12 md:pl-16 lg:pl-20"
+                    className="col-span-6 text-left flex flex-col items-start space-y-1.5 sm:space-y-3 pl-5 xs:pl-7 sm:pl-12 md:pl-16 lg:pl-20"
                   >
                     <motion.div
                       whileHover={{ scale: 1.08, rotate: -6 }}
-                      className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#FFFDF9] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-md mb-1 cursor-pointer"
+                      className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#FFFDF9] to-[#F5EBE1] text-[#AA771C] flex items-center justify-center border border-[color:var(--color-gold)]/60 shadow-md mb-0.5 cursor-pointer shrink-0"
                       onClick={() => toggleExpand(event.id)}
                     >
                       <IconComp className="w-4 h-4 sm:w-6 sm:h-6 text-[#AA771C]" />
                     </motion.div>
 
-                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/90 border border-[#C5A059]/40 text-[8px] xs:text-[9.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold shadow-xs">
+                    <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-md sm:rounded-lg bg-amber-100/90 border border-[#C5A059]/40 text-[7.5px] xs:text-[9.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#AA771C] font-extrabold shadow-xs">
                       <Calendar className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
                       <span>{event.date}</span>
                       <span>·</span>
@@ -433,40 +434,22 @@ export function EventsSection() {
                       <span>{event.time}</span>
                     </div>
 
-                    <h3 className="font-[family-name:var(--font-heading)] text-[11px] xs:text-xs sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
+                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
                       {event.title}
                     </h3>
 
-                    <p className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#5C4D46] font-medium leading-tight sm:leading-relaxed max-w-md">
-                      {event.subtitle}
-                    </p>
-
-                    <p className="text-[8px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
+                    <p className="text-[7.5px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
                       <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
                       <span>{event.venue}</span>
                     </p>
 
-                    {/* DRESS CODE & THEME PILL */}
-                    <div className="pt-1 flex items-center gap-1.5 sm:gap-2">
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-[#EBDBC9]/90 border border-[#C5A059]/60 text-[7px] xs:text-[8px] sm:text-[10px] font-extrabold text-[#3A2E2A] shadow-xs">
-                        <span>THEME:</span>
-                        {event.theme.colors.map((c, i) => (
-                          <span
-                            key={i}
-                            className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border border-white shadow-xs"
-                            style={{ backgroundColor: c }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
                     {/* INTERACTIVE POPUP TRIGGER BUTTON */}
                     <button
                       onClick={() => toggleExpand(event.id)}
-                      className="mt-2 text-[8px] xs:text-[9px] sm:text-xs uppercase font-extrabold tracking-wider text-[#AA771C] hover:text-[#4C342F] flex items-center gap-1 transition-colors cursor-pointer"
+                      className="mt-1.5 xs:mt-2.5 px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-amber-100/90 border border-[#D4AF37]/50 text-[7.5px] xs:text-[9.5px] sm:text-xs uppercase font-extrabold tracking-wider text-[#AA771C] hover:bg-[#AA771C] hover:text-white transition-colors cursor-pointer flex items-center gap-1 shadow-xs"
                     >
-                      <span>View Programme & Details</span>
-                      <ChevronRight className="w-3 h-3 text-[#AA771C]" />
+                      <span>View Event Details</span>
+                      <ChevronRight className="w-3 h-3" />
                     </button>
                   </motion.div>
                 )}
@@ -514,84 +497,101 @@ export function EventsSection() {
 
                   {/* Event Image Banner & Header */}
                   <div className="flex items-center gap-4 mb-5 border-b border-[#C5A059]/30 pb-4">
-                    <div className="w-16 h-16 rounded-full border-2 border-[#D4AF37] overflow-hidden shrink-0 shadow-md">
+                    <div className="w-20 h-20 sm:w-20 sm:h-20 rounded-2xl border-2 border-[#D4AF37] overflow-hidden shrink-0 shadow-md">
                       <img src={selectedEvent.photo} alt={selectedEvent.title} className="w-full h-full object-cover" />
                     </div>
-                    <div>
+                    <div className="space-y-1">
                       <div className="inline-flex items-center gap-1 text-[9.5px] uppercase tracking-wider font-extrabold text-[#AA771C]">
-                        <Crown className="w-3 h-3 text-[#AA771C]" />
+                        <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
                         <span>Royal Festivity Details</span>
                       </div>
                       <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-xl font-extrabold text-[#3A2E2A] leading-snug">
                         {selectedEvent.title}
                       </h3>
-                      <p className="text-xs text-[#AA771C] font-semibold flex items-center gap-1 mt-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#AA771C]" />
+                      <p className="text-xs text-[#AA771C] font-semibold flex items-center gap-1 pt-0.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#AA771C] shrink-0" />
                         <span>{selectedEvent.venue}</span>
                       </p>
                     </div>
                   </div>
 
                   {/* Event Time & Date Bar */}
-                  <div className="flex flex-wrap items-center gap-2 mb-5 px-3.5 py-2 rounded-xl bg-[#F5EBE1]/90 border border-[#C5A059]/40 text-xs font-bold text-[#AA771C]">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#AA771C]" />
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-5 px-4 py-2.5 rounded-2xl bg-amber-100/80 border border-[#C5A059]/50 text-xs font-extrabold text-[#AA771C]">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4 text-[#AA771C]" />
                       <span>{selectedEvent.date}</span>
                     </div>
-                    <span>·</span>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-[#AA771C]" />
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4 text-[#AA771C]" />
                       <span>{selectedEvent.time}</span>
                     </div>
                   </div>
 
-                  {/* Theme & Dress Code Info */}
-                  <div className="space-y-3 mb-6 bg-white/60 rounded-2xl p-4 border border-[#C5A059]/30">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-extrabold text-[#4C342F]">ROYAL THEME:</span>
-                      <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#EBDBC9] text-[10px] font-bold text-[#3A2E2A]">
-                        <span>{selectedEvent.theme.name}</span>
-                        <div className="flex items-center gap-1">
-                          {selectedEvent.theme.colors.map((c, i) => (
-                            <span
-                              key={i}
-                              className="w-3 h-3 rounded-full border border-white shadow-xs"
-                              style={{ backgroundColor: c }}
+                  {/* REDESIGNED DRESS CODE COLOR & ATTIRE PICTURES SHOWCASE */}
+                  <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white/95 via-[#FFFDF9] to-[#FDF8F0] border-2 border-[#D4AF37]/50 shadow-sm space-y-4">
+                    <div className="border-b border-[#C5A059]/30 pb-2">
+                      <span className="text-xs uppercase tracking-widest font-extrabold text-[#3A2E2A] block">
+                        DRESS CODE & COLOR INSPIRATION
+                      </span>
+                    </div>
+
+                    {/* Full Visible Recommended Attire Text */}
+                    <div className="p-3.5 rounded-xl bg-amber-50/90 border border-[#C5A059]/35 text-left space-y-1">
+                      <span className="text-[10px] uppercase tracking-widest font-extrabold text-[#AA771C] block">
+                        RECOMMENDED ATTIRE
+                      </span>
+                      <p className="text-xs font-bold text-[#3A2E2A] leading-relaxed break-words">
+                        {selectedEvent.dressCode}
+                      </p>
+                    </div>
+
+                    {/* DRESS COLOR PICTURES SHOWCASE GRID */}
+                    <div className="space-y-2 text-left">
+                      <span className="text-[10px] font-extrabold text-[#AA771C] uppercase tracking-wider block">
+                        DRESS COLOR & STYLE OPTIONS
+                      </span>
+                      <div className="grid grid-cols-2 gap-3">
+                        {selectedEvent.dressOptions.map((option, oIdx) => (
+                          <div
+                            key={oIdx}
+                            className="relative group overflow-hidden rounded-xl border-2 border-[#D4AF37]/70 shadow-md h-48 sm:h-40 bg-stone-100 flex flex-col justify-end"
+                          >
+                            <img
+                              src={option.photo}
+                              alt={option.colorName}
+                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                             />
-                          ))}
-                        </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                            <div className="relative z-10 p-2 text-center">
+                              <span className="text-[9.5px] font-extrabold text-[#FFF1B0] uppercase tracking-wider block drop-shadow-sm px-1.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 truncate">
+                                {option.colorName}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
-
-                    <div className="text-xs text-[#5C4D46] pt-2 border-t border-[#C5A059]/20">
-                      <strong className="text-[#4C342F]">DRESS CODE: </strong>
-                      <span>{selectedEvent.dressCode}</span>
-                    </div>
                   </div>
 
-                  {/* Detailed Programme Timeline */}
-                  <div className="space-y-2 mb-6">
-                    <p className="text-xs font-extrabold uppercase tracking-widest text-[#AA771C] flex items-center gap-1.5 mb-3">
-                      <Sparkles className="w-3.5 h-3.5 text-[#AA771C]" />
-                      <span>PROGRAMME SCHEDULE</span>
-                    </p>
-                    <div className="space-y-2.5 pl-3 border-l-2 border-[#D4AF37]">
-                      {selectedEvent.programme.map((item, pIdx) => (
-                        <div key={pIdx} className="text-xs flex items-center justify-between gap-3 bg-white/80 p-2.5 rounded-xl border border-[#C5A059]/20 shadow-xs">
-                          <span className="text-[#3A2E2A] font-semibold">{item.activity}</span>
-                          <span className="font-extrabold text-[#AA771C] bg-amber-50 px-2 py-0.5 rounded-md border border-[#D4AF37]/30 shrink-0">{item.time}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  {/* LOCATION / DIRECTION BUTTON & CLOSE ACTION */}
+                  <div className="space-y-2.5">
+                    <a
+                      href="https://maps.google.com/?q=Fateh+Palace+Udaipur"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <Navigation className="w-4 h-4 text-[#FFD700]" />
+                      <span>GET DIRECTIONS</span>
+                    </a>
 
-                  {/* Modal Footer Close Button */}
-                  <button
-                    onClick={() => setExpandedId(null)}
-                    className="w-full py-3 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#AA771C] to-[#8B6508] text-white font-extrabold text-xs uppercase tracking-widest shadow-md hover:brightness-105 active:scale-[0.99] transition-all cursor-pointer"
-                  >
-                    Close Details
-                  </button>
+                    <button
+                      onClick={() => setExpandedId(null)}
+                      className="w-full py-2.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 text-[#4C342F] font-bold text-xs uppercase tracking-widest hover:bg-stone-50 transition-all shadow-xs cursor-pointer"
+                    >
+                      Close Details
+                    </button>
+                  </div>
                 </motion.div>
               </motion.div>
             )}

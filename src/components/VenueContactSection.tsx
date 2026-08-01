@@ -8,7 +8,6 @@ import {
   Crown,
   Sparkles,
   Car,
-  Compass,
   Building2,
   TreePine,
   ShieldCheck,
@@ -18,7 +17,7 @@ import {
   Sun,
   Camera,
 } from "lucide-react";
-import venuePhoto from "../assets/venue.jpg";
+import venuePalacePhoto from "../assets/venue_palace.png";
 import groomFamilyPhoto from "../assets/groom_family.png";
 import brideFamilyPhoto from "../assets/bride_family.png";
 
@@ -45,7 +44,6 @@ export function VenueContactSection() {
   const [copiedAddress, setCopiedAddress] = useState(false);
   const addressText = "Fateh Palace Estate, 12 Raj Mahal Boulevard, Udaipur, Rajasthan 313001";
   const googleMapsUrl = "https://maps.google.com/?q=Fateh+Palace+Udaipur";
-  const directionsUrl = "https://www.google.com/maps/dir/?api=1&destination=Fateh+Palace+Udaipur";
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(addressText);
@@ -99,7 +97,7 @@ export function VenueContactSection() {
             <div className="lg:col-span-5 relative group">
               <div className="w-full h-80 sm:h-[420px] rounded-3xl overflow-hidden border-2 border-[#D4AF37] shadow-[0_15px_35px_rgba(0,0,0,0.25)] relative">
                 <img
-                  src={venuePhoto}
+                  src={venuePalacePhoto}
                   alt="Fateh Palace Estate"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -130,17 +128,9 @@ export function VenueContactSection() {
             {/* VENUE TEXT & SPECIFICATIONS (7 COLS) */}
             <div className="lg:col-span-7 space-y-6 text-left">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5EBE1] border border-[#C5A059]/40 text-[#4C342F] font-bold text-xs uppercase tracking-widest shadow-xs mb-3">
-                  <MapPin className="w-4 h-4 text-[#AA771C]" />
-                  <span>OFFICIAL CEREMONY SANCTUARY</span>
-                </div>
-
                 <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold text-[#4C342F] leading-tight drop-shadow-xs">
                   Fateh Palace Estate &amp; Lakefront Gardens
                 </h3>
-                <p className="font-[family-name:var(--font-script)] text-xl sm:text-2xl text-[#AA771C] mt-1">
-                  A Royal Heritage Sanctuary Overlooking Lake Pichola
-                </p>
               </div>
 
               {/* Address Container with Copy Button */}
@@ -211,16 +201,6 @@ export function VenueContactSection() {
                   <Navigation className="w-4 h-4 text-[#FFD700]" />
                   <span>Open in Google Maps</span>
                 </a>
-
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-6 py-3.5 rounded-2xl bg-white text-[#4C342F] text-xs font-bold uppercase tracking-widest hover:bg-stone-50 transition-all border border-[#D4C3B5] shadow-sm flex items-center gap-2"
-                >
-                  <Compass className="w-4 h-4 text-[#AA771C]" />
-                  <span>Get Driving Directions</span>
-                </a>
               </div>
             </div>
           </div>
@@ -237,9 +217,7 @@ export function VenueContactSection() {
             className="text-center max-w-2xl mx-auto mb-12"
           >
             <p className="tracking-[0.3em] text-xs uppercase text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-              <Crown className="w-4 h-4 text-[#D4AF37]" />
               WE ARE AT YOUR SERVICE
-              <Crown className="w-4 h-4 text-[#D4AF37]" />
             </p>
             <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold uppercase text-[#4C342F]">
               FAMILY REPRESENTATIVES
@@ -257,42 +235,44 @@ export function VenueContactSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
-              className="soft-card backdrop-blur-none rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8]"
+              whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
+              className="rounded-[36px] p-7 sm:p-9 border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(76,52,47,0.1)] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform"
             >
-              <div className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#EBDBC9] border border-[#C5A059]/40 text-[#4C342F] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-xs">
-                <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+              {/* Inset Gold Rim */}
+              <div className="absolute inset-3 rounded-[28px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors" />
+
+              <div className="absolute top-4.5 left-4.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-100/90 via-amber-50 to-amber-100/90 border border-[#C5A059]/50 text-[#AA771C] text-[10.5px] font-extrabold uppercase tracking-widest shadow-xs">
                 <span>Groom Side Host</span>
               </div>
 
-              <div className="mt-6 flex flex-col items-center w-full">
-                {/* Circular Portrait Avatar */}
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1.5 bg-gradient-to-tr from-[#D4AF37] via-white to-[#AA771C] border-2 border-[#C5A059] shadow-lg mb-4">
-                  <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
+              <div className="mt-8 flex flex-col items-center w-full relative z-10">
+                {/* Circular Metallic Gold Frame */}
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] border-2 border-[#D4AF37] shadow-xl mb-4 group-hover:scale-105 transition-transform duration-500">
+                  <div className="w-full h-full rounded-full overflow-hidden border border-[#C5A059] bg-stone-100 shadow-inner">
                     <img
                       src={groomFamilyPhoto}
-                      alt="Maharaja Vikram Singh"
+                      alt="Vikram Singh"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
 
                 <h4 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F]">
-                  Maharaja Vikram Singh
+                  Vikram Singh
                 </h4>
-                <p className="text-xs uppercase font-bold tracking-widest text-[#AA771C] mt-1">
+                <p className="text-xs uppercase font-extrabold tracking-widest text-[#AA771C] mt-1">
                   Father of the Groom
                 </p>
-                <p className="text-xs text-[#5C4D46] mt-2 max-w-xs leading-relaxed italic">
+                <p className="text-xs text-[#5C4D46] mt-2.5 max-w-xs leading-relaxed italic">
                   "For accommodation, guest arrivals, or VIP hospitality enquiries."
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-6 w-full grid grid-cols-2 gap-3">
+              <div className="mt-6 w-full grid grid-cols-2 gap-3 relative z-10">
                 <a
                   href="tel:+18005550199"
-                  className="py-3 rounded-2xl bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-[#3A2320] transition-colors border border-[#D4AF37] shadow-sm"
+                  className="py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#2C1815] text-amber-50 text-xs font-extrabold uppercase tracking-widest hover:brightness-110 active:scale-98 transition-all border border-[#D4AF37] shadow-md flex items-center justify-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#FFD700]" />
                   <span>Call</span>
@@ -301,9 +281,9 @@ export function VenueContactSection() {
                   href="https://wa.me/18005550199"
                   target="_blank"
                   rel="noreferrer"
-                  className="py-3 rounded-2xl bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-emerald-800 transition-colors shadow-sm"
+                  className="py-3.5 rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-800 text-white text-xs font-extrabold uppercase tracking-widest hover:brightness-110 active:scale-98 transition-all border border-emerald-500/50 shadow-md flex items-center justify-center gap-1.5"
                 >
-                  <MessageSquare className="w-3.5 h-3.5" />
+                  <MessageSquare className="w-3.5 h-3.5 text-white" />
                   <span>WhatsApp</span>
                 </a>
               </div>
@@ -315,18 +295,20 @@ export function VenueContactSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
-              className="soft-card backdrop-blur-none rounded-[32px] p-6 sm:p-8 border-2 border-[color:var(--color-gold)]/50 shadow-xl text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8]"
+              whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
+              className="rounded-[36px] p-7 sm:p-9 border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(76,52,47,0.1)] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] text-center flex flex-col items-center justify-between relative overflow-hidden group transform-gpu will-change-transform"
             >
-              <div className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#EBDBC9] border border-[#C5A059]/40 text-[#4C342F] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#AA771C]" />
+              {/* Inset Gold Rim */}
+              <div className="absolute inset-3 rounded-[28px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors" />
+
+              <div className="absolute top-4.5 left-4.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-100/90 via-amber-50 to-amber-100/90 border border-[#C5A059]/50 text-[#AA771C] text-[10.5px] font-extrabold uppercase tracking-widest shadow-xs">
                 <span>Bride Side Host</span>
               </div>
 
-              <div className="mt-6 flex flex-col items-center w-full">
-                {/* Circular Portrait Avatar */}
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1.5 bg-gradient-to-tr from-[#D4AF37] via-white to-[#AA771C] border-2 border-[#C5A059] shadow-lg mb-4">
-                  <div className="w-full h-full rounded-full overflow-hidden shadow-inner">
+              <div className="mt-8 flex flex-col items-center w-full relative z-10">
+                {/* Circular Metallic Gold Frame */}
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] border-2 border-[#D4AF37] shadow-xl mb-4 group-hover:scale-105 transition-transform duration-500">
+                  <div className="w-full h-full rounded-full overflow-hidden border border-[#C5A059] bg-stone-100 shadow-inner">
                     <img
                       src={brideFamilyPhoto}
                       alt="Sunita Sharma"
@@ -338,19 +320,19 @@ export function VenueContactSection() {
                 <h4 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F]">
                   Sunita Sharma
                 </h4>
-                <p className="text-xs uppercase font-bold tracking-widest text-[#AA771C] mt-1">
+                <p className="text-xs uppercase font-extrabold tracking-widest text-[#AA771C] mt-1">
                   Mother of the Bride
                 </p>
-                <p className="text-xs text-[#5C4D46] mt-2 max-w-xs leading-relaxed italic">
+                <p className="text-xs text-[#5C4D46] mt-2.5 max-w-xs leading-relaxed italic">
                   "For RSVP guidance, seating care, and general guest support."
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-6 w-full grid grid-cols-2 gap-3">
+              <div className="mt-6 w-full grid grid-cols-2 gap-3 relative z-10">
                 <a
                   href="tel:+18005550277"
-                  className="py-3 rounded-2xl bg-[#4C342F] text-amber-50 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-[#3A2320] transition-colors border border-[#D4AF37] shadow-sm"
+                  className="py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#2C1815] text-amber-50 text-xs font-extrabold uppercase tracking-widest hover:brightness-110 active:scale-98 transition-all border border-[#D4AF37] shadow-md flex items-center justify-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#FFD700]" />
                   <span>Call</span>
@@ -359,9 +341,9 @@ export function VenueContactSection() {
                   href="https://wa.me/18005550277"
                   target="_blank"
                   rel="noreferrer"
-                  className="py-3 rounded-2xl bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-emerald-800 transition-colors shadow-sm"
+                  className="py-3.5 rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-800 text-white text-xs font-extrabold uppercase tracking-widest hover:brightness-110 active:scale-98 transition-all border border-emerald-500/50 shadow-md flex items-center justify-center gap-1.5"
                 >
-                  <MessageSquare className="w-3.5 h-3.5" />
+                  <MessageSquare className="w-3.5 h-3.5 text-white" />
                   <span>WhatsApp</span>
                 </a>
               </div>

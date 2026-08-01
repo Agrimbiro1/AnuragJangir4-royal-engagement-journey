@@ -69,11 +69,11 @@ function Invitation() {
     if (!isOpen) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.8,
     });
 
     (window as any).lenis = lenis;
@@ -194,8 +194,8 @@ function Invitation() {
         <WaveDivider variant={1} />
 
         {/* FAMILY SECTION - RICH ROSE BLUSH CHAMPAGNE GRADIENT */}
-        <section id="family-section" className="relative w-full bg-gradient-to-br from-[#F7E2E6] via-[#EBCDD4] to-[#DFB9C3] textured-bg py-16 sm:py-20 overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+        <section id="family-section" className="relative w-full bg-gradient-to-br from-[#F7E2E6] via-[#EBCDD4] to-[#DFB9C3] textured-bg py-16 sm:py-20 overflow-visible">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
             <FamilySection />
           </div>
         </section>

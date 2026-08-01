@@ -73,14 +73,7 @@ export const WaveDivider = ({ variant = 1 }: WaveDividerProps) => {
             <stop offset="25%" stopColor="#FFF1B0" stopOpacity="0.75" />
             <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.8" />
             <stop offset="75%" stopColor="#FFF1B0" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
           </linearGradient>
-
-          {/* Soft Atmospheric Gold Glow Filter */}
-          <filter id={glowGold} x="-10%" y="-120%" width="120%" height="340%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#FFF8DC" floodOpacity="0.8" />
-            <feDropShadow dx="0" dy="1" stdDeviation="6" floodColor="#D4AF37" floodOpacity="0.45" />
-          </filter>
         </defs>
 
         {/* 1. Secondary Parallel Gold Thread Accent */}
@@ -100,7 +93,6 @@ export const WaveDivider = ({ variant = 1 }: WaveDividerProps) => {
           strokeWidth="4.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          filter={`url(#${glowGold})`}
         />
 
         {/* 3. Inner Bright Specular Core Line */}

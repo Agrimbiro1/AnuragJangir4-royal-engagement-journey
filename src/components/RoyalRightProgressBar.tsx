@@ -24,27 +24,35 @@ export function RoyalRightProgressBar() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight <= 0) return;
+      if (ticking) return;
+      ticking = true;
 
-      const currentScroll = Math.max(0, window.scrollY);
-      const calculatedPercent = Math.min(100, Math.round((currentScroll / totalHeight) * 100));
-      setScrollPercent(calculatedPercent);
+      requestAnimationFrame(() => {
+        ticking = false;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight <= 0) return;
 
-      // Determine active section based on scroll position
-      const scrollPosition = currentScroll + window.innerHeight / 3;
-      for (const section of SECTIONS) {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section.id);
-            break;
+        const currentScroll = Math.max(0, window.scrollY);
+        const calculatedPercent = Math.min(100, Math.round((currentScroll / totalHeight) * 100));
+        setScrollPercent(calculatedPercent);
+
+        // Determine active section based on scroll position
+        const scrollPosition = currentScroll + window.innerHeight / 3;
+        for (const section of SECTIONS) {
+          const el = document.getElementById(section.id);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveSection(section.id);
+              break;
+            }
           }
         }
-      }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -74,7 +82,7 @@ export function RoyalRightProgressBar() {
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         title="Scroll to Top"
       >
-        <Crown className="w-4 h-4 text-[#FFD700] animate-pulse" />
+        <Crown className="w-4 h-4 text-[#FFD700]" />
       </motion.div>
 
       {/* Main Glass Track Container */}
@@ -85,10 +93,9 @@ export function RoyalRightProgressBar() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/10 via-transparent to-[#D4AF37]/10 pointer-events-none" />
 
           {/* Animated Gold Fill Liquid */}
-          <motion.div
-            className="w-full bg-gradient-to-b from-[#FFFDF9] via-[#FFD700] to-[#AA771C] rounded-full shadow-[0_0_15px_rgba(212,175,55,0.8)] origin-top"
+          <div
+            className="w-full bg-gradient-to-b from-[#FFFDF9] via-[#FFD700] to-[#AA771C] rounded-full shadow-[0_0_15px_rgba(212,175,55,0.8)] origin-top transition-[height] duration-150 ease-out"
             style={{ height: `${scrollPercent}%` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           />
 
           {/* Section Marker Dots overlaying the track */}
@@ -110,15 +117,14 @@ export function RoyalRightProgressBar() {
         </div>
 
         {/* Floating Crown Gem Bead Indicator moving with scroll */}
-        <motion.div
-          className="absolute -left-1.5 w-5 h-5 rounded-full bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] border-2 border-white shadow-[0_0_16px_rgba(255,215,0,0.95)] flex items-center justify-center pointer-events-none z-10"
+        <div
+          className="absolute -left-1.5 w-5 h-5 rounded-full bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] border-2 border-white shadow-[0_0_16px_rgba(255,215,0,0.95)] flex items-center justify-center pointer-events-none z-10 transition-[top] duration-150 ease-out"
           style={{
             top: `calc(${scrollPercent}% * (100% - 20px) / 100)`,
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-white animate-ping opacity-80" />
-        </motion.div>
+          <div className="w-1.5 h-1.5 rounded-full bg-white opacity-90" />
+        </div>
 
         {/* Section Hover / Interactive Dots Sidebar Menu */}
         <div className="absolute top-0 bottom-0 -left-9 flex flex-col justify-between py-2 items-end">

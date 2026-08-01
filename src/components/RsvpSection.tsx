@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, Crown, CheckCircle2 } from "lucide-react";
-import royalSealPhoto from "../assets/royal_seal.jpg";
+import { Sparkles, Crown, CheckCircle2, X } from "lucide-react";
+import royalSealPhoto from "../assets/royal_seal.png";
 
 // Line-Art Engraved Bottom Border SVG
 function EngravedBottomBorder() {
@@ -101,6 +102,7 @@ function GoldFlourish() {
     </svg>
   );
 }
+
 // Interactive Royal Wax Seal Crest
 function RoyalWaxSeal({ onClick }: { onClick?: () => void }) {
   return (
@@ -113,11 +115,11 @@ function RoyalWaxSeal({ onClick }: { onClick?: () => void }) {
       <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-[#AA771C] via-[#FFD700] to-[#D4AF37] blur-md opacity-60 group-hover:opacity-95 transition-opacity" />
 
       {/* Royal Seal Image Frame */}
-      <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#AA771C] border-2 border-[#D4AF37] shadow-[0_15px_40px_rgba(120,75,40,0.35)] overflow-hidden">
+      <div className="relative w-full h-full rounded-full p-0 bg-transparent shadow-[0_15px_40px_rgba(120,75,40,0.35)] overflow-hidden">
         <img
           src={royalSealPhoto}
           alt="Arjun & Ananya Royal Seal"
-          className="w-full h-full object-cover rounded-full scale-[1.38] group-hover:scale-[1.45] transition-transform duration-500"
+          className="w-full h-full object-contain rounded-full scale-100 group-hover:scale-105 transition-transform duration-500"
         />
       </div>
     </div>
@@ -126,9 +128,11 @@ function RoyalWaxSeal({ onClick }: { onClick?: () => void }) {
 
 export function RsvpSection() {
   const [accepted, setAccepted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleAccept = () => {
     setAccepted(true);
+    setShowModal(true);
 
     confetti({
       particleCount: 160,
@@ -217,40 +221,34 @@ export function RsvpSection() {
           </div>
         </motion.div>
 
-        {/* 3. SINGLE ACCEPT INVITATION BUTTON */}
+        {/* 3. PURE LUXURY TYPOGRAPHIC ACCEPT INVITATION BUTTON (NO ICONS / SVGs) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="pt-2"
+          className="pt-3 flex flex-col items-center"
         >
           <button
             onClick={handleAccept}
-            className="relative px-10 sm:px-14 py-4.5 sm:py-5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#4C342F] text-amber-50 font-[family-name:var(--font-heading)] font-extrabold text-xs sm:text-sm uppercase tracking-[0.35em] shadow-[0_15px_40px_rgba(76,52,47,0.25)] hover:shadow-[0_20px_50px_rgba(212,175,55,0.45)] transition-all flex items-center justify-center gap-3.5 cursor-pointer border border-[#D4AF37] group active:scale-98 overflow-hidden"
+            className={`relative px-12 sm:px-18 py-4.5 sm:py-5 rounded-full font-[family-name:var(--font-heading)] font-bold text-xs sm:text-sm uppercase tracking-[0.35em] sm:tracking-[0.4em] transition-all duration-300 cursor-pointer border-2 select-none overflow-hidden group ${
+              accepted
+                ? "bg-[#2A4D3A] text-[#FFF1B0] border-[#D4AF37] shadow-[0_12px_35px_rgba(42,77,58,0.3)]"
+                : "bg-[#4C342F] text-[#FFF1B0] border-[#D4AF37] shadow-[0_12px_35px_rgba(76,52,47,0.25)] hover:bg-[#3A2320] hover:shadow-[0_16px_45px_rgba(212,175,55,0.35)] hover:border-[#FFD700]"
+            }`}
           >
-            <Crown className="w-4 h-4 text-[#FFD700] group-hover:scale-110 transition-transform relative z-10" />
-            <span className="relative z-10">
-              {accepted ? "INVITATION ACCEPTED" : "ACCEPT INVITATION"}
-            </span>
-            <Sparkles className="w-4 h-4 text-[#FFD700] group-hover:rotate-12 transition-transform relative z-10" />
-          </button>
-        </motion.div>
+            {/* Fine Inset Gold Accent Line */}
+            <div className="absolute inset-1 rounded-full border border-[#D4AF37]/40 pointer-events-none group-hover:border-[#FFD700]/70 transition-colors" />
 
-        {/* 4. CONFIRMATION BADGE */}
-        <AnimatePresence>
-          {accepted && (
-            <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#4C342F] text-amber-100 border border-[#D4AF37] shadow-xl font-[family-name:var(--font-heading)] font-extrabold text-xs uppercase tracking-[0.25em]"
-            >
-              <CheckCircle2 className="w-4 h-4 text-[#FFD700] shrink-0" />
-              <span>ROYAL INVITATION ACCEPTED WITH HONOR</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <span className="relative z-10">
+              {accepted ? "ROYAL INVITATION ACCEPTED" : "ACCEPT INVITATION"}
+            </span>
+          </button>
+
+          <p className="text-[9.5px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-bold mt-4 drop-shadow-xs">
+            {accepted ? "Your presence has been gracefully registered" : "Tap to confirm your royal attendance"}
+          </p>
+        </motion.div>
 
         {/* 5. ENGRAVED BOTTOM BORDER */}
         <motion.div
@@ -263,6 +261,83 @@ export function RsvpSection() {
           <EngravedBottomBorder />
         </motion.div>
       </div>
+
+      {/* ROYAL THANK YOU POP-UP MODAL */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {showModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowModal(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md"
+            >
+              {/* Gold Foil Outer Bevel Wrapper */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: 20 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="p-1 sm:p-1.5 rounded-[44px] bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] shadow-[0_30px_90px_rgba(212,175,55,0.4)] max-w-lg w-full relative select-none"
+              >
+                {/* Inner Card Container */}
+                <div className="rounded-[40px] p-7 sm:p-11 bg-gradient-to-b from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] flex flex-col items-center text-center relative overflow-hidden">
+                  {/* Close X Button */}
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="absolute top-5 right-5 w-9 h-9 rounded-full border border-[#D4AF37] bg-[#FFFDF9] text-[#4C342F] flex items-center justify-center hover:bg-[#F5EBE1] hover:scale-110 transition-all cursor-pointer z-20 shadow-sm"
+                  >
+                    <X className="w-5 h-5 text-[#AA771C]" />
+                  </button>
+
+                  {/* Corner Filigree Inner Rim */}
+                  <div className="absolute inset-3 rounded-[32px] border-2 border-[#D4AF37]/35 pointer-events-none" />
+
+                  {/* Ambient Golden Center Aura */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[radial-gradient(circle,rgba(255,220,150,0.5)_0%,transparent_75%)] pointer-events-none blur-2xl" />
+
+                  {/* Royal Wax Seal Top Medallion */}
+                  <div className="z-10 relative w-20 h-20 sm:w-24 sm:h-24 rounded-full p-0 bg-transparent shadow-[0_10px_30px_rgba(212,175,55,0.35)] mb-4 overflow-hidden">
+                    <img src={royalSealPhoto} alt="Royal Seal" className="w-full h-full object-contain rounded-full scale-100" />
+                  </div>
+
+                  <p className="z-10 font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-1.5">
+                    ROYAL CONFIRMATION & BLESSINGS
+                  </p>
+
+                  <h3 className="z-10 font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#4C342F] uppercase tracking-wide mb-2">
+                    THANK YOU FOR ACCEPTING!
+                  </h3>
+
+                  <div className="z-10">
+                    <GoldFlourish />
+                  </div>
+
+                  <p className="z-10 text-sm sm:text-base text-[#4C342F] leading-relaxed font-serif my-3.5 max-w-sm">
+                    Your gracious presence fills our hearts with immense joy and honor. We look forward to celebrating this royal milestone alongside you.
+                  </p>
+
+                  {/* Event & Date Badge */}
+                  <div className="z-10 my-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#FFFDF9] via-[#F5EBE1] to-[#FFFDF9] border border-[#D4AF37]/70 text-[#4C342F] text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] shadow-xs">
+                    SATURDAY, NOVEMBER 28, 2026 • THE CITY PALACE
+                  </div>
+
+                  {/* Close Action Button */}
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="z-10 mt-6 px-10 sm:px-12 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.3em] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(76,52,47,0.3)] hover:brightness-110 transition-all cursor-pointer"
+                  >
+                    EXPLORE CELEBRATION JOURNEY
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
