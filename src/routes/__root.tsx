@@ -87,8 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Arjun & Ananya — Royal Engagement Invitation" },
       { name: "twitter:description", content: "Join Arjun & Ananya for their royal engagement celebration on August 28, 2026 at Fateh Palace Estate, Udaipur. Video hero, events, family details, gallery, countdown, RSVP & venue details." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WcvP89nbJDTuzuG4fj49cmi9WIm2/social-images/social-1785438367044-Gemini_Generated_Image_8a9m1e8a9m1e8a9m.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WcvP89nbJDTuzuG4fj49cmi9WIm2/social-images/social-1785438367044-Gemini_Generated_Image_8a9m1e8a9m1e8a9m.webp" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WcvP89nbJDTuzuG4fj49cmi9WIm2/social-images/social-1785577320747-social-image.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WcvP89nbJDTuzuG4fj49cmi9WIm2/social-images/social-1785577320747-social-image.webp" },
     ],
     links: [
       {
