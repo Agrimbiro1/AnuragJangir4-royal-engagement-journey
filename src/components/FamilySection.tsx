@@ -129,6 +129,72 @@ function GoldOrnament() {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* PREMIUM ROYAL PALACE MANDALA & ARABESQUE SVG BACKGROUND ART               */
+/* -------------------------------------------------------------------------- */
+function RoyalBackgroundArtPattern() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-32 select-none">
+      {/* Central Grand Royal Mandala Watermark */}
+      <svg
+        viewBox="0 0 800 800"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] text-[#C5A059]"
+        fill="none"
+        stroke="currentColor"
+      >
+        <circle cx="400" cy="400" r="370" strokeWidth="1" strokeDasharray="6 6" />
+        <circle cx="400" cy="400" r="330" strokeWidth="1.5" />
+        <circle cx="400" cy="400" r="290" strokeWidth="0.8" />
+        <circle cx="400" cy="400" r="230" strokeWidth="1.5" />
+        <circle cx="400" cy="400" r="170" strokeWidth="1" strokeDasharray="4 4" />
+        <circle cx="400" cy="400" r="95" strokeWidth="1.5" />
+
+        {/* 16 Radial Petal Filigree Curves */}
+        {Array.from({ length: 16 }).map((_, i) => {
+          const angle = (i * 360) / 16;
+          return (
+            <g key={i} transform={`rotate(${angle} 400 400)`}>
+              <path d="M 400 70 Q 435 175, 400 235 Q 365 175, 400 70 Z" strokeWidth="1.2" fill="rgba(212,175,55,0.03)" />
+              <path d="M 400 135 Q 420 215, 400 275 Q 380 215, 400 135 Z" strokeWidth="0.8" />
+              <circle cx="400" cy="55" r="4" fill="currentColor" />
+              <circle cx="400" cy="105" r="3" />
+            </g>
+          );
+        })}
+      </svg>
+
+      {/* Four Corner Royal Palace Arabesque Filigrees */}
+      <svg viewBox="0 0 200 200" className="absolute top-0 left-0 w-52 h-52 text-[#D4AF37]" fill="none" stroke="currentColor">
+        <path d="M 0 0 L 190 0 C 130 25, 45 45, 0 190 Z" strokeWidth="1" />
+        <path d="M 0 25 Q 90 90, 25 0" strokeWidth="1.4" />
+        <path d="M 0 65 Q 130 130, 65 0" strokeWidth="1.2" />
+        <circle cx="45" cy="45" r="5" fill="#D4AF37" />
+      </svg>
+
+      <svg viewBox="0 0 200 200" className="absolute top-0 right-0 w-52 h-52 text-[#D4AF37] -scale-x-100" fill="none" stroke="currentColor">
+        <path d="M 0 0 L 190 0 C 130 25, 45 45, 0 190 Z" strokeWidth="1" />
+        <path d="M 0 25 Q 90 90, 25 0" strokeWidth="1.4" />
+        <path d="M 0 65 Q 130 130, 65 0" strokeWidth="1.2" />
+        <circle cx="45" cy="45" r="5" fill="#D4AF37" />
+      </svg>
+
+      <svg viewBox="0 0 200 200" className="absolute bottom-0 left-0 w-52 h-52 text-[#D4AF37] -scale-y-100" fill="none" stroke="currentColor">
+        <path d="M 0 0 L 190 0 C 130 25, 45 45, 0 190 Z" strokeWidth="1" />
+        <path d="M 0 25 Q 90 90, 25 0" strokeWidth="1.4" />
+        <path d="M 0 65 Q 130 130, 65 0" strokeWidth="1.2" />
+        <circle cx="45" cy="45" r="5" fill="#D4AF37" />
+      </svg>
+
+      <svg viewBox="0 0 200 200" className="absolute bottom-0 right-0 w-52 h-52 text-[#D4AF37] -scale-x-100 -scale-y-100" fill="none" stroke="currentColor">
+        <path d="M 0 0 L 190 0 C 130 25, 45 45, 0 190 Z" strokeWidth="1" />
+        <path d="M 0 25 Q 90 90, 25 0" strokeWidth="1.4" />
+        <path d="M 0 65 Q 130 130, 65 0" strokeWidth="1.2" />
+        <circle cx="45" cy="45" r="5" fill="#D4AF37" />
+      </svg>
+    </div>
+  );
+}
+
 export function FamilySection() {
   const [activeModal, setActiveModal] = useState<"groom" | "bride" | null>(null);
 
@@ -163,11 +229,11 @@ export function FamilySection() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-center max-w-3xl mx-auto mb-14"
       >
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-          HERITAGE & LINEAGE
-        </p>
+        <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+          <span>HERITAGE & LINEAGE</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
           FAMILY REPRESENTATIVES & BLESSINGS
         </h2>
       </motion.div>
@@ -187,7 +253,7 @@ export function FamilySection() {
           <div className="absolute inset-3 rounded-[28px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors duration-300" />
 
           {/* Top Crest Badge */}
-          <div className="z-10 inline-flex items-center justify-center px-4.5 py-1.5 rounded-full bg-gradient-to-r from-[#FFFDF9] via-[#F5EBE1] to-[#FFFDF9] border border-[#D4AF37]/60 text-[#4C342F] font-extrabold text-[10.5px] sm:text-xs uppercase tracking-[0.2em] shadow-xs mb-5">
+          <div className="z-10 inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border border-[#D4AF37] text-[#FFF1B0] font-extrabold text-[10.5px] sm:text-xs uppercase tracking-[0.25em] shadow-md mb-5">
             <span>GROOM'S FAMILY REPRESENTATIVES</span>
           </div>
 
@@ -252,7 +318,7 @@ export function FamilySection() {
           <div className="absolute inset-3 rounded-[28px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors duration-300" />
 
           {/* Top Crest Badge */}
-          <div className="z-10 inline-flex items-center justify-center px-4.5 py-1.5 rounded-full bg-gradient-to-r from-[#FFFDF9] via-[#F5EBE1] to-[#FFFDF9] border border-[#D4AF37]/60 text-[#4C342F] font-extrabold text-[10.5px] sm:text-xs uppercase tracking-[0.2em] shadow-xs mb-5">
+          <div className="z-10 inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border border-[#D4AF37] text-[#FFF1B0] font-extrabold text-[10.5px] sm:text-xs uppercase tracking-[0.25em] shadow-md mb-5">
             <span>BRIDE'S FAMILY REPRESENTATIVES</span>
           </div>
 
@@ -326,40 +392,57 @@ export function FamilySection() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
               data-lenis-prevent
-              className="bg-[#FDFBF7] max-w-4xl w-full rounded-[36px] shadow-2xl border-3 border-[#D4AF37] relative z-[9999999] max-h-[92vh] overflow-hidden flex flex-col"
+              className="bg-gradient-to-b from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] max-w-4xl w-full rounded-[38px] shadow-[0_30px_90px_rgba(0,0,0,0.5)] border-4 border-[#D4AF37] relative z-[9999999] max-h-[92vh] overflow-hidden flex flex-col"
             >
-              {/* Top Close Button */}
+              {/* Premium Royal Mandala & Arabesque SVG Background Pattern */}
+              <RoyalBackgroundArtPattern />
+
+              {/* Razor-Thin Inset Gold Accent Rim */}
+              <div className="absolute inset-2.5 rounded-[30px] border-2 border-[#C5A059]/35 pointer-events-none z-10" />
+
+              {/* Ambient Radial Golden Aura Backdrop */}
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 w-full max-w-lg h-64 bg-[radial-gradient(circle_at_50%_0%,rgba(255,225,160,0.45)_0%,transparent_70%)] pointer-events-none blur-2xl z-0" />
+
+              {/* Top Close Button (Clean Symbol) */}
               <button
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37] flex items-center justify-center text-[#FFF1B0] hover:bg-[#AA771C] hover:text-white transition-all cursor-pointer shadow-md"
+                className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] flex items-center justify-center text-[#FFD700] hover:scale-110 hover:bg-[#AA771C] hover:text-white transition-all cursor-pointer shadow-lg font-extrabold text-lg leading-none"
+                aria-label="Close"
               >
-                <X className="w-4 h-4" />
+                ✕
               </button>
 
-              {/* Scrollable Inner Content Container */}
-              <div data-lenis-prevent className="p-5 sm:p-8 md:p-10 overflow-y-auto flex-1 space-y-6">
+              {/* Scrollable Inner Content Container (Rollable for dynamic member lists) */}
+              <div data-lenis-prevent className="p-4 sm:p-7 md:p-9 overflow-y-auto max-h-[82vh] sm:max-h-[85vh] flex-1 space-y-6 relative z-10 custom-royal-scrollbar">
                 {/* Pop-up Title & Header */}
-                <div className="text-center pb-2 border-b border-[#C5A059]/30">
-                  <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-bold block mb-1">
-                    FAMILY MEMBERS
-                  </span>
-                  <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#4C342F]">
+                <div className="text-center pb-3 sm:pb-4 border-b-2 border-[#C5A059]/30 space-y-2">
+                  <div className="inline-flex items-center justify-center px-4 sm:px-5 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border border-[#D4AF37] text-[#FFF1B0] text-[9.5px] sm:text-xs font-extrabold tracking-[0.25em] sm:tracking-[0.3em] uppercase shadow-md">
+                    <span>ROYAL LINEAGE & FAMILY REPRESENTATIVES</span>
+                  </div>
+
+                  <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#4C342F] tracking-wide">
                     {activeTitle}
                   </h3>
                 </div>
 
-                {/* REDESIGNED LUXURY GRID OF INDIVIDUAL REPRESENTATIVE CARDS */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                {/* DYNAMIC ROLLABLE LUXURY GRID OF INDIVIDUAL REPRESENTATIVE CARDS (2-Cols Mobile View) */}
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
                   {activeMembers.map((member, i) => (
                     <motion.div
                       key={member.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08 }}
-                      className={`rounded-[32px] p-6 sm:p-7 pb-7 border-2 ${member.bgGradient} shadow-[0_15px_35px_rgba(76,52,47,0.08)] hover:shadow-[0_20px_45px_rgba(212,175,55,0.25)] transition-all flex flex-col items-center text-center relative overflow-hidden group space-y-4`}
+                      className={`rounded-[24px] sm:rounded-[32px] p-3 sm:p-5 pb-4 sm:pb-6 border-2 ${member.bgGradient} shadow-[0_10px_25px_rgba(76,52,47,0.1),0_4px_12px_rgba(212,175,55,0.15)] hover:shadow-[0_18px_40px_rgba(212,175,55,0.3)] transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group space-y-2 sm:space-y-3.5`}
                     >
+                      {/* Inner Inset Rim Accent inside each member card */}
+                      <div className="absolute inset-1.5 sm:inset-2 rounded-[20px] sm:rounded-[26px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors" />
+
+                      {/* Top Corner Shimmer Aura */}
+                      <div className="absolute inset-0 rounded-[24px] sm:rounded-[32px] bg-[radial-gradient(circle_at_0%_0%,rgba(255,230,170,0.35)_0%,transparent_60%)] opacity-70 pointer-events-none" />
+
                       {/* 1. SINGLE FAMILY MEMBER CIRCULAR GOLD PORTRAIT FRAME */}
-                      <div className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] border-2 border-[#D4AF37] shadow-xl group-hover:scale-105 transition-transform duration-500">
+                      <div className="relative z-10 w-22 h-22 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full p-1.5 sm:p-2 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] via-[#D4AF37] to-[#AA771C] border-2 border-[#D4AF37] shadow-[0_8px_20px_rgba(212,175,55,0.3)] group-hover:scale-105 transition-transform duration-500">
                         <div className="w-full h-full rounded-full overflow-hidden border border-[#C5A059] bg-stone-100 shadow-inner">
                           <img
                             src={member.avatar}
@@ -370,14 +453,14 @@ export function FamilySection() {
                       </div>
 
                       {/* 2. FAMILY MEMBER NAME (DIRECTLY BELOW PICTURE) */}
-                      <div className="relative z-10 space-y-2 w-full text-center">
-                        <h4 className="font-[family-name:var(--font-heading)] font-extrabold text-[#3A2E2A] text-xl sm:text-2xl leading-tight">
+                      <div className="relative z-10 space-y-1 sm:space-y-1.5 w-full text-center">
+                        <h4 className="font-[family-name:var(--font-heading)] font-extrabold text-[#3A2E2A] text-xs sm:text-lg md:text-xl leading-snug">
                           {member.name}
                         </h4>
 
                         {/* 3. FAMILY MEMBER RELATION (DIRECTLY BELOW FAMILY MEMBER NAME) */}
-                        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-100/90 via-amber-50 to-amber-100/90 border border-[#C5A059]/50 text-xs font-extrabold text-[#AA771C] uppercase tracking-widest shadow-xs">
-                          {member.relation}
+                        <div className="inline-flex items-center justify-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#FFFDF9] via-[#F5EBE1] to-[#FFFDF9] border border-[#D4AF37]/80 text-[#AA771C] font-extrabold text-[8.5px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] shadow-xs">
+                          <span>{member.relation}</span>
                         </div>
                       </div>
                     </motion.div>
@@ -387,9 +470,9 @@ export function FamilySection() {
                 {/* Bottom Close Action Button */}
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="w-full py-4 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-lg hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer"
+                  className="w-full py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs sm:text-sm uppercase tracking-[0.3em] border-2 border-[#D4AF37] shadow-[0_15px_35px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center"
                 >
-                  Close Window
+                  <span>CLOSE WINDOW</span>
                 </button>
               </div>
             </motion.div>

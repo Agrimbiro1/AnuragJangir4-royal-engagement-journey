@@ -61,13 +61,11 @@ export function VenueContactSection() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-center max-w-3xl mx-auto mb-14"
       >
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-          LOCATION & DESTINATION
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-        </p>
+        <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+          <span>LOCATION & DESTINATION</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
           ROYAL VENUE SANCTUARY
         </h2>
 
@@ -127,11 +125,7 @@ export function VenueContactSection() {
 
             {/* VENUE TEXT & SPECIFICATIONS (7 COLS) */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              <div>
-                <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold text-[#4C342F] leading-tight drop-shadow-xs">
-                  Fateh Palace Estate &amp; Lakefront Gardens
-                </h3>
-              </div>
+
 
               {/* Address Container with Copy Button */}
               <div className="p-4 sm:p-5 rounded-2xl bg-white/85 border border-[#C5A059]/40 space-y-2 relative shadow-xs">
@@ -216,10 +210,10 @@ export function VenueContactSection() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto mb-12"
           >
-            <p className="tracking-[0.3em] text-xs uppercase text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-              WE ARE AT YOUR SERVICE
-            </p>
-            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold uppercase text-[#4C342F]">
+            <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+              <span>WE ARE AT YOUR SERVICE</span>
+            </div>
+            <h3 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
               FAMILY REPRESENTATIVES
             </h3>
             <div className="mt-2 flex justify-center text-[#C5A059]">

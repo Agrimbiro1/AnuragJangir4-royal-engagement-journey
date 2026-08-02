@@ -38,8 +38,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 54,
     posClass: "top-[8%] left-[4%]",
     baseRotate: -7,
-    floatY: [-10, 10, -10],
-    floatDuration: 3.2,
+    floatY: [-14, 12, -14],
+    floatX: [6, -8, 6],
+    floatDuration: 5.4,
     zIndex: 10,
   },
   {
@@ -51,8 +52,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 42,
     posClass: "top-[36%] left-[3.5%]",
     baseRotate: 5,
-    floatY: [10, -10, 10],
-    floatDuration: 3.5,
+    floatY: [12, -16, 12],
+    floatX: [-7, 9, -7],
+    floatDuration: 7.1,
     zIndex: 15,
   },
   {
@@ -64,8 +66,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 63,
     posClass: "bottom-[10%] left-[4%]",
     baseRotate: -6,
-    floatY: [-10, 10, -10],
-    floatDuration: 3.0,
+    floatY: [-10, 15, -10],
+    floatX: [9, -5, 9],
+    floatDuration: 4.8,
     zIndex: 10,
   },
   // INNER LEFT CARD BEHIND TOP-LEFT CORNER OF CENTRAL INPUT CARD
@@ -78,8 +81,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 67,
     posClass: "top-[16%] left-[21%]",
     baseRotate: -5,
-    floatY: [8, -8, 8],
-    floatDuration: 3.4,
+    floatY: [16, -10, 16],
+    floatX: [-5, 7, -5],
+    floatDuration: 6.5,
     zIndex: 12,
   },
   {
@@ -91,8 +95,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 59,
     posClass: "bottom-[18%] left-[19%]",
     baseRotate: 6,
-    floatY: [-8, 8, -8],
-    floatDuration: 3.1,
+    floatY: [-12, 10, -12],
+    floatX: [8, -6, 8],
+    floatDuration: 5.8,
     zIndex: 14,
   },
 
@@ -106,8 +111,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 89,
     posClass: "top-[8%] right-[4%]",
     baseRotate: 8,
-    floatY: [10, -10, 10],
-    floatDuration: 3.6,
+    floatY: [15, -14, 15],
+    floatX: [-8, 6, -8],
+    floatDuration: 8.2,
     zIndex: 10,
   },
   {
@@ -119,8 +125,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 76,
     posClass: "top-[36%] right-[3.5%]",
     baseRotate: -6,
-    floatY: [-10, 10, -10],
-    floatDuration: 3.3,
+    floatY: [-11, 13, -11],
+    floatX: [6, -7, 6],
+    floatDuration: 6.2,
     zIndex: 15,
   },
   {
@@ -132,8 +139,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 58,
     posClass: "bottom-[10%] right-[4%]",
     baseRotate: 7,
-    floatY: [10, -10, 10],
-    floatDuration: 3.4,
+    floatY: [14, -11, 14],
+    floatX: [-6, 8, -6],
+    floatDuration: 5.1,
     zIndex: 10,
   },
   // INNER RIGHT CARD BEHIND TOP-RIGHT CORNER OF CENTRAL INPUT CARD
@@ -146,8 +154,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 71,
     posClass: "top-[16%] right-[21%]",
     baseRotate: 5,
-    floatY: [-8, 8, -8],
-    floatDuration: 3.2,
+    floatY: [-15, 9, -15],
+    floatX: [7, -9, 7],
+    floatDuration: 7.7,
     zIndex: 12,
   },
   {
@@ -159,8 +168,9 @@ const OVERLAPPING_ANGLED_CARDS: FloatingBlessingCard[] = [
     likes: 64,
     posClass: "bottom-[18%] right-[19%]",
     baseRotate: -5,
-    floatY: [8, -8, 8],
-    floatDuration: 3.0,
+    floatY: [10, -16, 10],
+    floatX: [-9, 5, -9],
+    floatDuration: 6.7,
     zIndex: 14,
   },
 ];
@@ -334,13 +344,11 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
 
       {/* 1. SECTION HEADER */}
       <div className="relative z-10 text-center max-w-3xl mx-auto mb-6">
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-          GUESTBOOK & WISHES
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-        </p>
+        <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+          <span>GUESTBOOK & WISHES</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F] drop-shadow-sm">
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
           BLESSINGS & WISHES
         </h2>
 
@@ -354,18 +362,24 @@ export function BlessingsSection({ guestName: propGuestName }: BlessingsSectionP
         className="relative w-full min-h-[820px] sm:min-h-[880px] md:min-h-[920px] hidden sm:flex items-center justify-center py-12 px-6 overflow-hidden"
       >
         {/* 10 ANGLED FLOATING CARDS */}
-        {floatingCards.map((card, idx) => (
+        {floatingCards.map((card) => (
           <motion.div
             key={card.id}
+            animate={{
+              y: card.floatY,
+              x: card.floatX,
+              rotate: [card.baseRotate - 2, card.baseRotate + 3, card.baseRotate - 2],
+            }}
+            transition={{
+              duration: card.floatDuration,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             whileHover={{ scale: 1.06, y: -8, zIndex: 50 }}
-            transition={{ scale: { duration: 0.2 } }}
             style={{
               zIndex: card.zIndex,
-              transform: `rotate(${card.baseRotate}deg)`,
             }}
-            className={`absolute ${card.posClass} ${
-              idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
-            } w-56 sm:w-60 md:w-64 h-[165px] sm:h-[175px] p-3.5 sm:p-4 rounded-[22px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37]/50 shadow-[0_20px_40px_rgba(140,90,60,0.14),0_8px_20px_rgba(212,175,55,0.18)] group flex flex-col justify-between cursor-pointer overflow-hidden`}
+            className={`absolute ${card.posClass} w-56 sm:w-60 md:w-64 h-[165px] sm:h-[175px] p-3.5 sm:p-4 rounded-[22px] bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] border-2 border-[#D4AF37]/50 shadow-[0_20px_40px_rgba(140,90,60,0.14),0_8px_20px_rgba(212,175,55,0.18)] group flex flex-col justify-between cursor-pointer overflow-hidden`}
           >
             {/* Inner Razor-Thin Gold Accent Rim */}
             <div className="absolute inset-1.5 rounded-[16px] border border-[#C5A059]/30 pointer-events-none group-hover:border-[#D4AF37]/60 transition-colors" />

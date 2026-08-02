@@ -61,8 +61,11 @@ function CinematicPetalCanvas() {
     );
     observer.observe(canvas);
 
-    // Create 20 subtle organic Jasmine & Rose Petal particles for homepage
-    const petals = Array.from({ length: 20 }, () => ({
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 8 : 18;
+
+    // Create subtle organic Jasmine & Rose Petal particles for homepage
+    const petals = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height - height * 0.8,
       size: Math.random() * 8 + 5,
@@ -305,6 +308,49 @@ function RoyalAnimatedScrollIndicator({ onClick }: { onClick: () => void }) {
 }
 
 /* -------------------------------------------------------------------------- */
+/* MINIMAL & ULTRA-PREMIUM ARCHITECTURAL CORNER ACCENTS (TOP-LEFT & TOP-RIGHT)*/
+/* -------------------------------------------------------------------------- */
+function RoyalCornerFiligree({ position }: { position: "top-left" | "top-right" }) {
+  const isRight = position === "top-right";
+  return (
+    <div
+      className={`absolute top-4 sm:top-6 ${isRight ? "right-4 sm:right-6" : "left-4 sm:left-6"} z-30 pointer-events-none w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 ${
+        isRight ? "scale-x-[-1]" : ""
+      } opacity-80`}
+    >
+      <svg
+        viewBox="0 0 120 120"
+        className="w-full h-full text-[#D4AF37] filter drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]"
+        fill="none"
+        stroke="currentColor"
+      >
+        {/* Sleek Minimalist L-Frame Corner Lines */}
+        <path d="M 0 0 L 110 0 M 0 0 L 0 110" strokeWidth="1.2" stroke="url(#goldGradCorner)" />
+        <path d="M 12 12 L 85 12 M 12 12 L 12 85" strokeWidth="0.75" strokeOpacity="0.6" />
+
+        {/* Delicate Modern Diamond & Dot Nodes */}
+        <path d="M 0 0 L 18 18" strokeWidth="1" strokeOpacity="0.8" />
+        <circle cx="18" cy="18" r="2.5" fill="#FFD700" />
+        <circle cx="110" cy="0" r="2" fill="#D4AF37" />
+        <circle cx="0" cy="110" r="2" fill="#D4AF37" />
+
+        {/* Minimal Arc Accent */}
+        <path d="M 35 0 C 35 20, 20 35, 0 35" strokeWidth="0.8" strokeOpacity="0.5" />
+        <path d="M 65 0 C 65 35, 35 65, 0 65" strokeWidth="0.6" strokeDasharray="3 3" strokeOpacity="0.4" />
+
+        <defs>
+          <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFF8DC" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#FFD700" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#AA771C" stopOpacity="0.3" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /* MAIN HERO VIDEO SECTION (100VH LUXURY CINEMATIC EXPERIENCE)                */
 /* -------------------------------------------------------------------------- */
 export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSectionProps) {
@@ -346,9 +392,18 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
     };
   }, []);
 
-  const toggleMusic = () => {
-    setIsPlayingMusic((prev) => !prev);
-    window.dispatchEvent(new CustomEvent("toggle-royal-audio"));
+  const handleMusicToggle = () => {
+    const audioEl = document.getElementById("hero-audio-player") as HTMLAudioElement;
+    if (audioEl) {
+      if (isPlayingMusic) {
+        audioEl.pause();
+        setIsPlayingMusic(false);
+      } else {
+        audioEl.play().then(() => setIsPlayingMusic(true)).catch(() => {});
+      }
+    } else {
+      window.dispatchEvent(new CustomEvent("reopen-envelope"));
+    }
   };
 
   const handleReopen = () => {
@@ -372,6 +427,9 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
 
   return (
     <section ref={sectionRef} className="sticky top-0 w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col items-center justify-between select-none z-0 bg-black">
+      {/* LAYER 0: PREMIUM ROYAL CORNER FILIGREE SVG EMBLEMS (TOP-LEFT & TOP-RIGHT) */}
+      <RoyalCornerFiligree position="top-left" />
+      <RoyalCornerFiligree position="top-right" />
       {/* LAYER 1: Full-Screen Cinematic Background Video (Optimized without real-time filter overhead) */}
       <video
         ref={videoRef}
@@ -418,17 +476,8 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
           <InterlockingAAMonogram />
         </div>
 
-        {/* Right Column: Right Pill Button: RE-OPEN ENVELOPE */}
-        <div className="flex justify-end pointer-events-auto">
-          <button
-            onClick={handleReopen}
-            className="px-2.5 py-1.5 xs:px-3.5 xs:py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 border border-[#D4AF37]/35 text-[#FFF1B0] text-[9px] xs:text-[10px] uppercase tracking-[0.15em] xs:tracking-[0.25em] font-semibold hover:bg-black/80 transition-colors duration-200 flex items-center gap-1.5 shadow-lg cursor-pointer group shrink-0"
-          >
-            <Mail className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#FFD700] group-hover:rotate-12 transition-transform" />
-            <span className="hidden xs:inline">RE-OPEN ENVELOPE</span>
-            <span className="xs:hidden">ENVELOPE</span>
-          </button>
-        </div>
+        {/* Right Column Spacer */}
+        <div />
       </header>
 
       {/* LAYER 4: Center Typography Container (3-Phase Reveal) */}

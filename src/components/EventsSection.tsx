@@ -306,13 +306,11 @@ export function EventsSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center max-w-4xl mx-auto px-4 mb-12 sm:mb-24"
       >
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-          SCHEDULE & CELEBRATIONS
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-        </p>
+        <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+          <span>SCHEDULE & CELEBRATIONS</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#FFFDF9] drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
           ROYAL ENGAGEMENT FESTIVITIES
         </h2>
 
@@ -366,14 +364,14 @@ export function EventsSection() {
                       <span>{event.time}</span>
                     </div>
 
-                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
+                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#FFFDF9] leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                       {event.title}
                     </h3>
 
-                    <p className="text-[7.5px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
-                      <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
+                    <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FFFDF9]/95 border border-[#D4AF37]/60 text-[8px] xs:text-[9.5px] sm:text-xs text-[#3A2E2A] font-extrabold shadow-xs my-0.5">
+                      <MapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#B8860B] shrink-0" />
                       <span>{event.venue}</span>
-                    </p>
+                    </div>
 
                     {/* INTERACTIVE POPUP TRIGGER BUTTON */}
                     <button
@@ -434,14 +432,14 @@ export function EventsSection() {
                       <span>{event.time}</span>
                     </div>
 
-                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#3A2E2A] leading-tight">
+                    <h3 className="font-[family-name:var(--font-heading)] text-xs xs:text-sm sm:text-2xl md:text-3xl font-extrabold text-[#FFFDF9] leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                       {event.title}
                     </h3>
 
-                    <p className="text-[7.5px] xs:text-[9px] sm:text-xs text-[#AA771C] font-bold flex items-center gap-0.5 sm:gap-1 pt-0.5">
-                      <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#AA771C] shrink-0" />
+                    <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FFFDF9]/95 border border-[#D4AF37]/60 text-[8px] xs:text-[9.5px] sm:text-xs text-[#3A2E2A] font-extrabold shadow-xs my-0.5">
+                      <MapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#B8860B] shrink-0" />
                       <span>{event.venue}</span>
-                    </p>
+                    </div>
 
                     {/* INTERACTIVE POPUP TRIGGER BUTTON */}
                     <button
@@ -482,7 +480,7 @@ export function EventsSection() {
                   transition={{ type: "spring", damping: 26, stiffness: 320 }}
                   onClick={(e) => e.stopPropagation()}
                   data-lenis-prevent
-                  className="relative z-[9999999] w-full max-w-lg bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_25px_60px_rgba(0,0,0,0.35)] overflow-hidden p-6 sm:p-8"
+                  className="relative z-[9999999] w-full max-w-lg bg-gradient-to-br from-[#FFFDF9] via-[#FDF8F0] to-[#FBF4E8] rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_25px_60px_rgba(0,0,0,0.35)] overflow-hidden p-4 xs:p-5 sm:p-8 max-h-[88vh] sm:max-h-none overflow-y-auto"
                 >
                   {/* Inner Gold Accent Rim */}
                   <div className="absolute inset-2 rounded-[22px] border border-[#C5A059]/30 pointer-events-none" />
@@ -490,71 +488,71 @@ export function EventsSection() {
                   {/* Close Button */}
                   <button
                     onClick={() => setExpandedId(null)}
-                    className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#F5EBE1] border border-[#C5A059]/50 flex items-center justify-center text-[#7A4B46] hover:bg-[#AA771C] hover:text-white transition-colors cursor-pointer"
+                    className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F5EBE1] border border-[#C5A059]/50 flex items-center justify-center text-[#7A4B46] hover:bg-[#AA771C] hover:text-white transition-colors cursor-pointer"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
 
                   {/* Event Image Banner & Header */}
-                  <div className="flex items-center gap-4 mb-5 border-b border-[#C5A059]/30 pb-4">
-                    <div className="w-20 h-20 sm:w-20 sm:h-20 rounded-2xl border-2 border-[#D4AF37] overflow-hidden shrink-0 shadow-md">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3.5 sm:mb-5 border-b border-[#C5A059]/30 pb-3 sm:pb-4">
+                    <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl border-2 border-[#D4AF37] overflow-hidden shrink-0 shadow-md">
                       <img src={selectedEvent.photo} alt={selectedEvent.title} className="w-full h-full object-cover" />
                     </div>
-                    <div className="space-y-1">
-                      <div className="inline-flex items-center gap-1 text-[9.5px] uppercase tracking-wider font-extrabold text-[#AA771C]">
-                        <Crown className="w-3.5 h-3.5 text-[#AA771C]" />
+                    <div className="space-y-0.5 sm:space-y-1 pr-6 sm:pr-0">
+                      <div className="inline-flex items-center gap-1 text-[8.5px] sm:text-[9.5px] uppercase tracking-wider font-extrabold text-[#AA771C]">
+                        <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#AA771C]" />
                         <span>Royal Festivity Details</span>
                       </div>
-                      <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-xl font-extrabold text-[#3A2E2A] leading-snug">
+                      <h3 className="font-[family-name:var(--font-heading)] text-base sm:text-xl font-extrabold text-[#3A2E2A] leading-snug">
                         {selectedEvent.title}
                       </h3>
-                      <p className="text-xs text-[#AA771C] font-semibold flex items-center gap-1 pt-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#AA771C] shrink-0" />
+                      <p className="text-[11px] sm:text-xs text-[#AA771C] font-semibold flex items-center gap-1 pt-0.5">
+                        <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#AA771C] shrink-0" />
                         <span>{selectedEvent.venue}</span>
                       </p>
                     </div>
                   </div>
 
                   {/* Event Time & Date Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-5 px-4 py-2.5 rounded-2xl bg-amber-100/80 border border-[#C5A059]/50 text-xs font-extrabold text-[#AA771C]">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5 sm:mb-5 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-2xl bg-amber-100/80 border border-[#C5A059]/50 text-[11px] sm:text-xs font-extrabold text-[#AA771C]">
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 text-[#AA771C]" />
+                      <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#AA771C]" />
                       <span>{selectedEvent.date}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-[#AA771C]" />
+                      <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#AA771C]" />
                       <span>{selectedEvent.time}</span>
                     </div>
                   </div>
 
                   {/* REDESIGNED DRESS CODE COLOR & ATTIRE PICTURES SHOWCASE */}
-                  <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white/95 via-[#FFFDF9] to-[#FDF8F0] border-2 border-[#D4AF37]/50 shadow-sm space-y-4">
-                    <div className="border-b border-[#C5A059]/30 pb-2">
-                      <span className="text-xs uppercase tracking-widest font-extrabold text-[#3A2E2A] block">
+                  <div className="mb-4 sm:mb-6 p-3 sm:p-5 rounded-2xl bg-gradient-to-br from-white/95 via-[#FFFDF9] to-[#FDF8F0] border-2 border-[#D4AF37]/50 shadow-sm space-y-2.5 sm:space-y-4">
+                    <div className="border-b border-[#C5A059]/30 pb-1.5 sm:pb-2">
+                      <span className="text-[11px] sm:text-xs uppercase tracking-widest font-extrabold text-[#3A2E2A] block">
                         DRESS CODE & COLOR INSPIRATION
                       </span>
                     </div>
 
                     {/* Full Visible Recommended Attire Text */}
-                    <div className="p-3.5 rounded-xl bg-amber-50/90 border border-[#C5A059]/35 text-left space-y-1">
-                      <span className="text-[10px] uppercase tracking-widest font-extrabold text-[#AA771C] block">
+                    <div className="p-2.5 sm:p-3.5 rounded-xl bg-amber-50/90 border border-[#C5A059]/35 text-left space-y-0.5 sm:space-y-1">
+                      <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-extrabold text-[#AA771C] block">
                         RECOMMENDED ATTIRE
                       </span>
-                      <p className="text-xs font-bold text-[#3A2E2A] leading-relaxed break-words">
+                      <p className="text-[11px] sm:text-xs font-bold text-[#3A2E2A] leading-relaxed break-words">
                         {selectedEvent.dressCode}
                       </p>
                     </div>
 
                     {/* DRESS COLOR PICTURES SHOWCASE GRID */}
-                    <div className="space-y-2 text-left">
-                      <span className="text-[10px] font-extrabold text-[#AA771C] uppercase tracking-wider block">
+                    <div className="space-y-1.5 sm:space-y-2 text-left">
+                      <span className="text-[9px] sm:text-[10px] font-extrabold text-[#AA771C] uppercase tracking-wider block">
                         DRESS COLOR & STYLE OPTIONS
                       </span>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
                         {selectedEvent.dressOptions.map((option, oIdx) => (
                           <div
                             key={oIdx}
-                            className="relative group overflow-hidden rounded-xl border-2 border-[#D4AF37]/70 shadow-md h-48 sm:h-40 bg-stone-100 flex flex-col justify-end"
+                            className="relative group overflow-hidden rounded-xl border-2 border-[#D4AF37]/70 shadow-md h-28 xs:h-32 sm:h-40 bg-stone-100 flex flex-col justify-end"
                           >
                             <img
                               src={option.photo}
@@ -562,8 +560,8 @@ export function EventsSection() {
                               className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                            <div className="relative z-10 p-2 text-center">
-                              <span className="text-[9.5px] font-extrabold text-[#FFF1B0] uppercase tracking-wider block drop-shadow-sm px-1.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 truncate">
+                            <div className="relative z-10 p-1.5 sm:p-2 text-center">
+                              <span className="text-[8.5px] sm:text-[9.5px] font-extrabold text-[#FFF1B0] uppercase tracking-wider block drop-shadow-sm px-1 sm:px-1.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 truncate">
                                 {option.colorName}
                               </span>
                             </div>
@@ -574,20 +572,20 @@ export function EventsSection() {
                   </div>
 
                   {/* LOCATION / DIRECTION BUTTON & CLOSE ACTION */}
-                  <div className="space-y-2.5">
+                  <div className="space-y-2 sm:space-y-2.5">
                     <a
                       href="https://maps.google.com/?q=Fateh+Palace+Udaipur"
                       target="_blank"
                       rel="noreferrer"
-                      className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-xs uppercase tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full py-2.5 sm:py-3.5 rounded-2xl bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] text-[#FFF1B0] font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(76,52,47,0.3)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      <Navigation className="w-4 h-4 text-[#FFD700]" />
+                      <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFD700]" />
                       <span>GET DIRECTIONS</span>
                     </a>
 
                     <button
                       onClick={() => setExpandedId(null)}
-                      className="w-full py-2.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 text-[#4C342F] font-bold text-xs uppercase tracking-widest hover:bg-stone-50 transition-all shadow-xs cursor-pointer"
+                      className="w-full py-2 sm:py-2.5 rounded-2xl bg-white/90 border border-[#D4AF37]/60 text-[#4C342F] font-bold text-[11px] sm:text-xs uppercase tracking-widest hover:bg-stone-50 transition-all shadow-xs cursor-pointer"
                     >
                       Close Details
                     </button>

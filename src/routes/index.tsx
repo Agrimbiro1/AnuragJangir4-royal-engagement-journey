@@ -47,6 +47,7 @@ function getGuestNameFromUrl(): string {
 function Invitation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showQuickNav, setShowQuickNav] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [guestName] = useState(() => getGuestNameFromUrl());
 
   // Manage Body Scroll Lock & Force Top Scroll when Opening Animation is Active
@@ -64,16 +65,23 @@ function Invitation() {
     };
   }, [isOpen]);
 
-  // Initialize Lenis Inertial Smooth Scrolling Physics
+  // Initialize Lenis Inertial Smooth Scrolling Physics (Desktop / Mouse Wheel only)
   useEffect(() => {
     if (!isOpen) return;
 
+    // Disable JS smooth scroll engine on mobile/touch screens to preserve 60/120fps native touch momentum scroll
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768);
+
+    if (isTouchDevice) return;
+
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.8,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 0,
     });
 
     (window as any).lenis = lenis;
@@ -108,11 +116,14 @@ function Invitation() {
     };
 
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.7) {
-        setShowQuickNav(true);
-      } else {
-        setShowQuickNav(false);
-      }
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+
+      const shouldShowNav = scrollY > heroHeight * 0.7;
+      setShowQuickNav((prev) => (prev !== shouldShowNav ? shouldShowNav : prev));
+
+      const shouldHeroBeVisible = scrollY <= heroHeight * 1.05;
+      setIsHeroVisible((prev) => (prev !== shouldHeroBeVisible ? shouldHeroBeVisible : prev));
     };
 
     window.addEventListener("reopen-envelope", handleCustomReopen);
@@ -177,34 +188,39 @@ function Invitation() {
       )}
 
       {/* 2. PINNED FULL-SCREEN 100VH HERO SECTION (FIXED BEHIND SCROLLING CURTAIN) */}
-      <div className="fixed top-0 left-0 w-full h-[100dvh] z-0 pointer-events-auto">
+      <div
+        className="fixed top-0 left-0 w-full h-[100dvh] z-0 pointer-events-auto"
+        style={{
+          display: isHeroVisible ? "block" : "none",
+        }}
+      >
         <HeroVideoSection onReopenEnvelope={handleReopen} guestName={guestName} />
       </div>
 
       {/* 3. CURTAIN SCROLL OVERLAY MAIN CONTENT (SLIDES UP & OVERLAPS FIXED HERO COMPLETELY) */}
       <main className="relative z-20 w-full mt-[100dvh] rounded-t-[48px] sm:rounded-t-[68px] shadow-[0_-40px_100px_rgba(0,0,0,0.75)] border-t-2 border-[#D4AF37] overflow-hidden bg-transparent">
         {/* EVENTS SECTION - RICH EMERALD MINT GRADIENT OVERLAPPING HERO */}
-        <section id="events-section" className="relative w-full bg-gradient-to-br from-[#DCECE0] via-[#C9E2CF] to-[#B8D7BF] textured-bg pt-14 sm:pt-20 pb-16 sm:pb-20 overflow-hidden rounded-t-[48px] sm:rounded-t-[68px]">
+        <section id="events-section" className="relative w-full bg-gradient-to-br from-[#96BC9D] via-[#75A37D] to-[#54875D] textured-bg pt-14 sm:pt-20 pb-16 sm:pb-20 overflow-hidden rounded-t-[48px] sm:rounded-t-[68px]">
           <div className="max-w-6xl lg:max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <EventsSection />
           </div>
         </section>
 
         {/* WAVE: Events (Green) → Family (Pink) */}
-        <WaveDivider variant={1} />
+        <WaveDivider variant={3} />
 
         {/* FAMILY SECTION - RICH ROSE BLUSH CHAMPAGNE GRADIENT */}
-        <section id="family-section" className="relative w-full bg-gradient-to-br from-[#F7E2E6] via-[#EBCDD4] to-[#DFB9C3] textured-bg py-16 sm:py-20 overflow-visible">
+        <section id="family-section" className="relative w-full bg-gradient-to-br from-[#C4929D] via-[#A87480] to-[#87515D] textured-bg py-16 sm:py-20 overflow-visible">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
             <FamilySection />
           </div>
         </section>
 
         {/* WAVE: Family (Pink) → Gallery (Blue) */}
-        <WaveDivider variant={2} />
+        <WaveDivider variant={3} />
 
         {/* GALLERY SECTION - RICH SAPPHIRE POWDER BLUE GRADIENT */}
-        <section id="gallery-section" className="relative w-full bg-gradient-to-br from-[#DAE9F7] via-[#C4DDED] to-[#B0CFE4] textured-bg py-16 sm:py-20 overflow-hidden">
+        <section id="gallery-section" className="relative w-full bg-gradient-to-br from-[#96B8D9] via-[#749BBD] to-[#517BA0] textured-bg py-16 sm:py-20 overflow-hidden">
           <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-6 overflow-hidden relative z-10">
             <GallerySection />
           </div>
@@ -214,27 +230,27 @@ function Invitation() {
         <WaveDivider variant={3} />
 
         {/* WEDDING COUNTDOWN - RICH ROYAL LAVENDER IRIS GRADIENT */}
-        <section id="countdown-section" className="relative w-full bg-gradient-to-br from-[#EAE2F7] via-[#D8C9EF] to-[#C7B2E5] textured-bg py-16 sm:py-20 overflow-hidden">
+        <section id="countdown-section" className="relative w-full bg-gradient-to-br from-[#AD98CF] via-[#8D75B2] to-[#6C5091] textured-bg py-16 sm:py-20 overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <CountdownSection />
           </div>
         </section>
 
         {/* WAVE: Countdown (Lavender) → RSVP (Peach) */}
-        <WaveDivider variant={1} />
+        <WaveDivider variant={3} />
 
         {/* RSVP INVITATION - RICH PEACH AMBER GOLD GRADIENT */}
-        <section id="rsvp-section" className="relative w-full bg-gradient-to-br from-[#F7E6D7] via-[#EED1BD] to-[#E3BAA2] textured-bg py-16 sm:py-20 overflow-hidden">
+        <section id="rsvp-section" className="relative w-full bg-gradient-to-br from-[#C4A086] via-[#A88065] to-[#875E43] textured-bg py-16 sm:py-20 overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <RsvpSection />
           </div>
         </section>
 
         {/* WAVE: RSVP (Peach) → Blessings (Jade) */}
-        <WaveDivider variant={2} />
+        <WaveDivider variant={3} />
 
         {/* BLESSINGS SHOWCASE - RICH JADE SEAFOAM GRADIENT */}
-        <section id="blessings-section" className="relative w-full bg-gradient-to-br from-[#DCEDE5] via-[#C6E2D4] to-[#B0D7C4] textured-bg py-24 sm:py-32 overflow-hidden">
+        <section id="blessings-section" className="relative w-full bg-gradient-to-br from-[#91BFA7] via-[#6FA68B] to-[#4B876B] textured-bg py-24 sm:py-32 overflow-hidden">
           <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
             <BlessingsSection guestName={guestName} />
           </div>
@@ -244,17 +260,17 @@ function Invitation() {
         <WaveDivider variant={3} strokeGlow />
 
         {/* VENUE MAP & REPRESENTATIVES CONTACTS - RICH PALACE SANDSTONE GRADIENT */}
-        <section id="venue-section" className="relative w-full bg-gradient-to-br from-[#F7EAD7] via-[#EED7BF] to-[#E4C3A6] textured-bg py-16 sm:py-20 overflow-hidden">
+        <section id="venue-section" className="relative w-full bg-gradient-to-br from-[#C4A686] via-[#A88665] to-[#876543] textured-bg py-16 sm:py-20 overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <VenueContactSection />
           </div>
         </section>
 
         {/* WAVE: Venue (Sandstone) → Footer (Rose) */}
-        <WaveDivider variant={1} />
+        <WaveDivider variant={3} />
 
         {/* THANK YOU FOOTER - RICH DUSK VELVET ROSE GRADIENT */}
-        <footer className="relative w-full bg-gradient-to-br from-[#EFE1EA] via-[#DEC5D5] to-[#CCA8BF] textured-bg pt-4 pb-6 sm:py-12 overflow-hidden">
+        <footer className="relative w-full bg-gradient-to-br from-[#BA96AC] via-[#9B758D] to-[#79526B] textured-bg pt-10 pb-16 sm:py-16 overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <FooterSection />
           </div>

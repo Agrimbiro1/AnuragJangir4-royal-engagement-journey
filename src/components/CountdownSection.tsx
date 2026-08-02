@@ -123,13 +123,11 @@ export function CountdownSection() {
 
         {/* 1. SECTION HEADER */}
         <div className="relative z-10 space-y-2 text-center max-w-3xl mx-auto">
-          <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#D4AF37] animate-spin-slow" />
-            SAVE THE DATE
-            <Sparkles className="w-4 h-4 text-[#D4AF37] animate-spin-slow" />
-          </p>
+          <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+            <span>SAVE THE DATE</span>
+          </div>
 
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
             COUNTDOWN TO THE CELEBRATION
           </h2>
 

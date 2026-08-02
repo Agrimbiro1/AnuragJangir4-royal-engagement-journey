@@ -1,40 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Crown } from "lucide-react";
 import royalSealPhoto from "../assets/royal_seal.png";
 
-// Gold Filigree Line Flourish SVG
+// High-Contrast Luminous 24K Gold Filigree Line Flourish SVG
 function GoldFlourish() {
   return (
     <svg
       viewBox="0 0 160 24"
-      className="w-36 sm:w-44 h-5 mx-auto text-[#C5A059] opacity-85 my-2"
+      className="w-40 sm:w-48 h-6 mx-auto text-[#FFD700] filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] my-2"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
+      stroke="#FFD700"
+      strokeWidth="1.8"
     >
       <path d="M 80 12 Q 60 4, 30 12 Q 10 20, 0 12" />
       <path d="M 80 12 Q 100 4, 130 12 Q 150 20, 160 12" />
       <path d="M 50 12 Q 40 8, 30 12" />
       <path d="M 110 12 Q 120 8, 130 12" />
-      <circle cx="80" cy="12" r="2.5" fill="#D4AF37" />
+      <circle cx="80" cy="12" r="3" fill="#FFD700" />
     </svg>
   );
 }
 
-// Elegant Line-Art Gold Floral Crest Emblem (Replacing Flower Image)
+// High-Contrast Luminous 24K Gold Line-Art Floral Crest Emblem SVG
 function FloralCrestEmblem() {
   return (
     <svg
       viewBox="0 0 200 60"
-      className="w-48 sm:w-56 h-12 mx-auto text-[#C5A059] opacity-90 my-2 pointer-events-none"
+      className="w-52 sm:w-64 h-14 mx-auto text-[#FFD700] filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] my-2 pointer-events-none"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
+      stroke="#FFD700"
+      strokeWidth="1.8"
     >
       {/* Central Rose Blossom */}
-      <circle cx="100" cy="30" r="8" stroke="#D4AF37" strokeWidth="1.5" />
-      <circle cx="100" cy="30" r="4" fill="#D4AF37" />
+      <circle cx="100" cy="30" r="8" stroke="#FFD700" strokeWidth="2" />
+      <circle cx="100" cy="30" r="4" fill="#FFD700" />
 
       {/* Curved Botanical Vines Left */}
       <path d="M 90 30 C 60 15, 30 30, 10 25" />
@@ -47,29 +46,29 @@ function FloralCrestEmblem() {
       <path d="M 155 28 C 160 20, 170 20, 175 27" />
 
       {/* Decorative Dots */}
-      <circle cx="10" cy="25" r="2" fill="#D4AF37" />
-      <circle cx="190" cy="25" r="2" fill="#D4AF37" />
+      <circle cx="10" cy="25" r="2.5" fill="#FFD700" />
+      <circle cx="190" cy="25" r="2.5" fill="#FFD700" />
     </svg>
   );
 }
 
 export function FooterSection() {
   return (
-    <footer className="mt-6 sm:mt-8 pt-8 sm:pt-10 pb-10 sm:pb-16 text-center relative px-4 select-none max-w-4xl mx-auto flex flex-col justify-center">
-      {/* WARM AMBER RADIAL GLOW AURA */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,225,160,0.35)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+    <footer className="mt-2 sm:mt-4 pt-6 sm:pt-10 pb-12 sm:pb-16 text-center relative px-4 select-none max-w-4xl mx-auto flex flex-col justify-center min-h-[60vh] sm:min-h-0">
+      {/* WARM LUMINOSITY RADIAL GLOW AURA */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,225,150,0.35)_0%,rgba(212,175,55,0.15)_40%,transparent_70%)] pointer-events-none blur-3xl" />
 
-      {/* COMPACT DIRECT PAGE LAYOUT */}
+      {/* CARDLESS DIRECT FLOATING ROYAL LAYOUT */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex flex-col items-center justify-center space-y-5 sm:space-y-4"
+        className="relative z-10 flex flex-col items-center justify-center space-y-5 sm:space-y-6 max-w-3xl mx-auto"
       >
-        {/* 1. ROYAL MONOGRAM INSIGNIA SEAL */}
-        <div className="relative my-2 sm:my-0">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-0 bg-transparent shadow-[0_12px_35px_rgba(76,52,47,0.3)] overflow-hidden">
+        {/* 1. ROYAL MONOGRAM INSIGNIA SEAL WITH LUMINOSITY HALO */}
+        <div className="relative mt-1 mb-2 sm:mb-3">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] shadow-[0_0_35px_rgba(255,215,0,0.45),0_10px_28px_rgba(0,0,0,0.4)] overflow-hidden">
             <img
               src={royalSealPhoto}
               alt="Arjun & Ananya Royal Seal"
@@ -78,33 +77,37 @@ export function FooterSection() {
           </div>
         </div>
 
-        {/* 2. SUBTITLE & CALLIGRAPHIC SCRIPT QUOTE */}
-        <p className="font-[family-name:var(--font-heading)] text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#C5A059] font-bold">
-          WITH EVERLASTING LOVE & GRATITUDE
-        </p>
+        {/* 2. SUBTITLE BADGE (MAHOGANY & GOLD CREST PILL) */}
+        <div className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-gradient-to-r from-[#3A2320] via-[#2A1815] to-[#201311] border-2 border-[#FFD700] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-[0_4px_16px_rgba(0,0,0,0.35)]">
+          <span>WITH EVERLASTING LOVE & GRATITUDE</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-script)] text-3xl sm:text-4xl md:text-5xl text-[#AA771C] max-w-2xl mx-auto leading-tight">
+        {/* 3. CALLIGRAPHIC SCRIPT QUOTE (WITH LETTER-SPACING & CHAMPAGNE GOLD COLOR) */}
+        <h2 className="font-[family-name:var(--font-script)] text-2.5xl sm:text-4xl md:text-4.5xl text-[#FFE8A3] max-w-2xl mx-auto leading-relaxed font-bold tracking-[0.08em] sm:tracking-[0.1em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
           "Love is what makes the ride worthwhile."
         </h2>
 
         <GoldFlourish />
 
-        <h3 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold tracking-[0.25em] uppercase text-[#4C342F]">
-          Arjun & Ananya
+        {/* 4. COUPLE NAMES IN SOLID CHAMPAGNE GOLD (GRADIENT REMOVED) */}
+        <h3 className="font-[family-name:var(--font-heading)] text-xl sm:text-3xl font-extrabold tracking-[0.28em] uppercase text-[#FFE8A3] drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+          ARJUN & ANANYA
         </h3>
 
-        {/* 3. THANK YOU VOW TEXT */}
-        <p className="text-xs sm:text-sm text-[#5C4D46] max-w-md mx-auto leading-relaxed italic font-normal px-2">
+        {/* 5. THANK YOU VOW TEXT (MATCHED TO HIGH-CONTRAST CHAMPAGNE GOLD) */}
+        <p className="text-xs sm:text-sm text-[#FFE8A3] max-w-lg mx-auto leading-relaxed italic font-semibold px-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
           Thank you from the bottom of our hearts for being part of our royal journey. We look
           forward to creating unforgettable memories with you!
         </p>
 
-        {/* 4. NEW LINE-ART GOLD FLORAL CREST EMBLEM (REPLACING IMAGE) */}
-        <FloralCrestEmblem />
+        {/* 6. HIGH-CONTRAST LINE-ART GOLD FLORAL CREST EMBLEM */}
+        <div className="w-full flex justify-center text-[#FFD700] filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+          <FloralCrestEmblem />
+        </div>
 
-        {/* 5. COPYRIGHT NOTE */}
-        <p className="text-[10px] sm:text-[11px] text-[#8B5E5A] uppercase tracking-[0.25em] font-semibold mt-5 sm:mt-4 border-t border-stone-200/60 pt-4 sm:pt-3 w-full max-w-xs">
-          © 2025 ARJUN & ANANYA — ROYAL ENGAGEMENT INVITATION
+        {/* 7. COPYRIGHT NOTE WITH CRISP GOLD DIVIDER */}
+        <p className="text-[10px] sm:text-[11px] text-[#FFE8A3] uppercase tracking-[0.25em] font-bold mt-2 border-t-2 border-[#D4AF37]/50 pt-3 sm:pt-4 w-full max-w-md drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+          © 2026 ARJUN & ANANYA — ROYAL ENGAGEMENT INVITATION
         </p>
       </motion.div>
     </footer>

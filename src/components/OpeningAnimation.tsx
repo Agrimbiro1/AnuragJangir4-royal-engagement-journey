@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Sparkles, Crown, ArrowRight, Calendar, MapPin } from "lucide-react";
-import couplePhoto from "../assets/couple.jpg";
 import royalSealPhoto from "../assets/royal_seal.png";
 
 interface OpeningAnimationProps {
@@ -23,7 +22,7 @@ function InterlockingAAMonogram() {
           className="w-full h-full object-contain rounded-full scale-100"
         />
       </div>
-      <span className="font-[family-name:var(--font-heading)] text-[9px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-bold mt-1.5 sm:mt-2 drop-shadow-md">
+      <span className="font-[family-name:var(--font-heading)] text-[9px] sm:text-xs tracking-[0.35em] text-[#D4AF37] uppercase font-bold mt-1.5 sm:mt-3 md:mt-3.5 drop-shadow-md">
         ARJUN &amp; ANANYA
       </span>
     </div>
@@ -95,9 +94,9 @@ function FallingLeavesCanvas({ isBursting }: { isBursting: boolean }) {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener("resize", handleResize);
-
-    petalsRef.current = Array.from({ length: 75 }, () => makePetal(width, height, true));
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 25 : 60;
+    petalsRef.current = Array.from({ length: particleCount }, () => makePetal(width, height, true));
 
     let animationFrameId: number;
 
@@ -383,7 +382,6 @@ export function OpeningAnimation({ isOpen, onOpen, guestName }: OpeningAnimation
         loop
         muted
         playsInline
-        poster={couplePhoto}
         style={{
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
@@ -420,16 +418,16 @@ export function OpeningAnimation({ isOpen, onOpen, guestName }: OpeningAnimation
       {/* LAYER 4: Floating Central Content */}
       <div
         ref={contentRef}
-        className="relative z-30 w-full max-w-2xl px-4 py-6 sm:px-4 sm:py-8 text-center flex flex-col items-center justify-center space-y-5 sm:space-y-5"
+        className="relative z-30 w-full max-w-2xl px-4 py-6 sm:px-4 sm:py-8 text-center flex flex-col items-center justify-center space-y-5 sm:space-y-7 md:space-y-8"
       >
         {/* 1. Header Monogram */}
-        <div className="mb-2 sm:mb-0">
+        <div className="mb-2 sm:mb-3 md:mb-4">
           <InterlockingAAMonogram />
         </div>
 
         {/* 2. Calligraphic Invitation Content */}
-        <div className="space-y-3.5 sm:space-y-3 flex flex-col items-center max-w-full">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-[#D4AF37]/50 shadow-md mb-1 sm:mb-0">
+        <div className="space-y-3.5 sm:space-y-5 md:space-y-6 flex flex-col items-center max-w-full">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-[#D4AF37]/50 shadow-md mb-1 sm:mb-2 md:mb-3">
             <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700] animate-pulse" />
             <span className="text-[8.5px] xs:text-[9.5px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] font-extrabold text-[#FFF1B0]">
               ROYAL ENGAGEMENT INVITATION
@@ -437,12 +435,12 @@ export function OpeningAnimation({ isOpen, onOpen, guestName }: OpeningAnimation
             <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700] animate-pulse" />
           </div>
 
-          <p className="font-[family-name:var(--font-script)] text-2xl xs:text-2.5xl sm:text-4xl text-[#FFF1B0] drop-shadow-md my-1 sm:my-0">
+          <p className="font-[family-name:var(--font-script)] text-2xl xs:text-2.5xl sm:text-4xl text-[#FFF1B0] drop-shadow-md my-1 sm:my-2 md:my-3">
             Together With Their Families
           </p>
 
           <h1
-            className="font-[family-name:var(--font-couple)] text-[30px] xs:text-[38px] sm:text-6xl md:text-7xl py-1 my-2 sm:my-1 leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.95)] max-w-full"
+            className="font-[family-name:var(--font-couple)] text-[30px] xs:text-[38px] sm:text-6xl md:text-7xl py-1 my-2 sm:my-3 md:my-4 leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.95)] max-w-full"
             style={{
               background:
                 "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
@@ -453,11 +451,11 @@ export function OpeningAnimation({ isOpen, onOpen, guestName }: OpeningAnimation
             Arjun &amp; Ananya
           </h1>
 
-          <p className="text-[11px] xs:text-xs sm:text-sm text-stone-200/90 font-light max-w-xs sm:max-w-md mx-auto italic leading-relaxed drop-shadow-sm my-2 sm:my-0">
+          <p className="text-[11px] xs:text-xs sm:text-sm text-stone-200/90 font-light max-w-xs sm:max-w-md mx-auto italic leading-relaxed drop-shadow-sm my-2 sm:my-2 md:my-3">
             Request the honor of your presence to celebrate their royal engagement and eternal union
           </p>
 
-          <div className="pt-3 sm:pt-1.5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-2.5 text-[10px] sm:text-xs font-bold text-[#FFF1B0] uppercase tracking-wider sm:tracking-widest">
+          <div className="pt-3 sm:pt-3 md:pt-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-2.5 text-[10px] sm:text-xs font-bold text-[#FFF1B0] uppercase tracking-wider sm:tracking-widest">
             <span className="flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-[#D4AF37]/40 shadow-sm">
               <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700]" />
               <span>AUG 26-28, 2026</span>

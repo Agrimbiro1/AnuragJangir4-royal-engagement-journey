@@ -37,9 +37,10 @@ export function RoyalRightProgressBar() {
 
         const currentScroll = Math.max(0, window.scrollY);
         const calculatedPercent = Math.min(100, Math.round((currentScroll / totalHeight) * 100));
-        setScrollPercent(calculatedPercent);
+        setScrollPercent((prev) => (Math.abs(prev - calculatedPercent) >= 1 ? calculatedPercent : prev));
 
         // Determine active section based on scroll position
+        let currentActive = "";
         const scrollPosition = currentScroll + window.innerHeight / 3;
         for (const section of SECTIONS) {
           const el = document.getElementById(section.id);
@@ -47,10 +48,14 @@ export function RoyalRightProgressBar() {
             const top = el.offsetTop;
             const height = el.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-              setActiveSection(section.id);
+              currentActive = section.id;
               break;
             }
           }
+        }
+
+        if (currentActive) {
+          setActiveSection((prev) => (prev !== currentActive ? currentActive : prev));
         }
       });
     };

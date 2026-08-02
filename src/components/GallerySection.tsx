@@ -317,13 +317,11 @@ export function GallerySection() {
     <section className="mt-16 sm:mt-24 relative select-none w-full overflow-visible">
       {/* 1. HEADER (ROYAL PHOTO GALLERY & FEATHER ORNAMENT) */}
       <div className="text-center max-w-3xl mx-auto mb-8">
-        <p className="font-[family-name:var(--font-heading)] text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A059] font-bold mb-2 flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-          ROYAL PORTRAITS & MOMENTS
-          <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-        </p>
+        <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-[#4C342F] via-[#3A2320] to-[#201311] border-2 border-[#D4AF37] text-[#FFF1B0] text-xs sm:text-sm font-extrabold tracking-[0.35em] uppercase shadow-lg mb-3">
+          <span>ROYAL PORTRAITS & MOMENTS</span>
+        </div>
 
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#4C342F]">
+        <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide uppercase text-[#3A2E2A] drop-shadow-[0_1.5px_3px_rgba(255,255,255,0.7)]">
           ROYAL PHOTO GALLERY
         </h2>
 
@@ -337,78 +335,110 @@ export function GallerySection() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,215,130,0.4)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
           {/* PANEL 1: Far Left Edge Panel */}
-          <div className="absolute left-[1%] md:left-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block animate-float-slow">
+          <motion.div
+            animate={{ y: [-14, 10, -14], x: [4, -8, 4], rotate: [-3, 2, -3] }}
+            transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[1%] md:left-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block"
+          >
             <GlassPhotoCard
               src={sangeetPhoto}
               caption="Palace Interior"
               onClick={() => setActiveLightboxIndex(5)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 2: Second Left Frosted Glass Card ("The Royal traditions") */}
-          <div className="absolute left-[5%] sm:left-[6%] md:left-[7%] top-[22%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2 animate-float-reverse">
+          <motion.div
+            animate={{ y: [12, -16, 12], x: [-6, 8, -6], rotate: [2, -4, 2] }}
+            transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[5%] sm:left-[6%] md:left-[7%] top-[22%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2"
+          >
             <GlassPhotoCard
               src={sangeetPhoto}
               caption="Royal Traditions"
               badgeText="The Royal traditions"
               onClick={() => setActiveLightboxIndex(4)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 3: Indian Wedding Group */}
-          <div className="absolute left-[15%] sm:left-[16%] md:left-[17%] top-[10%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3 animate-float-slow">
+          <motion.div
+            animate={{ y: [-8, 14, -8], x: [8, -4, 8], rotate: [-2, 3, -2] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[15%] sm:left-[16%] md:left-[17%] top-[10%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3"
+          >
             <GlassPhotoCard
               src={brideFamilyPhoto}
               caption="Indian Wedding Group"
               onClick={() => setActiveLightboxIndex(1)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 4: MAIN CENTER HERO CARD */}
-          <div className="relative z-20 w-64 sm:w-80 md:w-88 h-[420px] sm:h-[510px] md:h-[530px] animate-float-slow">
+          <motion.div
+            animate={{ y: [-16, 8, -16], x: [-4, 6, -4], rotate: [0, 2, -1, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative z-20 w-64 sm:w-80 md:w-88 h-[420px] sm:h-[510px] md:h-[530px]"
+          >
             <GlassPhotoCard
               isHero
               src={couplePhoto}
               caption="Arjun & Ananya"
               onClick={() => setActiveLightboxIndex(0)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 5: BOTTOM OVERLAPPING BOUQUET CARD */}
-          <div className="absolute bottom-[2%] sm:bottom-[4%] left-[50%] -translate-x-1/2 w-44 sm:w-56 md:w-64 h-44 sm:h-56 md:h-64 z-30 animate-float-reverse">
+          <motion.div
+            animate={{ y: [10, -12, 10], x: [7, -7, 7], rotate: [3, -3, 3] }}
+            transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-[2%] sm:bottom-[4%] left-[50%] -translate-x-1/2 w-44 sm:w-56 md:w-64 h-44 sm:h-56 md:h-64 z-30"
+          >
             <GlassPhotoCard
               src={bouquetPhoto}
               caption="Floral Bouquet"
               onClick={() => setActiveLightboxIndex(2)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 6: Fourth Right - Haldi Ceremony */}
-          <div className="absolute right-[15%] sm:right-[16%] md:right-[17%] top-[12%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3 animate-float-slow">
+          <motion.div
+            animate={{ y: [-12, 12, -12], x: [-8, 5, -8], rotate: [-3, 4, -3] }}
+            transition={{ duration: 8.1, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute right-[15%] sm:right-[16%] md:right-[17%] top-[12%] w-56 sm:w-72 md:w-76 h-84 sm:h-96 md:h-[440px] z-3"
+          >
             <GlassPhotoCard
               src={haldiPhoto}
               caption="Haldi Ceremony"
               onClick={() => setActiveLightboxIndex(3)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 7: Fifth Right - Bride Outdoor Portrait */}
-          <div className="absolute right-[5%] sm:right-[6%] md:right-[7%] top-[20%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2 animate-float-reverse">
+          <motion.div
+            animate={{ y: [14, -10, 14], x: [5, -6, 5], rotate: [4, -2, 4] }}
+            transition={{ duration: 6.1, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute right-[5%] sm:right-[6%] md:right-[7%] top-[20%] w-44 sm:w-56 md:w-60 h-72 sm:h-84 z-2"
+          >
             <GlassPhotoCard
               src={couplePhoto}
               caption="Bride Outdoor Portrait"
               onClick={() => setActiveLightboxIndex(4)}
             />
-          </div>
+          </motion.div>
 
           {/* PANEL 8: Far Right Edge Panel */}
-          <div className="absolute right-[1%] md:right-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block animate-float-slow">
+          <motion.div
+            animate={{ y: [-10, 16, -10], x: [-7, 7, -7], rotate: [-2, 3, -2] }}
+            transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute right-[1%] md:right-[2%] top-[30%] w-32 md:w-48 h-60 md:h-72 z-1 hidden md:block"
+          >
             <GlassPhotoCard
               src={venuePhoto}
               caption="Palace Sanctuary"
               onClick={() => setActiveLightboxIndex(5)}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
