@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail, Sparkles, Crown } from "lucide-react";
 import royalSealPhoto from "../assets/royal_seal.png";
+import { GoldenRosePetals } from "./GoldenRosePetals";
 
 interface HeroVideoSectionProps {
   onReopenEnvelope?: () => void;
@@ -62,27 +63,46 @@ function CinematicPetalCanvas() {
     observer.observe(canvas);
 
     const isMobile = width < 768;
-    const particleCount = isMobile ? 8 : 18;
+    const particleCount = isMobile ? 12 : 24;
 
-    // Create subtle organic Jasmine & Rose Petal particles for homepage
+    // Create organic Jasmine & Golden Rose Petal particles for Hero Section
     const petals = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height - height * 0.8,
-      size: Math.random() * 8 + 5,
-      type: Math.random() > 0.4 ? "jasmine" : "rose",
+      size: Math.random() * 6 + 5,
+      type: Math.random() > 0.4 ? "goldenRose" : Math.random() > 0.5 ? "jasmine" : "rose",
       rotation: Math.random() * Math.PI * 2,
       rotationSpeed: (Math.random() - 0.5) * 0.025,
       rotationX: Math.random() * Math.PI,
       rotationY: Math.random() * Math.PI,
       speedY: Math.random() * 0.9 + 0.4,
       speedX: (Math.random() - 0.5) * 0.5,
-      swayAmp: Math.random() * 1.2 + 0.4,
+      swayAmp: Math.random() * 1.4 + 0.5,
       swayFreq: Math.random() * 0.015 + 0.008,
       step: Math.random() * 100,
-      opacity: Math.random() * 0.6 + 0.25,
+      opacity: Math.random() * 0.65 + 0.3,
     }));
 
     let animationFrameId: number;
+
+    const drawGoldenRosePetal = (size: number, opacity: number) => {
+      ctx.beginPath();
+      ctx.moveTo(0, -size * 0.95);
+      ctx.bezierCurveTo(size * 1.15, -size * 0.4, size * 0.95, size * 0.85, 0, size * 0.95);
+      ctx.bezierCurveTo(-size * 0.95, size * 0.85, -size * 1.15, -size * 0.4, 0, -size * 0.95);
+
+      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 1.2);
+      grad.addColorStop(0, `rgba(255, 248, 220, ${opacity})`);
+      grad.addColorStop(0.3, `rgba(255, 215, 0, ${opacity * 0.95})`);
+      grad.addColorStop(0.7, `rgba(212, 175, 55, ${opacity * 0.85})`);
+      grad.addColorStop(1, `rgba(170, 119, 28, ${opacity * 0.7})`);
+
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(255, 215, 0, ${opacity * 0.9})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    };
 
     const drawJasminePetal = (size: number, opacity: number) => {
       ctx.beginPath();
@@ -164,7 +184,9 @@ function CinematicPetalCanvas() {
           const scaleY = Math.cos(p.rotationY);
           ctx.scale(1, Math.abs(scaleY) < 0.1 ? 0.1 : scaleY);
 
-          if (p.type === "jasmine") {
+          if (p.type === "goldenRose") {
+            drawGoldenRosePetal(p.size, currentOpacity);
+          } else if (p.type === "jasmine") {
             drawJasminePetal(p.size, currentOpacity);
           } else {
             drawRosePetal(p.size, currentOpacity);
@@ -465,6 +487,9 @@ export function HeroVideoSection({ onReopenEnvelope, guestName }: HeroVideoSecti
 
       {/* LAYER 3: Full-Screen Canvas Particle Engine (Cinematic Petal Shower) */}
       <CinematicPetalCanvas />
+
+      {/* LAYER 4: Floating Golden Rose Petals SVG Overlay */}
+      <GoldenRosePetals count={14} />
 
       {/* LAYER 5: Fixed Top Navigation Header */}
       <header className="fixed top-0 left-0 right-0 w-full grid grid-cols-3 items-center px-3 py-3 sm:px-10 sm:py-6 z-40 pointer-events-none">

@@ -132,6 +132,229 @@ function GlassPhotoCard({
   );
 }
 
+/* Animated Royal Corner Mandala SVG Accent */
+function RoyalCornerMandala({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
+  const positionClasses = {
+    tl: "top-0 left-0",
+    tr: "top-0 right-0 scale-x-[-1]",
+    bl: "bottom-0 left-0 scale-y-[-1]",
+    br: "bottom-0 right-0 scale-x-[-1] scale-y-[-1]",
+  }[position];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: [0.35, 0.65, 0.35], scale: [0.96, 1.04, 0.96] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      className={`fixed ${positionClasses} w-36 h-36 sm:w-56 sm:h-56 md:w-72 md:h-72 pointer-events-none z-10 text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]`}
+    >
+      <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
+        {/* Outer Corner Arch & Background Glow Fill */}
+        <path
+          d="M 0,20 C 60,20 100,60 100,120 L 100,0 Z"
+          fill="url(#goldGradCorner)"
+          opacity="0.12"
+        />
+        <path
+          d="M 0,0 L 180,0 C 180,40 140,80 100,100 C 60,120 0,60 0,0 Z"
+          stroke="url(#goldGradCorner)"
+          strokeWidth="1.5"
+          opacity="0.6"
+        />
+
+        {/* Concentric Arc Lines */}
+        <path d="M 0,150 Q 80,140 150,0" stroke="#FFD700" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.7" />
+        <path d="M 0,120 Q 60,110 120,0" stroke="#D4AF37" strokeWidth="1.8" />
+        <path d="M 0,90 Q 45,85 90,0" stroke="#FFF1B0" strokeWidth="1" />
+        <path d="M 0,60 Q 30,55 60,0" stroke="#D4AF37" strokeWidth="1.5" />
+
+        {/* Radiating Flower Petal Rays */}
+        {[15, 30, 45, 60, 75].map((angle, i) => (
+          <g key={i} transform={`rotate(${angle} 0 0)`}>
+            <line x1="0" y1="0" x2="140" y2="0" stroke="#D4AF37" strokeWidth="0.8" opacity="0.4" />
+            <circle cx="110" cy="0" r="3" fill="#FFD700" opacity="0.8" />
+            <path d="M 125,-4 L 133,0 L 125,4 Z" fill="#D4AF37" />
+          </g>
+        ))}
+
+        {/* Corner Medallion Jewels */}
+        <circle cx="25" cy="25" r="18" stroke="#D4AF37" strokeWidth="1" fill="none" opacity="0.5" />
+        <circle cx="25" cy="25" r="8" fill="url(#goldGradCorner)" opacity="0.7" />
+        <circle cx="50" cy="50" r="4" fill="#FFD700" />
+        <circle cx="80" cy="80" r="3" fill="#D4AF37" />
+
+        <defs>
+          <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFE259" />
+            <stop offset="50%" stopColor="#FFA751" />
+            <stop offset="100%" stopColor="#9A7432" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </motion.div>
+  );
+}
+
+/* Flanking Continuous Rotating Royal Side Mandala SVG */
+function RoyalSideMandala({ side }: { side: "left" | "right" }) {
+  return (
+    <div
+      className={`fixed ${
+        side === "left" ? "left-1 sm:left-10 md:left-16" : "right-1 sm:right-10 md:right-16"
+      } top-1/2 -translate-y-1/2 w-44 h-44 sm:w-72 sm:h-72 md:w-96 md:h-96 pointer-events-none z-10 opacity-30 sm:opacity-50`}
+    >
+      <motion.svg
+        animate={{ rotate: side === "left" ? 360 : -360 }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        viewBox="0 0 300 300"
+        className="w-full h-full text-[#D4AF37] filter drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+      >
+        {/* Outer Ring & Star Rays */}
+        <circle cx="150" cy="150" r="140" stroke="url(#goldGradSide)" strokeWidth="1.5" fill="none" strokeDasharray="6 6" />
+        <circle cx="150" cy="150" r="125" stroke="#D4AF37" strokeWidth="1" fill="none" />
+        <circle cx="150" cy="150" r="105" stroke="#FFF1B0" strokeWidth="1.2" fill="none" opacity="0.6" />
+        <circle cx="150" cy="150" r="85" stroke="#AA771C" strokeWidth="1.5" fill="none" />
+
+        {/* 12 Outer Petals */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <g key={i} transform={`rotate(${i * 30} 150 150)`}>
+            <path
+              d="M 150,25 Q 165,65 150,105 Q 135,65 150,25 Z"
+              fill="url(#goldGradSide)"
+              opacity="0.25"
+              stroke="#FFD700"
+              strokeWidth="1"
+            />
+            <circle cx="150" cy="15" r="3" fill="#FFD700" />
+            <line x1="150" y1="105" x2="150" y2="125" stroke="#D4AF37" strokeWidth="1" />
+          </g>
+        ))}
+
+        {/* 12 Inner Petals */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <g key={i} transform={`rotate(${i * 30 + 15} 150 150)`}>
+            <path
+              d="M 150,65 Q 160,95 150,125 Q 140,95 150,65 Z"
+              fill="#D4AF37"
+              opacity="0.3"
+              stroke="#FFF1B0"
+              strokeWidth="0.8"
+            />
+          </g>
+        ))}
+
+        {/* Center Core Star */}
+        <circle cx="150" cy="150" r="35" fill="url(#goldGradSide)" opacity="0.4" stroke="#FFD700" strokeWidth="1.5" />
+        <circle cx="150" cy="150" r="12" fill="#FFD700" />
+
+        <defs>
+          <linearGradient id="goldGradSide" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFD700" />
+            <stop offset="50%" stopColor="#D4AF37" />
+            <stop offset="100%" stopColor="#AA771C" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+    </div>
+  );
+}
+
+/* Center Backdrop Sunburst Mandala Ring directly behind photo card */
+function CenterBackdropMandala() {
+  return (
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] md:w-[680px] md:h-[680px] pointer-events-none z-0 opacity-45">
+      <motion.svg
+        animate={{ rotate: 360, scale: [0.95, 1.03, 0.95] }}
+        transition={{
+          rotate: { duration: 60, repeat: Infinity, ease: "linear" },
+          scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+        }}
+        viewBox="0 0 400 400"
+        className="w-full h-full text-[#D4AF37]"
+      >
+        <circle cx="200" cy="200" r="190" stroke="url(#centerGoldGrad)" strokeWidth="1.5" fill="none" strokeDasharray="4 8" />
+        <circle cx="200" cy="200" r="170" stroke="#FFD700" strokeWidth="1" fill="none" opacity="0.5" />
+        <circle cx="200" cy="200" r="145" stroke="#D4AF37" strokeWidth="1.2" fill="none" />
+        <circle cx="200" cy="200" r="120" stroke="#FFF1B0" strokeWidth="1" fill="none" opacity="0.7" />
+
+        {/* Radiating Rays */}
+        {Array.from({ length: 24 }).map((_, i) => (
+          <g key={i} transform={`rotate(${i * 15} 200 200)`}>
+            <line x1="200" y1="10" x2="200" y2="40" stroke="#FFD700" strokeWidth="1.5" opacity="0.8" />
+            <polygon points="200,5 196,15 204,15" fill="#D4AF37" />
+            <circle cx="200" cy="55" r="2.5" fill="#FFF1B0" />
+          </g>
+        ))}
+
+        {/* Outer Lotus Petal Ring */}
+        {Array.from({ length: 16 }).map((_, i) => (
+          <g key={i} transform={`rotate(${i * 22.5} 200 200)`}>
+            <path
+              d="M 200,40 Q 215,80 200,120 Q 185,80 200,40 Z"
+              fill="url(#centerGoldGrad)"
+              opacity="0.15"
+              stroke="#D4AF37"
+              strokeWidth="1"
+            />
+          </g>
+        ))}
+
+        <defs>
+          <linearGradient id="centerGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFF1B0" />
+            <stop offset="50%" stopColor="#D4AF37" />
+            <stop offset="100%" stopColor="#8A6421" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+    </div>
+  );
+}
+
+/* Floating Animated Golden Sparkles in Surrounding Backdrop Space */
+function FloatingBackdropSparkles() {
+  const sparkles = [
+    { left: "10%", top: "18%", size: 24, delay: 0, duration: 4 },
+    { left: "86%", top: "15%", size: 28, delay: 1.2, duration: 4.5 },
+    { left: "8%", top: "75%", size: 22, delay: 0.7, duration: 3.8 },
+    { left: "88%", top: "78%", size: 26, delay: 1.8, duration: 4.2 },
+    { left: "20%", top: "86%", size: 18, delay: 2.2, duration: 3.5 },
+    { left: "80%", top: "88%", size: 20, delay: 0.4, duration: 5 },
+    { left: "15%", top: "45%", size: 16, delay: 1.5, duration: 3.2 },
+    { left: "84%", top: "42%", size: 18, delay: 2.7, duration: 4.8 },
+    { left: "50%", top: "6%", size: 22, delay: 0.9, duration: 4.1 },
+  ];
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
+      {sparkles.map((sp, idx) => (
+        <motion.div
+          key={idx}
+          style={{ left: sp.left, top: sp.top }}
+          initial={{ opacity: 0, scale: 0.5, y: 0 }}
+          animate={{
+            opacity: [0.2, 0.95, 0.2],
+            scale: [0.7, 1.25, 0.7],
+            y: [-12, 12, -12],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: sp.duration,
+            repeat: Infinity,
+            delay: sp.delay,
+            ease: "easeInOut",
+          }}
+          className="absolute text-[#FFD700] filter drop-shadow-[0_0_8px_rgba(255,215,0,0.85)]"
+        >
+          <svg width={sp.size} height={sp.size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z" />
+          </svg>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 interface LightboxModalProps {
   activeLightboxIndex: number;
   onClose: () => void;
@@ -164,9 +387,20 @@ function LightboxModalPortal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-[999999] bg-stone-950/92 backdrop-blur-xl flex flex-col justify-between items-center p-3 sm:p-6 overflow-hidden select-none"
+      className="fixed inset-0 z-[999999] bg-stone-950/94 backdrop-blur-xl flex flex-col justify-between items-center p-3 sm:p-6 overflow-hidden select-none"
       onClick={onClose}
     >
+      {/* Animated Royal Backdrop SVGs Filling the Blank Space */}
+      <RoyalCornerMandala position="tl" />
+      <RoyalCornerMandala position="tr" />
+      <RoyalCornerMandala position="bl" />
+      <RoyalCornerMandala position="br" />
+
+      <RoyalSideMandala side="left" />
+      <RoyalSideMandala side="right" />
+
+      <FloatingBackdropSparkles />
+
       {/* Top Bar: Close Button & Gold Crown Header */}
       <div className="w-full max-w-5xl flex items-center justify-between z-50 pt-2 px-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/60 text-amber-200 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-extrabold shadow-lg">
@@ -221,11 +455,14 @@ function LightboxModalPortal({
         onClick={(e) => e.stopPropagation()}
         className="my-auto max-w-4xl w-full flex flex-col items-center justify-center px-2 py-2 z-40 relative"
       >
+        {/* Center Backdrop Sunburst Mandala Ring */}
+        <CenterBackdropMandala />
+
         {/* Soft Golden Ambient Backdrop Aura */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(212,175,55,0.35)_0%,transparent_75%)] pointer-events-none blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(212,175,55,0.35)_0%,transparent_75%)] pointer-events-none blur-3xl z-0" />
 
         {/* Main Photo Card Container */}
-        <div className="relative rounded-[28px] overflow-hidden border-2 border-[#D4AF37] shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_60px_rgba(212,175,55,0.45)] bg-stone-950 flex items-center justify-center group p-1.5 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C]">
+        <div className="relative rounded-[28px] overflow-hidden border-2 border-[#D4AF37] shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_60px_rgba(212,175,55,0.45)] bg-stone-950 flex items-center justify-center group p-1.5 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] z-10">
           <div className="relative rounded-[22px] overflow-hidden bg-stone-950 flex items-center justify-center max-h-[62vh] sm:max-h-[72vh] w-auto">
             <img
               src={currentItem.src}

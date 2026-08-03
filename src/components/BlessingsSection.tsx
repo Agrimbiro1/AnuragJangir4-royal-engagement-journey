@@ -21,6 +21,7 @@ export interface FloatingBlessingCard {
   likes: number;
   posClass: string;
   floatY: number[];
+  floatX?: number[];
   baseRotate: number;
   floatDuration: number;
   zIndex: number;

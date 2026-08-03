@@ -1,23 +1,29 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 interface GoldenRosePetalsProps {
   count?: number;
 }
 
-export function GoldenRosePetals({ count = 7 }: GoldenRosePetalsProps) {
+export function GoldenRosePetals({ count = 14 }: GoldenRosePetalsProps) {
   const petals = [
-    { left: "6%", size: 30, delay: 0, duration: 18, rotate: 25 },
-    { left: "19%", size: 24, delay: 3, duration: 22, rotate: -35 },
-    { left: "34%", size: 36, delay: 1, duration: 20, rotate: 45 },
-    { left: "52%", size: 26, delay: 5, duration: 24, rotate: -15 },
-    { left: "69%", size: 32, delay: 2, duration: 19, rotate: 30 },
-    { left: "83%", size: 22, delay: 4, duration: 23, rotate: -40 },
-    { left: "94%", size: 28, delay: 6, duration: 21, rotate: 15 },
+    { left: "4%", size: 14, delay: 0, duration: 16 },
+    { left: "12%", size: 10, delay: 4, duration: 21 },
+    { left: "22%", size: 16, delay: 1, duration: 18 },
+    { left: "31%", size: 11, delay: 6, duration: 23 },
+    { left: "42%", size: 15, delay: 2, duration: 17 },
+    { left: "53%", size: 12, delay: 7, duration: 20 },
+    { left: "62%", size: 16, delay: 3, duration: 19 },
+    { left: "73%", size: 10, delay: 8, duration: 22 },
+    { left: "82%", size: 13, delay: 1.5, duration: 16.5 },
+    { left: "91%", size: 12, delay: 5.5, duration: 20.5 },
+    { left: "17%", size: 14, delay: 9, duration: 19 },
+    { left: "48%", size: 15, delay: 11, duration: 15 },
+    { left: "68%", size: 11, delay: 10, duration: 24 },
+    { left: "87%", size: 14, delay: 12, duration: 18 },
   ].slice(0, count);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-25">
       {petals.map((petal, index) => (
         <div
           key={index}
@@ -33,28 +39,28 @@ export function GoldenRosePetals({ count = 7 }: GoldenRosePetalsProps) {
         >
           <svg
             viewBox="0 0 40 40"
-            className="w-full h-full filter drop-shadow-[0_2px_6px_rgba(212,175,55,0.4)]"
+            className="w-full h-full filter drop-shadow-[0_4px_12px_rgba(255,215,0,0.65)]"
             fill="none"
           >
             <defs>
               <linearGradient id={`petalGold-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FFF8DC" stopOpacity="0.9" />
-                <stop offset="40%" stopColor="#F3E5AB" stopOpacity="0.8" />
-                <stop offset="80%" stopColor="#D4AF37" stopOpacity="0.65" />
-                <stop offset="100%" stopColor="#AA771C" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="#FFF8DC" stopOpacity="0.95" />
+                <stop offset="25%" stopColor="#FFD700" stopOpacity="0.9" />
+                <stop offset="65%" stopColor="#D4AF37" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#9A7432" stopOpacity="0.75" />
               </linearGradient>
             </defs>
             <path
-              d="M20 4 C32 2, 38 16, 32 28 C26 38, 14 38, 8 28 C2 16, 8 2, 20 4 Z"
+              d="M20 3 C34 1, 39 15, 33 29 C27 39, 13 39, 7 29 C1 15, 6 1, 20 3 Z"
               fill={`url(#petalGold-${index})`}
-              stroke="#D4AF37"
-              strokeWidth="0.8"
+              stroke="#FFD700"
+              strokeWidth="0.9"
             />
             <path
-              d="M20 8 C20 18, 22 28, 20 34 M20 18 C15 14, 12 12, 10 12 M20 22 C26 18, 28 16, 30 16"
-              stroke="#B8860B"
-              strokeWidth="0.5"
-              strokeOpacity="0.6"
+              d="M20 7 C20 18, 21 28, 20 35 M20 16 C14 12, 11 10, 9 10 M20 22 C26 18, 29 15, 31 15 M20 27 C15 24, 12 22, 10 22"
+              stroke="#FFF1B0"
+              strokeWidth="0.6"
+              strokeOpacity="0.8"
             />
           </svg>
         </div>
